@@ -20,7 +20,7 @@ setuptools.setup(
     ],
     install_requires=[
         'nemo_toolkit',
-        'librosa',
+        'librosa==0.6.2',
         'num2words',
         'inflect',
         'kaldi-io',

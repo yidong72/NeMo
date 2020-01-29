@@ -1,6 +1,7 @@
-pillow>=4.3.0
-torch
-ipython[all]
+pillow==5.1.0
+llvmlite
+numba
+python_speech_features
 tqdm
 sox
 ruamel.yaml
@@ -17,7 +18,7 @@ progressbar
 matplotlib
 wget
 pandas
-onnx
+onnx==1.4.1
 wget
 num2words
 librosa
@@ -25,8 +26,8 @@ inflect
 kaldi-io
 marshmallow
 unidecode
-sentencepiece
 boto3
 matplotlib
 h5py
+cython
 youtokentome
