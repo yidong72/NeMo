@@ -1,5 +1,5 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index a1937f1..85b03f2 100644
+index 75701ac..6575765 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -20,7 +20,7 @@
@@ -11,3 +11,11 @@ index a1937f1..85b03f2 100644
  
  if(${CMAKE_VERSION} VERSION_LESS ${CMAKE_VERSION_THRESHOLD})
    project(onnx2trt LANGUAGES CXX C)
+@@ -89,6 +89,7 @@ set(API_TESTS_SOURCES
+ 
+ set(HEADERS
+   NvOnnxParser.h
++  NvOnnxParserTypedefs.h
+ )
+ 
+ if (NOT TARGET protobuf::libprotobuf)
