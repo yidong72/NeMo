@@ -5,6 +5,7 @@ cd ${DIR}
 
 export INCLUDE=/usr/local/cuda-10.0/targets/aarch64-linux/include
 export VERBOSE=ON
+export LLVM_CONFIG=/usr/lib/llvm-7/bin/llvm-config
 
 pip3 install --disable-pip-version-check -U -r requirements.txt && \
     mkdir -p /tmp/onnx-trt && cd /tmp/onnx-trt && rm -fr onnx-tensorrt &&\
