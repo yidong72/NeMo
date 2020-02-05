@@ -40,8 +40,7 @@ class NemoArgParser(argparse.ArgumentParser):
             "constant this should help, for various shapes "
             "it can slow things down.",
         )
-        # self.add_argument("--random_seed", default=None, type=int,
-        #                   help="random seed")
+        self.add_argument("--random_seed", default=None, type=int, help="random seed")
         # self.add_argument("--deterministic", action="store_true",
         #                   help="whether to enable determinism")
 

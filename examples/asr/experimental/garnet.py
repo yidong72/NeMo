@@ -33,6 +33,13 @@ sss = [
 
 def parse_args():
     parser = argparse.ArgumentParser(
+        description='GarNet training pipeline.', parents=[nm_argparse.NemoArgParser()], conflict_handler='resolve',
+    )
+    parser.set_defaults(
+        amp_opt_level='O1', random_seed=239,
+    )
+
+    parser = argparse.ArgumentParser(
         parents=[nm_argparse.NemoArgParser()], description='GarNet', conflict_handler='resolve',
     )
     parser.set_defaults(
@@ -235,7 +242,7 @@ def construct_name(args, cfg):
     return name
 
 
-def main():
+def old_main():
     # Parse args
     args = parse_args()
     cfg = parse_cfg(args)
@@ -324,5 +331,9 @@ def main():
     )
 
 
+def main():
+    args = parse_args()
+
+
 if __name__ == '__main__':
-    main()
+    old_main()

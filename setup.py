@@ -28,6 +28,19 @@ from itertools import chain
 
 import setuptools
 
+from nemo.package_info import (
+    __contact_emails__,
+    __contact_names__,
+    __description__,
+    __download_url__,
+    __homepage__,
+    __keywords__,
+    __license__,
+    __package_name__,
+    __repository_url__,
+    __version__,
+)
+
 
 def is_build_action():
     if len(sys.argv) <= 1:
@@ -44,18 +57,6 @@ def is_build_action():
 if is_build_action():
     os.environ['NEMO_PACKAGE_BUILDING'] = 'True'
 
-from nemo.package_info import (
-    __contact_emails__,
-    __contact_names__,
-    __description__,
-    __download_url__,
-    __homepage__,
-    __keywords__,
-    __license__,
-    __package_name__,
-    __repository_url__,
-    __version__,
-)
 
 if os.path.exists('README.rst'):
     # codec is used for consistent encoding
@@ -159,6 +160,9 @@ class StyleCommand(distutils_cmd.Command):
     def initialize_options(self):
         self.scope = '.'
         self.fix = ''
+
+        # Nasty trick to look to formatters programs in python bin folder.
+        os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable)
 
     def run(self):
         scope, check = self.scope, not self.fix
