@@ -1,11 +1,9 @@
 pillow
 llvmlite
-numba
 python_speech_features
 tqdm
 sox
 ruamel.yaml
-jupyterlab
 tqdm
 boto3
 requests
@@ -15,7 +13,6 @@ h5py
 html2text
 nltk
 progressbar
-matplotlib
 wget
 pandas
 onnx==1.4.1
@@ -27,7 +24,7 @@ kaldi-io
 marshmallow
 unidecode
 boto3
-matplotlib
 h5py
 cython
 youtokentome
+scikit-learn==0.21.3
