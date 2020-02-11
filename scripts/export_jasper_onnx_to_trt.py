@@ -12,14 +12,16 @@ def build_engine(
     max_batch_size=64,
     trt_fp16=True,
     verbose=True,
-    max_workspace_size=None,
-    encoder=True,
+    max_workspace_size=None
 ):
     """Builds TRT engine from an ONNX file
     Note that network output 1 is unmarked so that the engine will not use
     vestigial length calculations associated with masked_fill
     """
-    TRT_LOGGER = trt.Logger(trt.Logger.VERBOSE) if verbose else trt.Logger(trt.Logger.WARNING)
+    TRT_LOGGER = trt.Logger(trt.Logger.VERBOSE) if verbose else trt.Logger(
+        trt.Logger.WARNING)
+    max_workspace_size = max_workspace_size*1024*1024
+
     builder = trt.Builder(TRT_LOGGER)
     builder.max_batch_size = max_batch_size
 
@@ -36,7 +38,8 @@ def build_engine(
         config_flags = 1 << int(trt.BuilderFlag.FP16)  # | 1 << int(trt.BuilderFlag.STRICT_TYPES)
     else:
         config_flags = 0
-    builder.max_workspace_size = max_workspace_size if max_workspace_size else (4 * 1024 * 1024 * 1024)
+
+    builder.max_workspace_size = max_workspace_size
 
     config = builder.create_builder_config()
     config.flags = config_flags
@@ -68,6 +71,9 @@ def get_parser():
     parser.add_argument("--max-batch-size", type=int, default=64, help="Maximum sequence length of input")
     parser.add_argument("--batch-size", type=int, default=8, help="Preferred batch size of input")
     parser.add_argument("--no-fp16", action="store_true", help="Disable fp16 model building, use fp32 instead")
+    parser.add_argument(
+        "--workspace-size", type=int, default=1024,
+        help="Preferred workspace size (in MB)")
 
     return parser
 
