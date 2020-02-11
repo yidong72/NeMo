@@ -15,7 +15,7 @@ nltk
 progressbar
 wget
 pandas
-onnx==1.4.1
+onnx
 wget
 num2words
 librosa
