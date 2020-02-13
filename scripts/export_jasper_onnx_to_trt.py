@@ -32,7 +32,7 @@ def build_engine(onnx_path, min_seq_len, seq_len, max_seq_len, batch_size=8,
     else:
         config_flags = 0
     if not encoder:
-        max_workspace_size = max_workspace_size//2
+        max_workspace_size = max_workspace_size//8
     builder.max_workspace_size = max_workspace_size
 
     config = builder.create_builder_config()
