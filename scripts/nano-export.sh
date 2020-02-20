@@ -10,7 +10,7 @@ cd ${DIR}/..
 #       --nn_encoder quartznet15x5/JasperEncoder-STEP-247400.pt --nn_decoder quartznet15x5/JasperDecoderForCTC-STEP-2474 --onnx_encoder=encoder1.onnx --onnx_decoder=decoder1.onnx || exit 1
 
 python3 scripts/export_jasper_onnx_to_trt.py \
-	--max-seq-len 768 --seq-len 256 --max-batch-size 1 --batch-size 1 --workspace 512 encoder.onnx encoder.plan decoder.onnx decoder.plan
+	--max-seq-len 256 --seq-len 256 --max-batch-size 1 --batch-size 1 --workspace 256 encoder.onnx encoder.plan decoder.onnx decoder.plan
 
 mkdir -p ../trtis-asr/pbr/model_repo/jasper-trt-d/1
 cp decoder.plan ../trtis-asr/pbr/model_repo/jasper-trt-d/1/decoder_53.plan
