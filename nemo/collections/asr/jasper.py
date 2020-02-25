@@ -92,10 +92,6 @@ class JasperEncoder(TrainableNM):
         """Returns definitions of module input ports.
         """
         return {
-            # "audio_signal": NeuralType(
-            #    {0: AxisType(BatchTag), 1: AxisType(SpectrogramSignalTag), 2: AxisType(ProcessedTimeTag),}
-            # ),
-            # "length": NeuralType({0: AxisType(BatchTag)}),
             "audio_signal": NeuralType(('B', 'D', 'T'), SpectrogramType()),
             "length": NeuralType(tuple('B'), LengthsType()),
         }
@@ -106,10 +102,6 @@ class JasperEncoder(TrainableNM):
         """Returns definitions of module output ports.
         """
         return {
-            # "outputs": NeuralType(
-            #    {0: AxisType(BatchTag), 1: AxisType(EncodedRepresentationTag), 2: AxisType(ProcessedTimeTag),}
-            # ),
-            # "encoded_lengths": NeuralType({0: AxisType(BatchTag)}),
             "outputs": NeuralType(('B', 'D', 'T'), AcousticEncodedRepresentation()),
             "encoded_lengths": NeuralType(tuple('B'), LengthsType()),
         }
@@ -178,8 +170,9 @@ class JasperEncoder(TrainableNM):
 
     def forward(self, audio_signal, length=None):
         # type: (Tensor, Optional[Tensor]) -> Tensor, Optional[Tensor]
-
+        audio_signal.unsqueeze_(-1)
         s_input, length = self.encoder(([audio_signal], length))
+        s_input[-1].squeeze_(-1)
         if length is None:
             return s_input[-1]
         return s_input[-1], length

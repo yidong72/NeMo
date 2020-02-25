@@ -28,7 +28,8 @@ jasper_activations = {
 def init_weights(m, mode='xavier_uniform'):
     if isinstance(m, MaskedConv1d):
         init_weights(m.conv, mode)
-    if isinstance(m, (nn.Conv1d, nn.Linear)):
+    #if isinstance(m, (nn.Conv1d, nn.Linear)):
+    if isinstance(m, (nn.Conv2d, nn.Linear)):
         if mode == 'xavier_uniform':
             nn.init.xavier_uniform_(m.weight, gain=1.0)
         elif mode == 'xavier_normal':
@@ -73,8 +74,8 @@ class MaskedConv1d(nn.Module):
         in_channels,
         out_channels,
         kernel_size,
-        stride=1,
-        padding=0,
+        stride,
+        padding,
         dilation=1,
         groups=1,
         heads=-1,
@@ -82,6 +83,9 @@ class MaskedConv1d(nn.Module):
         use_mask=True,
     ):
         super(MaskedConv1d, self).__init__()
+
+        if padding != 0:
+            padding = (padding, 0)
 
         if not (heads == -1 or groups == in_channels):
             raise ValueError("Only use heads for depthwise convolutions")
@@ -92,10 +96,10 @@ class MaskedConv1d(nn.Module):
             out_channels = heads
             groups = heads
 
-        self.conv = nn.Conv1d(
+        self.conv = nn.Conv2d(
             in_channels,
             out_channels,
-            kernel_size,
+            (kernel_size[0], 1) if isinstance(kernel_size, list) else (kernel_size, 1),
             stride=stride,
             padding=padding,
             dilation=dilation,
@@ -115,7 +119,8 @@ class MaskedConv1d(nn.Module):
             lens = lens.to(dtype=torch.long)
             max_len = x.size(2)
             mask = torch.arange(max_len).to(lens.device).expand(len(lens), max_len) >= lens.unsqueeze(1)
-            x = x.masked_fill(mask.unsqueeze(1).to(device=x.device), 0)
+            #x = x.masked_fill(mask.unsqueeze(1).to(device=x.device), 0)
+            x = x.masked_fill(mask.unsqueeze(1).unsqueeze(-1).to(device=x.device), 0)
             # del mask
             lens = self.get_seq_len(lens)
 
@@ -297,7 +302,6 @@ class JasperBlock(nn.Module):
         bias=False,
         groups=1,
         heads=-1,
-        separable=False,
     ):
         use_mask = self.conv_mask
         if use_mask:
@@ -314,10 +318,10 @@ class JasperBlock(nn.Module):
                 use_mask=use_mask,
             )
         else:
-            return nn.Conv1d(
+            return nn.Conv2d(
                 in_channels,
                 out_channels,
-                kernel_size,
+                (kernel_size[0], 1) if isinstance(kernel_size, list) else (kernel_size, 1),
                 stride=stride,
                 dilation=dilation,
                 padding=padding,
@@ -388,7 +392,8 @@ class JasperBlock(nn.Module):
         elif normalization == "layer":
             layers.append(nn.GroupNorm(num_groups=1, num_channels=out_channels))
         elif normalization == "batch":
-            layers.append(nn.BatchNorm1d(out_channels, eps=1e-3, momentum=0.1))
+            # layers.append(nn.BatchNorm1d(out_channels, eps=1e-3, momentum=0.1))
+            layers.append(nn.BatchNorm2d(out_channels, eps=1e-3, momentum=0.1))
         else:
             raise ValueError(
                 f"Normalization method ({normalization}) does not match" f" one of [batch, layer, group, instance]."

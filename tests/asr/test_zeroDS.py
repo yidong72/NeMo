@@ -97,16 +97,6 @@ class TestZeroDL(NeMoUnitTest):
             dtype=torch.FloatTensor,
             batch_size=4,
             output_ports={
-                # "processed_signal": NeuralType(
-                #    {
-                #        0: AxisType(BatchTag),
-                #        1: AxisType(SpectrogramSignalTag, dim=64),
-                #        2: AxisType(ProcessedTimeTag, dim=64),
-                #    }
-                # ),
-                # "processed_length": NeuralType({0: AxisType(BatchTag)}),
-                # "transcript": NeuralType({0: AxisType(BatchTag), 1: AxisType(TimeTag, dim=64)}),
-                # "transcript_length": NeuralType({0: AxisType(BatchTag)}),
                 "processed_signal": NeuralType(
                     (AxisType(AxisKind.Batch), AxisType(AxisKind.Dimension, 64), AxisType(AxisKind.Time, 64)),
                     SpectrogramType(),
