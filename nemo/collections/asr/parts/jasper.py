@@ -388,7 +388,8 @@ class JasperBlock(nn.Module):
         elif normalization == "layer":
             layers.append(nn.GroupNorm(num_groups=1, num_channels=out_channels))
         elif normalization == "batch":
-            layers.append(nn.BatchNorm1d(out_channels, eps=1e-3, momentum=0.1))
+            #layers.append(nn.BatchNorm1d(out_channels, eps=1e-3, momentum=0.1))
+            layers.append(nn.BatchNorm2d(out_channels, eps=1e-3, momentum=0.1))
         else:
             raise ValueError(
                 f"Normalization method ({normalization}) does not match" f" one of [batch, layer, group, instance]."
@@ -421,6 +422,10 @@ class JasperBlock(nn.Module):
             # if (i % 4) == 0 and self.conv_mask:
             if isinstance(l, MaskedConv1d):
                 out, lens = l(out, lens)
+            elif isinstance(l, nn.BatchNorm2d):
+                out.unsqueeze_(-1)
+                out = l(out)
+                out.squeeze_(-1)
             else:
                 out = l(out)
 
@@ -431,6 +436,10 @@ class JasperBlock(nn.Module):
                 for j, res_layer in enumerate(layer):
                     if isinstance(res_layer, MaskedConv1d):
                         res_out, _ = res_layer(res_out, lens_orig)
+                    elif isinstance(res_layer, nn.BatchNorm2d):
+                        res_out.unsqueeze_(-1)
+                        res_out = res_layer(res_out)
+                        res_out.squeeze_(-1)
                     else:
                         res_out = res_layer(res_out)
 
