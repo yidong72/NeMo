@@ -217,7 +217,8 @@ class JasperBlock(nn.Module):
 
         for _ in range(repeat - 1):
             conv.extend(
-                self._get_conv_bn_layer(
+                self._get_bn_conv_layer(
+                #self._get_conv_bn_layer(
                     inplanes_loop,
                     planes,
                     kernel_size=kernel_size,
@@ -297,7 +298,6 @@ class JasperBlock(nn.Module):
         bias=False,
         groups=1,
         heads=-1,
-        separable=False,
     ):
         use_mask = self.conv_mask
         if use_mask:
@@ -324,6 +324,79 @@ class JasperBlock(nn.Module):
                 bias=bias,
                 groups=groups,
             )
+
+    def _get_bn_conv_layer(
+        self,
+        in_channels,
+        out_channels,
+        kernel_size=11,
+        stride=1,
+        dilation=1,
+        padding=0,
+        bias=False,
+        groups=1,
+        heads=-1,
+        separable=False,
+        normalization="batch",
+        norm_groups=1,
+    ):
+        if norm_groups == -1:
+            norm_groups = out_channels
+
+        if normalization == "group":
+            layers.append(nn.GroupNorm(num_groups=norm_groups, num_channels=out_channels))
+        elif normalization == "instance":
+            layers.append(nn.GroupNorm(num_groups=out_channels, num_channels=out_channels))
+        elif normalization == "layer":
+            layers.append(nn.GroupNorm(num_groups=1, num_channels=out_channels))
+        elif normalization == "batch":
+            layers.append(nn.BatchNorm1d(out_channels, eps=1e-3, momentum=0.1))
+        else:
+            raise ValueError(
+                f"Normalization method ({normalization}) does not match" f" one of [batch, layer, group, instance]."
+            )
+
+        if groups > 1:
+            layers.append(GroupShuffle(groups, out_channels))
+
+        if separable:
+            layers = [
+                self._get_conv(
+                    in_channels,
+                    in_channels,
+                    kernel_size,
+                    stride=stride,
+                    dilation=dilation,
+                    padding=padding,
+                    bias=bias,
+                    groups=in_channels,
+                    heads=heads,
+                ),
+                self._get_conv(
+                    in_channels,
+                    out_channels,
+                    kernel_size=1,
+                    stride=1,
+                    dilation=1,
+                    padding=0,
+                    bias=bias,
+                    groups=groups,
+                ),
+            ]
+        else:
+            layers = [
+                self._get_conv(
+                    in_channels,
+                    out_channels,
+                    kernel_size,
+                    stride=stride,
+                    dilation=dilation,
+                    padding=padding,
+                    bias=bias,
+                    groups=groups,
+                )
+            ]
+        return layers
 
     def _get_conv_bn_layer(
         self,
