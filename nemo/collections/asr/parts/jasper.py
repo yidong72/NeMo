@@ -341,23 +341,23 @@ class JasperBlock(nn.Module):
         norm_groups=1,
     ):
         if norm_groups == -1:
-            norm_groups = out_channels
+            norm_groups = in_channels
 
         if normalization == "group":
-            layers = [nn.GroupNorm(num_groups=norm_groups, num_channels=out_channels)]
+            layers = [nn.GroupNorm(num_groups=norm_groups, num_channels=in_channels)]
         elif normalization == "instance":
-            layers = [nn.GroupNorm(num_groups=out_channels, num_channels=out_channels)]
+            layers = [nn.GroupNorm(num_groups=in_channels, num_channels=in_channels)]
         elif normalization == "layer":
-            layers = [nn.GroupNorm(num_groups=1, num_channels=out_channels)]
+            layers = [nn.GroupNorm(num_groups=1, num_channels=in_channels)]
         elif normalization == "batch":
-            layers = [nn.BatchNorm1d(out_channels, eps=1e-3, momentum=0.1)]
+            layers = [nn.BatchNorm1d(in_channels, eps=1e-3, momentum=0.1)]
         else:
             raise ValueError(
                 f"Normalization method ({normalization}) does not match" f" one of [batch, layer, group, instance]."
             )
 
         if groups > 1:
-            layers += [GroupShuffle(groups, out_channels)]
+            layers += [GroupShuffle(groups, in_channels)]
 
         if separable:
             layers += [
