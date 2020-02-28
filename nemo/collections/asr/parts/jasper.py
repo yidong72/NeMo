@@ -218,7 +218,7 @@ class JasperBlock(nn.Module):
         for _ in range(repeat - 1):
             conv.extend(
                 self._get_bn_conv_layer(
-                #self._get_conv_bn_layer(
+                    # self._get_conv_bn_layer(
                     inplanes_loop,
                     planes,
                     kernel_size=kernel_size,
