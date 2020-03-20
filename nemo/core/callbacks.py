@@ -25,6 +25,7 @@ from abc import ABC, abstractmethod
 from collections import namedtuple
 
 import attrdict
+import numpy as np
 
 import nemo
 from nemo.utils import get_checkpoint_from_dir
@@ -652,7 +653,7 @@ class TrainLogger(SimpleLossLoggerCallback):
 
         # noinspection PyUnusedLocal
         def get_tb_values(*args, **kwargs):
-            return list(self._cache.items())
+            return list((k, np.array(v)) for k, v in self._cache.items())
 
         super().__init__(
             tensors=list(tensors.values()),
