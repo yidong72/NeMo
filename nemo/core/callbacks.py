@@ -17,7 +17,9 @@
 
 import collections
 import glob
+import json
 import os
+import pprint
 import sys
 import time
 import warnings
@@ -638,27 +640,3 @@ class WandbCallback(ActionCallback):
     def wandb_log(self, tensors_logged):
         if _WANDB_AVAILABLE:
             wandb.log(tensors_logged, step=self.step)
-
-
-class TrainLogger(SimpleLossLoggerCallback):
-    def __init__(self, tensors, metrics, freq, tb_writer, mu=0.99):
-        self._cache = collections.defaultdict(float)
-
-        def print_func(pt_tensors):
-            kv_tensors = attrdict.AttrDict(dict(zip(tensors.keys(), pt_tensors)))
-
-            for metric in metrics:
-                for k, v in metric(kv_tensors).items():
-                    self._cache[k] = (1 - mu) * self._cache[k] + mu * v
-
-        # noinspection PyUnusedLocal
-        def get_tb_values(*args, **kwargs):
-            return list((k, np.array(v)) for k, v in self._cache.items())
-
-        super().__init__(
-            tensors=list(tensors.values()),
-            print_func=print_func,
-            get_tb_values=get_tb_values,
-            step_freq=freq,
-            tb_writer=tb_writer,
-        )
