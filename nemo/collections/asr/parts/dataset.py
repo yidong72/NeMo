@@ -133,6 +133,8 @@ class AudioDataset(Dataset):
         eos_id=None,
         load_audio=True,
         parser='en',
+        add_id=False,
+        add_speaker=False,
     ):
         self.collection = collections.ASRAudioText(
             manifests_files=manifest_filepath.split(','),
@@ -149,11 +151,13 @@ class AudioDataset(Dataset):
         self.eos_id = eos_id
         self.bos_id = bos_id
         self.load_audio = load_audio
+        self._add_id = add_id
+        self._add_speaker = add_speaker
 
     def __getitem__(self, index):
         sample = self.collection[index]
         if self.load_audio:
-            features = self.featurizer.process(sample.audio_file, offset=0, duration=sample.duration, trim=self.trim,)
+            features = self.featurizer.process(sample.audio_file, offset=0, duration=sample.duration, trim=self.trim)
             f, fl = features, torch.tensor(features.shape[0]).long()
         else:
             f, fl = None, None
@@ -166,7 +170,15 @@ class AudioDataset(Dataset):
             t = t + [self.eos_id]
             tl += 1
 
-        return f, fl, torch.tensor(t).long(), torch.tensor(tl).long()
+        output = f, fl, torch.tensor(t).long(), torch.tensor(tl).long()
+
+        if self._add_id:
+            output = (sample.id,) + output
+
+        if self._add_speaker:
+            output = output + (sample.speaker,)
+
+        return output
 
     def __len__(self):
         return len(self.collection)
