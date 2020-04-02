@@ -1,0 +1,198 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../tutorials/module_configuration.rst:2
+msgid "Module Configuration"
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:4
+msgid ""
+"Neural Modules have configuration that can be imported from/exported to "
+"YAML file. \\ A module configuration file stores all parameters required "
+"for creation of an instance."
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:8
+msgid ""
+"In the case of Trainable Neural Modules the `configuration` is "
+"complementary to checkpoint, i.e. \\ configuration contains parameters "
+"(like e.g. number of layers, hidden size etc.), \\ whereas checkpoint "
+"contains the actual module weights."
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:14
+msgid "Exporting the configuration"
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:16
+msgid ""
+"In the following example we will once again train a model to learn "
+"Taylor's coefficients for y=sin(x). \\ However, we will extend the "
+"example by showing how to export configuration of the module to a YAML "
+"file and \\ create a second instance having the same set of parameters."
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:20
+msgid ""
+"Let us start by creating the :class:`NeuralFactory` object and "
+"instatiating the modules from the original example:"
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:26
+msgid ""
+"Now we can export the configuration of any of the existing modules by "
+"using  the :meth:`export_to_config()`, for \\ example we can export the "
+"configuration of the trainable :class:`TaylorNet` by calling:"
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:34
+msgid "Importing the configuration"
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:36
+msgid ""
+"There is an analogical function :meth:`import_from_config()` responsible "
+"for loading the configuration file:"
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:43
+msgid ""
+"The :meth:`import_from_config()` function actually creates a new instance"
+" of object of the class that was stored \\ in the configuration. But it "
+"is important to understand that both instances do not share any trainable"
+" weights. \\ NeMo offers a separate mechanism for weight tying."
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:47
+msgid ""
+"Now we can use the newly imported module in the same way as every other "
+"module. \\ For example, we can build a graph and train it with a NeMo "
+"trainer:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:2
+msgid "Customizing the configuration"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:5
+msgid ""
+"A generic configuration export enables to use of parameters of primitive "
+"types (string, int, float) \\ or nested lists of/dicts of primitive "
+"types."
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:8
+msgid ""
+"In order to extend that functionality by other, custom types one must "
+"overload the \\ generic :meth:`export_to_config()` and  "
+":meth:`import_from_config()` methods for his/her Module class. \\ This "
+"tutorial explains how one can do it."
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:13
+msgid ""
+"In the following example we will derive a class from the "
+":class:`TaylorNet` (used in the previous example) \\ and extend it by "
+"those methods. But first, let us define a simple :class:`Status` enum:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:20
+msgid "Now let us define the :class:`CustomTaylorNet` Neural Module class:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:27
+msgid ""
+"In order to properly handle the export of the :class:`Status` enum we "
+"must implement a custom function \\ :meth:`export_to_config()`:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:35
+msgid ""
+"Note that the configuration is actually a dictionary consisting of two "
+"sections:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:37
+msgid ""
+"``header`` (storing class specification, NeMo version, NeMo collection "
+"name etc.) and"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:38
+msgid ""
+"``init_params`` storing the parameters used for instantiation of the "
+"object."
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:40
+msgid ""
+"Those parameters are stored in the protected ``self._init_params``  field"
+" of the base :class:`NeuralModule` class. It is assumed that (aside of "
+"this use-case) the user won't access nor use them directly."
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:43
+msgid "Analogically, we must overload the :meth:`import_from_config()` method:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:49
+msgid ""
+"Please note that the base :class:`NeuralModule` class provides several "
+"protected methods that we used, \\ with most important being:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:52
+msgid ":meth:`_create_config_header()` generating the appropriate header, and \\"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:53
+msgid ""
+":meth:`_validate_config_file()` validating the loaded configuration file "
+"(checking the header content)."
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:57
+msgid ""
+"It is once again worth emphasizing that the :meth:`import_from_config()` "
+"is a class method, actually returning a \\ new object instance - in this "
+"case of the hardcoded :class:`CustomTaylorNet` type."
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:61
+msgid ""
+"Now we can simply create an instance and export its configuration by "
+"calling:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:67
+msgid "And instantiate a second by loading that configuration:"
+msgstr ""
+
+#: ../../tutorials/module_custom_configuration.rst:73
+msgid ""
+"As a result we will see that the new object has set the status to the "
+"same value as the original one:"
+msgstr ""
+
+#: ../../tutorials/module_configuration.rst:59
+msgid ""
+"The above (along with many other) examples can be found in the "
+"`nemo/examples` folder"
+msgstr ""
+

@@ -1,0 +1,336 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../speech_command/tutorial.rst:2
+msgid "Tutorial"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:4
+msgid ""
+"Make sure you have installed ``nemo`` and the ``nemo_asr`` collection. "
+"See the :ref:`installation` section."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:8
+msgid ""
+"You need to have ``nemo`` and the ``nemo_asr`` collection for this "
+"tutorial. It is also necessary to install `torchaudio` in order to use "
+"MFCC preprocessing."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:13
+msgid "Introduction"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:15
+msgid ""
+"Speech Command Recognition is the task of classifying an input audio "
+"pattern into a discrete set of classes. It is a subset of Automatic "
+"Speech Recognition, sometimes referred to as Key Word Spotting, in which "
+"a model is constantly analyzing speech patterns to detect certain "
+"\"command\" classes. Upon detection of these commands, a specific action "
+"can be taken by the system. It is often the objective of command "
+"recognition models to be small and efficient, so that they can be "
+"deployed onto low power sensors and remain active for long durations of "
+"time."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:20
+msgid ""
+"This Speech Command recognition tutorial is based on the QuartzNet model "
+":cite:`speech-recognition-tut-kriman2019quartznet` with a modified "
+"decoder head to suit classification tasks. Instead of predicting a token "
+"for each time step of the input, we predict a single label for the entire"
+" duration of the audio signal. This is accomplished by a decoder head "
+"that performs Global Max / Average pooling across all timesteps prior to "
+"classification. After this, the model can be trained via standard "
+"categorical cross-entropy loss."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:25
+msgid ""
+"Audio preprocessing (feature extraction): signal normalization, "
+"windowing, (log) spectrogram (or mel scale spectrogram, or MFCC)"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:26
+msgid ""
+"Data augmentation using SpecAugment :cite:`speech-recognition-tut-"
+"park2019` to increase number of data samples."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:27
+msgid ""
+"Develop a small Neural classification model which can be trained "
+"efficiently."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:30
+msgid ""
+"A Jupyter Notebook containing all the steps to download the dataset, "
+"train a model and evaluate its results is available at : `Speech Commands"
+" Using NeMo "
+"<https://github.com/NVIDIA/NeMo/blob/master/examples/asr/notebooks/3_Speech_Commands_using_NeMo.ipynb>`_"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:34
+msgid "Data Preparation"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:36
+msgid ""
+"We will be using the open source Google Speech Commands Dataset (we will "
+"use V1 of the dataset for the tutorial, but require very minor changes to"
+" support V2 dataset). These scripts below will download the dataset and "
+"convert it to a format suitable for use with `nemo_asr`:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:50
+msgid ""
+"You should have at least 4GB of disk space available if you've used "
+"``--data_version=1``; and at least 6GB if you used ``--data_version=2``. "
+"Also, it will take some time to download and process, so go grab a "
+"coffee."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:52
+msgid ""
+"After download and conversion, your `data` folder should contain a "
+"directory called `google_speech_recognition_v{1/2}`. Inside this "
+"directory, there should be multiple subdirectory containing wav files, "
+"and three json manifest files:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:55
+msgid "`train_manifest.json`"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:56
+msgid "`validation_manifest.json`"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:57
+msgid "`test_manifest.json`"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:59
+msgid ""
+"Each line in json file describes a training sample - `audio_filepath` "
+"contains path to the wav file, `duration` it's duration in seconds, and "
+"`label` is the class label:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:68
+msgid "Training"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:70
+msgid ""
+"We will be training a QuartzNet model :cite:`speech-recognition-tut-"
+"kriman2019quartznet`. The benefit of QuartzNet over JASPER models is that"
+" they use Separable Convolutions, which greatly reduce the number of "
+"parameters required to get good model accuracy."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:74
+msgid ""
+"QuartzNet models generally follow the model definition pattern "
+"QuartzNet-[BxR], where B is the number of blocks and R is the number of "
+"convolutional sub-blocks. Each sub-block contains a 1-D masked "
+"convolution, batch normalization, ReLU, and dropout:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:81
+msgid ""
+"In the tutorial we will be using model QuartzNet [3x1]. The script below "
+"does both training and evaluation (on V1 dataset) on single GPU:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:85
+msgid "Run Jupyter notebook and walk through this script step-by-step"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:88
+msgid "**Training script**"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:334
+msgid ""
+"This script trains should finish 100 epochs in about 4-5 hours on GTX "
+"1080."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:341
+msgid "To improve your accuracy:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:338
+msgid "Train longer (200-300 epochs)"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:339
+msgid ""
+"Train on more data (try increasing the augmentation parameters for "
+"SpectrogramAugmentation)"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:340
+msgid "Use larger model"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:341
+msgid ""
+"Train on several GPUs and use mixed precision (on NVIDIA Volta and Turing"
+" GPUs)"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:342
+msgid "Start with pre-trained checkpoints"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:346
+msgid "Mixed Precision training"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:347
+msgid ""
+"Mixed precision and distributed training in NeMo is based on `NVIDIA's "
+"APEX library <https://github.com/NVIDIA/apex>`_. Make sure it is "
+"installed prior to attempting mixed precision training."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:350
+msgid ""
+"To train with mixed-precision all you need is to set `optimization_level`"
+" parameter of `nemo.core.NeuralModuleFactory`  to "
+"`nemo.core.Optimization.mxprO1`. For example:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:363
+msgid "Multi-GPU training"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:365
+msgid "Enabling multi-GPU training with NeMo is easy:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:367
+msgid ""
+"First set `placement` to `nemo.core.DeviceType.AllGpu` in "
+"NeuralModuleFactory and in your Neural Modules"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:368
+msgid ""
+"Have your script accept 'local_rank' argument and do not set it yourself:"
+" `parser.add_argument(\"--local_rank\", default=None, type=int)`"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:369
+msgid ""
+"Use `torch.distributed.launch` package to run your script like this "
+"(replace <num_gpus> with number of gpus):"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:376
+msgid ""
+"Because mixed precision requires Tensor Cores it only works on NVIDIA "
+"Volta and Turing based GPUs"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:379
+msgid "Large Training Example"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:381
+msgid ""
+"Please refer to the "
+"`<nemo_git_repo_root>/examples/asr/quartznet_speech_commands.py` for "
+"comprehensive example. It builds one train DAG, one validation DAG and a "
+"test DAG to evaluate on different datasets."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:384
+msgid ""
+"Assuming, you are working with Volta-based DGX, you can run training like"
+" this:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:395
+msgid ""
+"The command above should trigger 8-GPU training with mixed precision. In "
+"the command above various manifests (.json) files are various datasets. "
+"Substitute them with the ones containing your data."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:398
+msgid ""
+"You can pass several manifests (comma-separated) to train on a combined "
+"dataset like this: `--train_manifest=/manifests/<first "
+"dataset>.json,/manifests/<second dataset>.json`"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:402
+msgid "Fine-tuning"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:403
+msgid ""
+"Training time can be dramatically reduced if starting from a good pre-"
+"trained model:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:405
+msgid ""
+"Obtain pre-trained model (jasper_encoder, jasper_decoder and "
+"configuration files)."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:406
+msgid ""
+"load pre-trained weights right after you've instantiated your "
+"jasper_encoder and jasper_decoder, like this:"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:416
+msgid "When fine-tuning, use smaller learning rate."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:420
+msgid "Evaluation"
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:422
+msgid ""
+"First download pre-trained model (jasper_encoder, jasper_decoder and "
+"configuration files) into `<path_to_checkpoints>`. We will use this pre-"
+"trained model to measure classification accuracy on Google Speech "
+"Commands dataset v1, but they can similarly be used for v2 dataset."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:427
+msgid ""
+"To listen to the samples that were incorrectly labeled by the model, "
+"please run the following code in a notebook."
+msgstr ""
+
+#: ../../speech_command/tutorial.rst:652
+msgid "References"
+msgstr ""
+

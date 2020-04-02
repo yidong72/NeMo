@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../speech_command/quartznet.rst:2
+msgid "QuartzNet"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:4
+msgid ""
+"QuartzNet is a version of Jasper :cite:`asr-models-li2019jasper` model "
+"with separable convolutions and larger filters. It can achieve "
+"performance similar to Jasper but with an order of magnitude less "
+"parameters. Similarly to Jasper, QuartzNet family of models are denoted "
+"as QuartzNet_[BxR] where B is the number of blocks, and R - the number of"
+" convolutional sub-blocks within a block. Each sub-block contains a 1-D "
+"*separable* convolution, batch normalization, ReLU, and dropout:"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:8
+msgid ""
+"These models are trained on Google Speech Commands dataset (V1 - all 30 "
+"classes)."
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:14
+msgid ""
+"This checkpoint was trained on LibriSpeech "
+":cite:`panayotov2015librispeech` and full \"validated\" part of En "
+"Mozilla Common Voice :cite:`ardila2019common`"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:16
+msgid "`QuartzNet paper <https://arxiv.org/abs/1910.10261>`_."
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:18
+msgid ""
+"These QuartzNet models were trained for 200 epochs using mixed precision "
+"on 2 GPUs with a batch size of 128 over 200 epochs. On 2 Quadro GV100 "
+"GPUs, training time is approximately 1 hour."
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:22
+msgid "Network"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:22
+msgid "Dataset"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:22
+msgid "Results"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:24 ../../speech_command/quartznet.rst:28
+msgid "QuartzNet3x1 (77k params)"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:24 ../../speech_command/quartznet.rst:26
+msgid "Speech Commands V1"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:24
+msgid "97.32% Test"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:26 ../../speech_command/quartznet.rst:30
+msgid "QuartzNet3x2 (93k params)"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:26
+msgid "97.69% Test"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:28 ../../speech_command/quartznet.rst:30
+msgid "Speech Commands V2"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:28
+msgid "97.12% Test"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:30
+msgid "97.29% Test"
+msgstr ""
+
+#: ../../speech_command/quartznet.rst:35
+msgid "References"
+msgstr ""
+

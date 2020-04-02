@@ -1,0 +1,906 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../api-docs/nemo.rst:2
+msgid "Core APIs"
+msgstr ""
+
+#: ../../api-docs/nemo.rst:5
+msgid "neural_types"
+msgstr ""
+
+#: ../../api-docs/nemo.rst:14
+msgid "neural_modules"
+msgstr ""
+
+#: nemo.core.neural_modules:1 of
+msgid "This file contains NeuralModule and NmTensor classes."
+msgstr ""
+
+#: nemo.core.neural_factory.Backend:1
+#: nemo.core.neural_factory.DeploymentFormat:1
+#: nemo.core.neural_factory.DeviceType:1 nemo.core.neural_factory.ModelMode:1
+#: nemo.core.neural_factory.Optimization:1
+#: nemo.core.neural_modules.WeightShareTransform:1 of
+msgid "Bases: :class:`enum.Enum`"
+msgstr ""
+
+#: nemo.core.neural_modules.WeightShareTransform:1 of
+msgid "When sharing parameters, what kind of transform to apply."
+msgstr ""
+
+#: nemo.core.neural_factory.Actions:1 nemo.core.neural_modules.NeuralModule:1
+#: of
+msgid "Bases: :class:`abc.ABC`"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule:1 of
+msgid "Abstract class that every Neural Module must inherit from."
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.create_ports:1 of
+msgid "Deprecated method, to be remoted in the next release."
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.export_to_config:1 of
+msgid ""
+"A function that exports module \"configuration\" (i.e. init parameters) "
+"to a YAML file. Raises a ValueError exception in case then parameters "
+"coudn't be exported."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.create_optimizer
+#: nemo.backends.pytorch.actions.PtActions.deployment_export
+#: nemo.backends.pytorch.actions.PtActions.train
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.freeze
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.restore_from
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.save_to
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.set_weights
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.tie_weights_with
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.unfreeze
+#: nemo.backends.pytorch.nm.DataLayerNM.freeze
+#: nemo.backends.pytorch.nm.DataLayerNM.restore_from
+#: nemo.backends.pytorch.nm.DataLayerNM.save_to
+#: nemo.backends.pytorch.nm.DataLayerNM.set_weights
+#: nemo.backends.pytorch.nm.DataLayerNM.tie_weights_with
+#: nemo.backends.pytorch.nm.DataLayerNM.unfreeze
+#: nemo.backends.pytorch.nm.LossNM.freeze
+#: nemo.backends.pytorch.nm.LossNM.restore_from
+#: nemo.backends.pytorch.nm.LossNM.save_to
+#: nemo.backends.pytorch.nm.LossNM.set_weights
+#: nemo.backends.pytorch.nm.LossNM.tie_weights_with
+#: nemo.backends.pytorch.nm.LossNM.unfreeze
+#: nemo.backends.pytorch.nm.NonTrainableNM.freeze
+#: nemo.backends.pytorch.nm.NonTrainableNM.restore_from
+#: nemo.backends.pytorch.nm.NonTrainableNM.save_to
+#: nemo.backends.pytorch.nm.NonTrainableNM.set_weights
+#: nemo.backends.pytorch.nm.NonTrainableNM.tie_weights_with
+#: nemo.backends.pytorch.nm.NonTrainableNM.unfreeze
+#: nemo.backends.pytorch.nm.TrainableNM
+#: nemo.backends.pytorch.nm.TrainableNM.freeze
+#: nemo.backends.pytorch.nm.TrainableNM.restore_from
+#: nemo.backends.pytorch.nm.TrainableNM.save_to
+#: nemo.backends.pytorch.nm.TrainableNM.set_weights
+#: nemo.backends.pytorch.nm.TrainableNM.tie_weights_with
+#: nemo.backends.pytorch.nm.TrainableNM.unfreeze
+#: nemo.core.neural_factory.Actions.create_optimizer
+#: nemo.core.neural_factory.Actions.train
+#: nemo.core.neural_factory.NeuralModuleFactory.deployment_export
+#: nemo.core.neural_factory.NeuralModuleFactory.get_module
+#: nemo.core.neural_factory.NeuralModuleFactory.infer
+#: nemo.core.neural_factory.NeuralModuleFactory.sync_all_processes
+#: nemo.core.neural_modules.NeuralModule.export_to_config
+#: nemo.core.neural_modules.NeuralModule.freeze
+#: nemo.core.neural_modules.NeuralModule.import_from_config
+#: nemo.core.neural_modules.NeuralModule.restore_from
+#: nemo.core.neural_modules.NeuralModule.save_to
+#: nemo.core.neural_modules.NeuralModule.set_weights
+#: nemo.core.neural_modules.NeuralModule.tie_weights_with
+#: nemo.core.neural_modules.NeuralModule.unfreeze of
+msgid "Parameters"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.export_to_config:4
+#: nemo.core.neural_modules.NeuralModule.import_from_config:5 of
+msgid "path (absolute or relative) and name of the config file (YML)"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.factory:1 of
+msgid ""
+"Neural module factory which created this module Returns: "
+"NeuralModuleFactory instance or None"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.freeze:1
+#: nemo.backends.pytorch.nm.DataLayerNM.freeze:1
+#: nemo.backends.pytorch.nm.LossNM.freeze:1
+#: nemo.backends.pytorch.nm.NonTrainableNM.freeze:1
+#: nemo.backends.pytorch.nm.TrainableNM.freeze:1
+#: nemo.core.neural_modules.NeuralModule.freeze:1 of
+msgid "Freeze weights"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.freeze:3
+#: nemo.backends.pytorch.nm.DataLayerNM.freeze:3
+#: nemo.backends.pytorch.nm.LossNM.freeze:3
+#: nemo.backends.pytorch.nm.NonTrainableNM.freeze:3
+#: nemo.backends.pytorch.nm.TrainableNM.freeze:3
+#: nemo.core.neural_modules.NeuralModule.freeze:3 of
+msgid "set of weight names to freeze"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.get_config_dict_and_checkpoint:1 of
+msgid "WARNING: This part is work in progress"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.get_weights:1
+#: nemo.backends.pytorch.nm.DataLayerNM.get_weights:1
+#: nemo.backends.pytorch.nm.LossNM.get_weights:1
+#: nemo.backends.pytorch.nm.NonTrainableNM.get_weights:1
+#: nemo.backends.pytorch.nm.TrainableNM.get_weights:1
+#: nemo.core.neural_modules.NeuralModule.get_weights:1 of
+msgid "Returns NeuralModule's weights copy."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.create_optimizer
+#: nemo.backends.pytorch.actions.PtActions.train
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.get_weights
+#: nemo.backends.pytorch.nm.DataLayerNM.get_weights
+#: nemo.backends.pytorch.nm.DataLayerNM.input_ports
+#: nemo.backends.pytorch.nm.LossNM.get_weights
+#: nemo.backends.pytorch.nm.NonTrainableNM.get_weights
+#: nemo.backends.pytorch.nm.TrainableNM.get_weights
+#: nemo.core.neural_factory.Actions.create_optimizer
+#: nemo.core.neural_factory.Actions.global_rank
+#: nemo.core.neural_factory.Actions.infer
+#: nemo.core.neural_factory.Actions.local_rank
+#: nemo.core.neural_factory.Actions.train
+#: nemo.core.neural_factory.NeuralModuleFactory.get_module
+#: nemo.core.neural_factory.NeuralModuleFactory.infer
+#: nemo.core.neural_modules.NeuralModule.get_weights
+#: nemo.core.neural_modules.NeuralModule.import_from_config
+#: nemo.core.neural_modules.NeuralModule.init_params
+#: nemo.core.neural_modules.NeuralModule.input_ports
+#: nemo.core.neural_modules.NeuralModule.is_trainable
+#: nemo.core.neural_modules.NeuralModule.list_pretrained_models
+#: nemo.core.neural_modules.NeuralModule.local_parameters
+#: nemo.core.neural_modules.NeuralModule.output_ports
+#: nemo.core.neural_modules.NeuralModule.placement
+#: nemo.core.neural_modules.NeuralModule.unique_instance_id of
+msgid "Returns"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.get_weights:3
+#: nemo.backends.pytorch.nm.DataLayerNM.get_weights:3
+#: nemo.backends.pytorch.nm.LossNM.get_weights:3
+#: nemo.backends.pytorch.nm.NonTrainableNM.get_weights:3
+#: nemo.backends.pytorch.nm.TrainableNM.get_weights:3
+#: nemo.core.neural_modules.NeuralModule.get_weights:3 of
+msgid "Dictionary of name -> (weights, trainable)"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.import_from_config:1 of
+msgid ""
+"Class method importing the configuration file. Raises an ImportError "
+"exception when config file is invalid or incompatible (when called from a"
+" particular class)."
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.import_from_config:6 of
+msgid ""
+"section in the configuration file storing module configuration (optional,"
+" DEFAULT: None)"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.import_from_config:7 of
+msgid ""
+"Dictionary containing parameters that will be added to or overwrite (!) "
+"the default"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.import_from_config:10 of
+msgid "Instance of the created NeuralModule object."
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.init_params:1 of
+msgid "Property returning parameters used to instantiate the module."
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.init_params:3 of
+msgid "Dictionary containing parameters used to instantiate the module."
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.input_ports:1 of
+msgid "Returns definitions of module input ports"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.input_ports:3 of
+msgid "A (dict) of module's input ports names to NeuralTypes mapping"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.is_trainable:1 of
+msgid ""
+"Checks if NeuralModule is trainable. A NeuralModule is trainable IFF it "
+"contains at least one trainable weight"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.is_trainable:5 of
+msgid "True if module has trainable weights, False otherwise"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.list_pretrained_models:1 of
+msgid "List all available pre-trained models (e.g. weights) for this NM."
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.list_pretrained_models:3 of
+msgid ""
+"A list of PretrainedModelInfo tuples. The pretrained_model_name field of "
+"the tuple can be used to retrieve pre-trained model's weights (pass it as"
+" pretrained_model_name argument to the module's constructor)"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.local_parameters:1 of
+msgid "Get module's parameters"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.local_parameters:3 of
+msgid "module's parameters"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.num_weights:1
+#: nemo.backends.pytorch.nm.DataLayerNM.num_weights:1
+#: nemo.backends.pytorch.nm.LossNM.num_weights:1
+#: nemo.backends.pytorch.nm.NonTrainableNM.num_weights:1
+#: nemo.backends.pytorch.nm.TrainableNM.num_weights:1
+#: nemo.core.neural_modules.NeuralModule.num_weights:1 of
+msgid "Number of module's weights"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.output_ports:1 of
+msgid "Returns definitions of module output ports"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.output_ports:3 of
+msgid "A (dict) of module's output ports names to NeuralTypes mapping"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.placement:1 of
+msgid ""
+"Module's placement. Currently CPU or GPU. DataParallel and ModelParallel "
+"will come later."
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.placement:4 of
+msgid "(DeviceType) Device where NM's weights are located"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.restore_from:1
+#: nemo.backends.pytorch.nm.DataLayerNM.restore_from:1
+#: nemo.backends.pytorch.nm.LossNM.restore_from:1
+#: nemo.backends.pytorch.nm.NonTrainableNM.restore_from:1
+#: nemo.backends.pytorch.nm.TrainableNM.restore_from:1
+#: nemo.core.neural_modules.NeuralModule.restore_from:1 of
+msgid "Restore module's state from file."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.restore_from:3
+#: nemo.backends.pytorch.nm.DataLayerNM.restore_from:3
+#: nemo.backends.pytorch.nm.LossNM.restore_from:3
+#: nemo.backends.pytorch.nm.NonTrainableNM.restore_from:3
+#: nemo.backends.pytorch.nm.TrainableNM.restore_from:3
+#: nemo.core.neural_modules.NeuralModule.restore_from:3 of
+msgid "path to where to restore from."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.save_to:1
+#: nemo.backends.pytorch.nm.DataLayerNM.save_to:1
+#: nemo.backends.pytorch.nm.LossNM.save_to:1
+#: nemo.backends.pytorch.nm.NonTrainableNM.save_to:1
+#: nemo.backends.pytorch.nm.TrainableNM.save_to:1
+#: nemo.core.neural_modules.NeuralModule.save_to:1 of
+msgid "Save module state to file."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.save_to:3
+#: nemo.backends.pytorch.nm.DataLayerNM.save_to:3
+#: nemo.backends.pytorch.nm.LossNM.save_to:3
+#: nemo.backends.pytorch.nm.NonTrainableNM.save_to:3
+#: nemo.backends.pytorch.nm.TrainableNM.save_to:3
+#: nemo.core.neural_modules.NeuralModule.save_to:3 of
+msgid "path to while where to save."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.set_weights:1
+#: nemo.backends.pytorch.nm.DataLayerNM.set_weights:1
+#: nemo.backends.pytorch.nm.LossNM.set_weights:1
+#: nemo.backends.pytorch.nm.NonTrainableNM.set_weights:1
+#: nemo.backends.pytorch.nm.TrainableNM.set_weights:1
+#: nemo.core.neural_modules.NeuralModule.set_weights:1 of
+msgid ""
+"Sets weight from given values. For every named weight in name2weight, if "
+"weight with the same name is found in the model, it will be set to found "
+"value."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.set_weights:6
+#: nemo.backends.pytorch.nm.DataLayerNM.set_weights:6
+#: nemo.backends.pytorch.nm.LossNM.set_weights:6
+#: nemo.backends.pytorch.nm.NonTrainableNM.set_weights:6
+#: nemo.backends.pytorch.nm.TrainableNM.set_weights:6
+#: nemo.core.neural_modules.NeuralModule.set_weights:6 of
+msgid "WARNING: This will NOT tie weights. It will copy values."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.set_weights:8
+#: nemo.backends.pytorch.nm.DataLayerNM.set_weights:8
+#: nemo.backends.pytorch.nm.LossNM.set_weights:8
+#: nemo.backends.pytorch.nm.NonTrainableNM.set_weights:8
+#: nemo.backends.pytorch.nm.TrainableNM.set_weights:8
+#: nemo.core.neural_modules.NeuralModule.set_weights:8 of
+msgid ""
+"If ``name2name_and_transform`` is provided then if will set weights using"
+" name mapping and transform. For example, suppose ``objec1.X = 3x5 "
+"weight``. Then, if ``name2name_and_transform['X']=('Y', "
+"WeightShareTransform.TRANSPOSE)`` and ``Y`` is 5x3 weight and "
+"``name2weight['Y']=Y. Then: ``object1.set_weights(name2weight, "
+"name2name_and_transform)`` will set object1.X=transpose(Y)."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.set_weights:18
+#: nemo.backends.pytorch.nm.DataLayerNM.set_weights:18
+#: nemo.backends.pytorch.nm.LossNM.set_weights:18
+#: nemo.backends.pytorch.nm.NonTrainableNM.set_weights:18
+#: nemo.backends.pytorch.nm.TrainableNM.set_weights:18
+#: nemo.core.neural_modules.NeuralModule.set_weights:18 of
+msgid "dictionary of name to (weight, trainable)."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.set_weights:21
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.tie_weights_with:28
+#: nemo.backends.pytorch.nm.DataLayerNM.set_weights:21
+#: nemo.backends.pytorch.nm.DataLayerNM.tie_weights_with:28
+#: nemo.backends.pytorch.nm.LossNM.set_weights:21
+#: nemo.backends.pytorch.nm.LossNM.tie_weights_with:28
+#: nemo.backends.pytorch.nm.NonTrainableNM.set_weights:21
+#: nemo.backends.pytorch.nm.NonTrainableNM.tie_weights_with:28
+#: nemo.backends.pytorch.nm.TrainableNM.set_weights:21
+#: nemo.backends.pytorch.nm.TrainableNM.tie_weights_with:28
+#: nemo.core.neural_modules.NeuralModule.set_weights:21
+#: nemo.core.neural_modules.NeuralModule.tie_weights_with:28 of
+msgid "mapping from name -> (name, transform)"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.tie_weights_with:1
+#: nemo.backends.pytorch.nm.DataLayerNM.tie_weights_with:1
+#: nemo.backends.pytorch.nm.LossNM.tie_weights_with:1
+#: nemo.backends.pytorch.nm.NonTrainableNM.tie_weights_with:1
+#: nemo.backends.pytorch.nm.TrainableNM.tie_weights_with:1
+#: nemo.core.neural_modules.NeuralModule.tie_weights_with:1 of
+msgid ""
+"Ties weights between self and module. For every weight name in "
+"weight_names, if weight with the same name is found in self, it will be "
+"tied with a same weight from ``module``."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.tie_weights_with:6
+#: nemo.backends.pytorch.nm.DataLayerNM.tie_weights_with:6
+#: nemo.backends.pytorch.nm.LossNM.tie_weights_with:6
+#: nemo.backends.pytorch.nm.NonTrainableNM.tie_weights_with:6
+#: nemo.backends.pytorch.nm.TrainableNM.tie_weights_with:6
+#: nemo.core.neural_modules.NeuralModule.tie_weights_with:6 of
+msgid ""
+"WARNING: Once weights are tied, updates to one weights's weights will "
+"affect other module's weights."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.tie_weights_with:11
+#: nemo.backends.pytorch.nm.DataLayerNM.tie_weights_with:11
+#: nemo.backends.pytorch.nm.LossNM.tie_weights_with:11
+#: nemo.backends.pytorch.nm.NonTrainableNM.tie_weights_with:11
+#: nemo.backends.pytorch.nm.TrainableNM.tie_weights_with:11
+#: nemo.core.neural_modules.NeuralModule.tie_weights_with:11 of
+msgid ""
+"If ``name2name_and_transform`` is provided then if will set weights using"
+" name mapping and transform. For example, suppose ``objec1.X = 3x5 "
+"weights`` and ``object2.Y = 5x3 weights``. Then these weights can be tied"
+" like this:"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.tie_weights_with:25
+#: nemo.backends.pytorch.nm.DataLayerNM.tie_weights_with:25
+#: nemo.backends.pytorch.nm.LossNM.tie_weights_with:25
+#: nemo.backends.pytorch.nm.NonTrainableNM.tie_weights_with:25
+#: nemo.backends.pytorch.nm.TrainableNM.tie_weights_with:25
+#: nemo.core.neural_modules.NeuralModule.tie_weights_with:25 of
+msgid "with which module to tie weights"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.tie_weights_with:26
+#: nemo.backends.pytorch.nm.DataLayerNM.tie_weights_with:26
+#: nemo.backends.pytorch.nm.LossNM.tie_weights_with:26
+#: nemo.backends.pytorch.nm.NonTrainableNM.tie_weights_with:26
+#: nemo.backends.pytorch.nm.TrainableNM.tie_weights_with:26
+#: nemo.core.neural_modules.NeuralModule.tie_weights_with:26 of
+msgid "list of self weights' names"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.unfreeze:1
+#: nemo.backends.pytorch.nm.DataLayerNM.unfreeze:1
+#: nemo.backends.pytorch.nm.LossNM.unfreeze:1
+#: nemo.backends.pytorch.nm.NonTrainableNM.unfreeze:1
+#: nemo.backends.pytorch.nm.TrainableNM.unfreeze:1
+#: nemo.core.neural_modules.NeuralModule.unfreeze:1 of
+msgid "Unfreeze weights"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.unfreeze:3
+#: nemo.backends.pytorch.nm.DataLayerNM.unfreeze:3
+#: nemo.backends.pytorch.nm.LossNM.unfreeze:3
+#: nemo.backends.pytorch.nm.NonTrainableNM.unfreeze:3
+#: nemo.backends.pytorch.nm.TrainableNM.unfreeze:3
+#: nemo.core.neural_modules.NeuralModule.unfreeze:3 of
+msgid "set of weight names to unfreeze"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.unique_instance_id:1 of
+msgid "A unique instance id for this object"
+msgstr ""
+
+#: nemo.core.neural_modules.NeuralModule.unique_instance_id:3 of
+msgid "A uniq uuid which can be used to identify this object"
+msgstr ""
+
+#: ../../api-docs/nemo.rst:22
+msgid "neural_factory"
+msgstr ""
+
+#: nemo.core.neural_factory.Backend:1 of
+msgid "Supported backends. For now, it is only PyTorch."
+msgstr ""
+
+#: nemo.core.neural_factory.ModelMode:1 of
+msgid "Training Mode or Evaluation/Inference"
+msgstr ""
+
+#: nemo.core.neural_factory.Optimization:1 of
+msgid ""
+"Various levels of Apex/amp Optimization. WARNING: This might have effect "
+"on model accuracy."
+msgstr ""
+
+#: nemo.core.neural_factory.DeviceType:1 of
+msgid "Device types where Neural Modules can be placed."
+msgstr ""
+
+#: nemo.core.neural_factory.Actions:1 of
+msgid "Basic actions allowed on graphs of Neural Modules"
+msgstr ""
+
+#: nemo.core.neural_factory.Actions.create_optimizer:1 of
+msgid "Creates an optimizer object to be use in the train() method."
+msgstr ""
+
+#: nemo.core.neural_factory.Actions.create_optimizer:3 of
+msgid "Specifies which optimizer to use."
+msgstr ""
+
+#: nemo.core.neural_factory.Actions.create_optimizer:4 of
+msgid "A list of neural modules or tensors to be optimized."
+msgstr ""
+
+#: nemo.core.neural_factory.Actions.create_optimizer:6 of
+msgid "Specifies the parameters of the optimizer"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.create_optimizer:12
+#: nemo.core.neural_factory.Actions.create_optimizer:8 of
+msgid "Optimizer"
+msgstr ""
+
+#: nemo.core.neural_factory.Actions.global_rank:1 of
+msgid "Global rank during distributed execution. None if single GPU/CPU"
+msgstr ""
+
+#: nemo.core.neural_factory.Actions.global_rank:3
+#: nemo.core.neural_factory.Actions.local_rank:3 of
+msgid "(int) rank or worker or None if not in distributed model"
+msgstr ""
+
+#: nemo.core.neural_factory.Actions.infer:1 of
+msgid ""
+"This action executes inference. Nothing is optimized. :param tensors: "
+"which tensors to evaluate."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.train:19
+#: nemo.core.neural_factory.Actions.infer:4
+#: nemo.core.neural_factory.Actions.train:19 of
+msgid "None"
+msgstr ""
+
+#: nemo.core.neural_factory.Actions.local_rank:1 of
+msgid "Local rank during distributed execution. None if single GPU/CPU"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.restore_state_from:1
+#: nemo.core.neural_factory.Actions.restore_state_from:1 of
+msgid "Restores state such as step, epoch and optimizer parameters :param path:"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.restore_state_from:4
+#: nemo.backends.pytorch.actions.PtActions.save_state_to:4
+#: nemo.core.neural_factory.Actions.restore_state_from:4
+#: nemo.core.neural_factory.Actions.save_state_to:4 of
+msgid "Returns:"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.save_state_to:1
+#: nemo.core.neural_factory.Actions.save_state_to:1 of
+msgid ""
+"Saves current state such as step, epoch and optimizer parameters :param "
+"path:"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.train:1
+#: nemo.core.neural_factory.Actions.train:1 of
+msgid "This action executes training and (optionally) evaluation."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.train:3
+#: nemo.core.neural_factory.Actions.train:3 of
+msgid "which tensors to optimize. Typically this is single loss tesnor."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.train:5
+#: nemo.core.neural_factory.Actions.train:5 of
+msgid "list of callback objects"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.train:6
+#: nemo.core.neural_factory.Actions.train:6 of
+msgid ""
+"function which should take (initial_lr, step, epoch) and return learning "
+"rate"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.train:8
+#: nemo.core.neural_factory.Actions.train:8 of
+msgid ""
+"number of mini-batches to process before one optimizer step. (default: "
+"None, same as 1). Use this to simulate larger batch sizes on hardware "
+"which could not fit larger batch in memory otherwise. Effectively, this "
+"will make \"algorithmic\" batch size per GPU/worker = batches_per_step* "
+"batch_size"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.train:14
+#: nemo.core.neural_factory.Actions.train:14 of
+msgid ""
+"(default: False) If set to True, the training will stop if loss=nan. If "
+"set to False, the training will continue, but the gradients will be "
+"zeroed before next mini-batch."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory:1 of
+msgid "Bases: :class:`object`"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.clear_cache:1 of
+msgid "Helper function to clean inference cache."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.deployment_export:1
+#: nemo.core.neural_factory.NeuralModuleFactory.deployment_export:1 of
+msgid "Exports Neural Module instance for deployment."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.deployment_export:3
+#: nemo.core.neural_factory.NeuralModuleFactory.deployment_export:3 of
+msgid "neural module to export"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.deployment_export:4
+#: nemo.core.neural_factory.NeuralModuleFactory.deployment_export:4 of
+msgid "where export results should be saved"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.deployment_export:6
+#: nemo.core.neural_factory.NeuralModuleFactory.deployment_export:6 of
+msgid "which deployment format to use"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.deployment_export:8
+#: nemo.core.neural_factory.NeuralModuleFactory.deployment_export:8 of
+msgid "sometimes tracing will require input examples"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.deployment_export:9
+#: nemo.core.neural_factory.NeuralModuleFactory.deployment_export:9 of
+msgid "Should match inference on input_example"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.get_module:1 of
+msgid "Creates NeuralModule instance"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.get_module:3 of
+msgid "name of NeuralModule which instance should be returned."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.get_module:5 of
+msgid "local parameters which should be passed to"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.get_module:8 of
+msgid "in which collection to look for"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.get_module:11 of
+msgid "return pre-trained instance or randomly"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.get_module:16 of
+msgid "NeuralModule instance"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:1 of
+msgid "Runs inference to obtain values for tensors"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:3 of
+msgid "List of NeMo tensors that we want to get values of."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:6 of
+msgid ""
+"Path to checkpoint directory. Default is None which does not load "
+"checkpoints."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:9 of
+msgid ""
+"Pattern used to check for checkpoints inside checkpoint_dir. Default is "
+"'' which matches any checkpoints inside checkpoint_dir."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:13 of
+msgid "Controls printing. Defaults to True."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:15 of
+msgid ""
+"If True, cache all `tensors` and intermediate tensors so that future "
+"calls that have use_cache set will avoid computation. Defaults to False."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:19 of
+msgid ""
+"Values from `tensors` will be always re-computed. It will re-use "
+"intermediate tensors from the DAG leading to `tensors`. If you want "
+"something to be re-computed, put it into `tensors` list. Defaults to "
+"False."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:24 of
+msgid ""
+"If True, all evaluated tensors are moved to cpu memory after each "
+"inference batch. Defaults to True."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:27 of
+msgid ""
+"Defaults to None, in which case all NMs inside callchain with weights "
+"will be restored. If specified only the modules inside this list will be "
+"restored."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.infer:32 of
+msgid ""
+"List of evaluated tensors. Each element in the list is also a list where "
+"each element is now a batch of tensor values."
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.sync_all_processes:1 of
+msgid ""
+"Helper function for testing that allows proccess 0 to inform all other "
+"processes of failures. Does nothing if not using distributed training. "
+"Usage example can be seen in examples/asr/jasper_an4.py"
+msgstr ""
+
+#: nemo.core.neural_factory.NeuralModuleFactory.sync_all_processes:5 of
+msgid ""
+"Defaults to True. If any proccess passes False, it will trigger a "
+"graceful exit on all other processes. It is assumed that the process that"
+" passed False will print an error message on its own and exit"
+msgstr ""
+
+#: nemo.core.neural_factory.DeploymentFormat:1 of
+msgid "Which format to use when exporting a Neural Module for deployment"
+msgstr ""
+
+#: ../../api-docs/nemo.rst:30
+msgid "PyTorch BackEnd"
+msgstr ""
+
+#: ../../api-docs/nemo.rst:31
+msgid "Currently, we only support PyTorch backend."
+msgstr ""
+
+#: ../../api-docs/nemo.rst:34
+msgid "Basic actions"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions:1 of
+msgid "Bases: :class:`nemo.core.neural_factory.Actions`"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.append_to_cache:1 of
+msgid ""
+"Simpler helper function to add results of __nm_graph_forward_pass to "
+"current cache."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.clear_cache:1 of
+msgid "Simple helpful function to clear cache by setting self.cache to None"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.create_optimizer:1 of
+msgid "Wrapper function around __setup_optimizer()"
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.create_optimizer:3 of
+msgid ""
+"A instantiated PyTorch optimizer or string. For currently supported "
+"strings, see __setup_optimizer()."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.create_optimizer:5 of
+msgid ""
+"Must be a list of Neural Modules and/or parameters. If a Neural Module is"
+" passed, all trainable parameters are extracted and passed to the "
+"optimizer."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.create_optimizer:9 of
+msgid "Optional parameters dictionary."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.deployment_export:10 of
+msgid "Max value for amp loss scaling. Defaults to 2.0**24."
+msgstr ""
+
+#: nemo.backends.pytorch.actions.PtActions.infer:1 of
+msgid "See NeuralModuleFactory.infer()"
+msgstr ""
+
+#: ../../api-docs/nemo.rst:41
+msgid "Classes for writing your own NMs"
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM:1 nemo.backends.pytorch.nm.LossNM:1
+#: nemo.backends.pytorch.nm.NonTrainableNM:1 of
+msgid "Bases: :class:`nemo.core.neural_modules.NeuralModule`"
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM:1 of
+msgid ""
+"A helper Base class for creating Pytorch-based data layers. You must "
+"implement __len__ method to return dataset size and data_iterator "
+"property to return iterator over the dataset."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM.batch_size:1 of
+msgid "Property returning the batch size."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM.data_iterator:1 of
+msgid ""
+"\"Iterator over the dataset. It is a good idea to return "
+"torch.utils.data.DataLoader here. Should implement either this or "
+"`dataset`. If this is implemented, `dataset` property should return None."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM.dataset:1 of
+msgid ""
+"Should return an instance of torch.utils.data.Dataset. Should implement "
+"either this or `data_iterator`. If this is implemented, `data_iterator` "
+"should return None."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM.input_ports:1 of
+msgid "DataLayer by definition does not have any input ports."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM.input_ports:3 of
+msgid "An empty dictionary."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM.num_workers:1 of
+msgid "Property returning the number of workers."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.DataLayerNM.shuffle:1 of
+msgid "Property returning the shuffle flag."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.LossNM:1 of
+msgid ""
+"A helper Base class for creating Pytorch-based loss function modules. You"
+" must implement _loss_function method."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.NonTrainableNM.forward:1 of
+msgid "Defines the computation performed at every call."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.NonTrainableNM.forward:3 of
+msgid "Should be overridden by all subclasses."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper:1
+#: nemo.backends.pytorch.nm.TrainableNM:1 of
+msgid ""
+"Bases: :class:`nemo.core.neural_modules.NeuralModule`, "
+":class:`torch.nn.Module`"
+msgstr ""
+
+#: nemo.backends.pytorch.nm.TrainableNM:1 of
+msgid "A helper Base class for NeuralModule's based on Pytorch's nn.Module."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.TrainableNM:3 of
+msgid ""
+"If you have a Pytorch class which derives from nn.Module you can covert "
+"it into a NeuralModule, by replacing inheriting from this class instead"
+msgstr ""
+
+#: nemo.backends.pytorch.nm.TrainableNM:7 of
+msgid "Your constructor then should look like this:"
+msgstr ""
+
+#: nemo.backends.pytorch.nm.TrainableNM:15 of
+msgid ""
+"Then make sure that your forward(..) method accepts arguments named like "
+"input ports."
+msgstr ""
+
+#: nemo.backends.pytorch.nm.TrainableNM:18 of
+msgid "name of pretrained model to use in order to initialize this neural module"
+msgstr ""
+
+#: ../../api-docs/nemo.rst:49
+msgid "Trainable Module Wrapper"
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper:1 of
+msgid ""
+"This class wraps an instance of Pytorch's nn.Module and returns "
+"NeuralModule's instance."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.input_ports:1
+#: of
+msgid "Returns definitions of module input ports."
+msgstr ""
+
+#: nemo.backends.pytorch.module_wrapper.TrainableNeuralModuleWrapper.output_ports:1
+#: of
+msgid "Returns definitions of module output ports."
+msgstr ""
+

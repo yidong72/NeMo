@@ -1,0 +1,105 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../nlp/intro.rst:4
+msgid "Natural Language Processing"
+msgstr ""
+
+#: ../../nlp/intro.rst:6
+msgid "Supported Tasks and Models:"
+msgstr ""
+
+#: ../../nlp/intro.rst:8
+msgid "Intent Detection and Slot Filling"
+msgstr ""
+
+#: ../../nlp/intro.rst:9
+msgid "Text Classification"
+msgstr ""
+
+#: ../../nlp/intro.rst:10
+msgid "State Tracking for Task-oriented Dialogue Systems"
+msgstr ""
+
+#: ../../nlp/intro.rst:11
+msgid "Language Modelling"
+msgstr ""
+
+#: ../../nlp/intro.rst:12
+msgid "Neural Machine Translation"
+msgstr ""
+
+#: ../../nlp/intro.rst:13 ../../nlp/intro.rst:80
+msgid "Question Answering"
+msgstr ""
+
+#: ../../nlp/intro.rst:14
+msgid "Name Entity Recognition (NER)"
+msgstr ""
+
+#: ../../nlp/intro.rst:15
+msgid "Punctuation and Capitalization"
+msgstr ""
+
+#: ../../nlp/intro.rst:16
+msgid "GLUE Benchmark"
+msgstr ""
+
+#: ../../nlp/intro.rst:17
+msgid "ASR Postprocessing with BERT"
+msgstr ""
+
+#: ../../nlp/intro.rst:19
+msgid ""
+"All examples from NLP collection can be found `here "
+"<https://github.com/NVIDIA/NeMo/tree/master/examples/nlp>`__."
+msgstr ""
+
+#: ../../nlp/intro.rst:22
+msgid "Neural Machine Translation (NMT)"
+msgstr ""
+
+#: ../../nlp/intro.rst:29
+msgid "Pretraining BERT"
+msgstr ""
+
+#: ../../nlp/intro.rst:37
+msgid "Transformer Language Model"
+msgstr ""
+
+#: ../../nlp/intro.rst:45
+msgid "Dialogue State Tracking"
+msgstr ""
+
+#: ../../nlp/intro.rst:54
+msgid "Named Entity Recognition"
+msgstr ""
+
+#: ../../nlp/intro.rst:62
+msgid "Punctuation and Word Capitalization"
+msgstr ""
+
+#: ../../nlp/intro.rst:71
+msgid "Intent and Slot filling"
+msgstr ""
+
+#: ../../nlp/intro.rst:87
+msgid "Improving Speech Recognition with BERTx2 Post-processing Model"
+msgstr ""
+

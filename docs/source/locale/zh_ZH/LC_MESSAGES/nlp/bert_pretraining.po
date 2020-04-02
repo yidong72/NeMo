@@ -1,0 +1,430 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../nlp/bert_pretraining.rst:4
+msgid "Tutorial"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:6
+msgid ""
+"In this tutorial, we will build and train a masked language model, either"
+" from scratch or from a pretrained BERT model, using the BERT "
+"architecture :cite:`nlp-bert-devlin2018bert`. Make sure you have ``nemo``"
+" and ``nemo_nlp`` installed before starting this tutorial. See the "
+":ref:`installation` section for more details."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:9
+msgid ""
+"The code used in this tutorial can be found at "
+"``examples/nlp/language_modeling/bert_pretraining.py``."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:14
+msgid "Download pretrained models"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:16
+msgid ""
+"Pretrained BERT models and model configuration files can be downloaded at"
+" following links."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:18
+msgid ""
+"BERT Large models (~330M parameters): "
+"`https://ngc.nvidia.com/catalog/models/nvidia:bertlargeuncasedfornemo "
+"<https://ngc.nvidia.com/catalog/models/nvidia:bertlargeuncasedfornemo>`__"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:21
+msgid ""
+"BERT Base models (~110M parameters): "
+"`https://ngc.nvidia.com/catalog/models/nvidia:bertbaseuncasedfornemo "
+"<https://ngc.nvidia.com/catalog/models/nvidia:bertbaseuncasedfornemo>`__ "
+"`https://ngc.nvidia.com/catalog/models/nvidia:bertbasecasedfornemo "
+"<https://ngc.nvidia.com/catalog/models/nvidia:bertbasecasedfornemo>`__"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:25
+msgid "Model results on downstream tasks:"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:30
+msgid "Model"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:28
+msgid "SQuADv1.1"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:28
+msgid "SQuADv2.0"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:28
+msgid "GLUE MRPC"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:30
+msgid "EM"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:30
+msgid "F1"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:30
+msgid "Acc"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:32
+msgid "BERT-base-uncased"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:32
+msgid "82.74%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:32
+msgid "89.79%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:32
+msgid "71.24%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:32
+msgid "74.32%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:32
+msgid "86.52%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:32
+msgid "90.53%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:34
+msgid "BERT-large-uncased"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:34
+msgid "85.79%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:34
+msgid "92.28%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:34
+msgid "80.17%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:34
+msgid "83.32%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:34
+msgid "88.72%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:34
+msgid "91.96%"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:38
+msgid "Introduction"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:40
+msgid ""
+"Creating domain-specific BERT models can be advantageous for a wide range"
+" of applications. One notable is domain-specific BERT in a biomedical "
+"setting, similar to BioBERT :cite:`nlp-bert-lee2019biobert` and SciBERT "
+":cite:`nlp-bert-beltagy2019scibert`."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:46
+msgid "Download Corpus"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:48
+msgid ""
+"The training corpus can be either raw text where data preprocessing is "
+"done on the fly or an already preprocessed data set. In the following we "
+"will give examples for both. To showcase how to train on raw text data, "
+"we will be using the very small WikiText-2 dataset :cite:`nlp-bert-"
+"merity2016pointer`."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:51
+msgid ""
+"To download the dataset, run the script "
+"``examples/nlp/language_modeling/get_wkt2.sh download_dir``. After "
+"downloading and unzipping, the folder is located at `download_dir` and "
+"should include 3 files that look like this:"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:59
+msgid ""
+"To train BERT on a Chinese dataset, you may download the Chinese "
+"Wikipedia corpus wiki2019zh_. After downloading, you may unzip and use "
+"the script ``examples/nlp/language_modeling/process_wiki_zh.py`` for "
+"preprocessing the raw text."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:68
+msgid ""
+"For already preprocessed data, we will be using a large dataset composed "
+"of Wikipedia and BookCorpus as in the original BERT paper."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:70
+msgid ""
+"To download the dataset, go to "
+"`https://github.com/NVIDIA/DeepLearningExamples/blob/master/PyTorch/LanguageModeling/BERT"
+" "
+"<https://github.com/NVIDIA/DeepLearningExamples/blob/master/PyTorch/LanguageModeling/BERT>`__"
+" and run the script ``./data/create_datasets_from_start.sh``. The "
+"downloaded folder should include a 2 sub folders with the prefix "
+"`lower_case_[0,1]_seq_len_128_max_pred_20_masked_lm_prob_0.15_random_seed_12345_dupe_factor_5`"
+" and "
+"`lower_case_[0,1]_seq_len_512_max_pred_80_masked_lm_prob_0.15_random_seed_12345_dupe_factor_5`,"
+" containing sequences of length 128 with a maximum of 20 masked tokens "
+"and sequences of length 512 with a maximum of 80 masked tokens "
+"respectively."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:78
+msgid "Create the tokenizer"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:79
+msgid ""
+"A tokenizer will be used for data preprocessing and, therefore, is only "
+"required for training using raw text data."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:81
+msgid ""
+"`BERTPretrainingDataDesc` converts your dataset into the format "
+"compatible with `BertPretrainingDataset`. The most computationally "
+"intensive step is to tokenize the dataset to create a vocab file and a "
+"tokenizer model."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:84
+msgid ""
+"You can also use an available vocab or tokenizer model to skip this step."
+" If you already have a pretrained tokenizer model copy it to the "
+"`[data_dir]/bert` folder under the name `tokenizer.model` and the script "
+"will skip this step."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:87
+msgid ""
+"If have an available vocab, such as `vocab.txt` file from any pretrained "
+"BERT model, copy it to the `[data_dir]/bert` folder under the name "
+"`vocab.txt`."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:101
+msgid ""
+"We need to define our tokenizer. If you'd like to use a custom vocabulary"
+" file, we strongly recommend you use our `SentencePieceTokenizer`. "
+"Otherwise, if you'll be using a vocabulary file from another pre-trained "
+"BERT model, you should use `NemoBertTokenizer`."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:104
+msgid "To train on a Chinese dataset, you should use `NemoBertTokenizer`."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:119
+msgid "Create the model"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:123
+msgid ""
+"We recommend you try this out in a Jupyter notebook. It'll make debugging"
+" much easier!"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:125
+msgid ""
+"First, we need to create our neural factory with the supported backend. "
+"How you should define it depends on whether you'd like to multi-GPU or "
+"mixed-precision training. This tutorial assumes that you're training on "
+"one GPU, without mixed precision. If you want to use mixed precision, set"
+" ``amp_opt_level`` to ``O1`` or ``O2``."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:137
+msgid ""
+"We also need to define the BERT model that we will be pre-training. Here,"
+" you can configure your model size as needed. If you want to train from "
+"scratch, use this:"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:152
+msgid ""
+"If you want to start pre-training from existing BERT checkpoints, specify"
+" the checkpoint folder path with the argument ``--load_dir``."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:154
+msgid ""
+"The following code will automatically load the checkpoints if they exist "
+"and are compatible to the previously defined model"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:161
+msgid ""
+"To initialize the model with already pretrained checkpoints, specify "
+"``pretrained_model_name``. For example, to initialize BERT Base trained "
+"on cased Wikipedia and BookCorpus with 12 layers, run"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:167
+msgid ""
+"For the full list of BERT model names, check out "
+"`nemo_nlp.nm.trainables.huggingface.BERT.list_pretrained_models()`."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:169
+msgid ""
+"Next, we will define our classifier and loss functions. We will "
+"demonstrate how to pre-train with both MLM (masked language model) and "
+"NSP (next sentence prediction) losses, but you may observe higher "
+"downstream accuracy by only pre-training with MLM loss."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:193
+msgid ""
+"Finally we will tie the weights of the encoder embedding layer and the "
+"MLM output embedding:"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:205
+msgid ""
+"Then, we create the pipeline from input to output that can be used for "
+"both training and evaluation:"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:207
+msgid ""
+"For training from raw text use "
+"`nemo_nlp.nm.data_layers.BertPretrainingDataLayer`, for preprocessed data"
+" use `nemo_nlp.nm.data_layers.BertPretrainingPreprocessedDataLayer`"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:287
+msgid "Run the model"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:289
+msgid "Define your learning rate policy"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:302
+msgid "Next, we define necessary callbacks:"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:304
+msgid "`SimpleLossLoggerCallback`: tracking loss during training"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:305
+msgid "`EvaluatorCallback`: tracking metrics during evaluation at set intervals"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:306
+msgid "`CheckpointCallback`: saving model checkpoints at set intervals"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:323
+msgid ""
+"We recommend you export your model's parameters to a config file. This "
+"makes it easier to load your BERT model into NeMo later, as explained in "
+"our Named Entity Recognition :ref:`ner_tutorial` tutorial."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:332
+msgid "Finally, you should define your optimizer, and start training!"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:348
+msgid "How to use the training script"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:350
+msgid ""
+"You can find the example training script at "
+"``examples/nlp/language_modeling/bert_pretraining.py``."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:352
+msgid "For single GPU training, the script can be started with"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:359
+msgid ""
+"The BERT configuration files can be found in the NGC model repositories, "
+"see :ref:`pretrained_models_bert`."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:362
+msgid "For multi-GPU training with ``x`` GPUs, the script can be started with"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:370
+msgid ""
+"If you running the model on raw text data, please remember to add the "
+"argument ``data_text`` to the python command."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:376
+msgid ""
+"Similarly, to run the model on already preprocessed data add the argument"
+" ``data_preprocessed`` to the python command."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:383
+msgid "By default, the script assumes ``data_preprocessed`` as input mode."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:386
+msgid ""
+"For downloading or preprocessing data offline please refer to "
+":ref:`bert_data_download`."
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:391
+msgid ""
+"Tensorboard_ is a great debugging tool. It's not a requirement for this "
+"tutorial, but if you'd like to use it, you should install tensorboardX_ "
+"and run the following command during pre-training:"
+msgstr ""
+
+#: ../../nlp/bert_pretraining.rst:401
+msgid "References"
+msgstr ""
+

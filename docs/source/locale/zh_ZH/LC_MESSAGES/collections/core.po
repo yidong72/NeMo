@@ -1,0 +1,420 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../collections/core.rst:2
+msgid "NeMo Common Collection"
+msgstr ""
+
+#: ../../collections/core.rst:4
+msgid "NeMo core package comes with \"common\" collection for pytorch built-in:"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.CrossEntropyLossNM:1
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM:1
+#: nemo.backends.pytorch.common.losses.MSELoss:1
+#: nemo.backends.pytorch.common.losses.SequenceLoss:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.LossNM`"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss:1 of
+msgid "Loss for seq2seq tasks"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM
+#: nemo.backends.pytorch.common.losses.SequenceLoss
+#: nemo.backends.pytorch.common.rnn.DecoderRNN
+#: nemo.backends.pytorch.common.search.BeamSearch
+#: nemo.backends.pytorch.common.search.GreedySearch
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer of
+msgid "Parameters"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss:3 of
+msgid "Label position of padding symbol. Defaults to 0."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss:6 of
+msgid "Label smoothing coefficient in range [0, 1]. Defaults to 0.0."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss:9 of
+msgid ""
+"Flag indicates if loss sum divisor should be batch size. Defaults to "
+"False."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss:13 of
+msgid "Whether to add auxiliary CTC loss. Defaults to False."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss:16 of
+msgid "Initial coefficient to multiply ctc component by. Defaults to 0.1."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss:20 of
+msgid ""
+"ID of blank symbols to pass to mask when calculating ctc loss. Defaults "
+"to None."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss:24 of
+msgid ""
+"small number to prevent division by zero in loss calculation Defaults to "
+"1e-5."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.CrossEntropyLossNM.input_ports:1
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM.input_ports:1
+#: nemo.backends.pytorch.common.losses.MSELoss.input_ports:1
+#: nemo.backends.pytorch.common.losses.SequenceLoss.input_ports:1
+#: nemo.backends.pytorch.common.rnn.DecoderRNN.input_ports:1
+#: nemo.backends.pytorch.common.rnn.EncoderRNN.input_ports:1
+#: nemo.backends.pytorch.common.search.GreedySearch.input_ports:1 of
+msgid "Returns definitions of module input ports."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss.input_ports:3 of
+msgid "*log_probs* : axes: (batch, time, dimension);  elements_type: VoidType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.SequenceLoss.input_ports:5 of
+msgid "*targets* : axes: (batch, time);  elements_type: VoidType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.CrossEntropyLossNM.output_ports:1
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM.output_ports:1
+#: nemo.backends.pytorch.common.losses.MSELoss.output_ports:1
+#: nemo.backends.pytorch.common.losses.SequenceLoss.output_ports:1
+#: nemo.backends.pytorch.common.rnn.DecoderRNN.output_ports:1
+#: nemo.backends.pytorch.common.rnn.EncoderRNN.output_ports:1
+#: nemo.backends.pytorch.common.search.GreedySearch.output_ports:1 of
+msgid "Returns definitions of module output ports."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.CrossEntropyLossNM.output_ports:6
+#: nemo.backends.pytorch.common.losses.MSELoss.output_ports:6
+#: nemo.backends.pytorch.common.losses.SequenceLoss.output_ports:3 of
+msgid "*loss* : axes: None;  elements_type: LossType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.CrossEntropyLossNM:1 of
+msgid ""
+"CrossEntropyLoss :param logits_ndim: number of dimensions (or rank) of "
+"the logits tensor :type logits_ndim: int :param weight: list of rescaling"
+" weight given to each class :type weight: list :param reduction: type of "
+"the reduction over the batch :type reduction: str"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.CrossEntropyLossNM.output_ports:4
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM.output_ports:3
+#: nemo.backends.pytorch.common.losses.MSELoss.output_ports:4 of
+msgid "loss:"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.CrossEntropyLossNM.output_ports:4
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM.output_ports:4
+#: nemo.backends.pytorch.common.losses.MSELoss.output_ports:4 of
+msgid "NeuralType(None)"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.MSELoss.input_ports:4 of
+msgid "preds:"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.MSELoss.input_ports:4
+#: nemo.backends.pytorch.common.losses.MSELoss.input_ports:7 of
+msgid "0: AxisType(RegressionTag)"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.MSELoss.input_ports:7 of
+msgid "labels:"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.MSELoss.input_ports:9 of
+msgid "*preds* : axes: (batch,);  elements_type: RegressionValuesType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.MSELoss.input_ports:11 of
+msgid "*labels* : axes: (batch,);  elements_type: LabelsType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM:1 of
+msgid "Neural module which combines sums several losses into one."
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM:3 of
+msgid "number of input losses"
+msgstr ""
+
+#: nemo.backends.pytorch.common.losses.LossAggregatorNM:5 of
+msgid "a list of coefficient for merging losses"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:1
+#: nemo.backends.pytorch.common.rnn.EncoderRNN:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.TrainableNM`"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:1 of
+msgid "Simple RNN-based decoder with attention."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:3 of
+msgid "Total number of symbols to use"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:5
+#: nemo.backends.pytorch.common.search.BeamSearch:9
+#: nemo.backends.pytorch.common.search.GreedySearch:9 of
+msgid "Label position of start of string symbol"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:7 of
+msgid "Size of hidden vector to use in RNN"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:9 of
+msgid ""
+"Method of using attention to pass in `Attention` constructor. Defaults to"
+" 'general'."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:13 of
+msgid ""
+"String type of attention describing time to apply attention. Could be on "
+"of ['post', 'none']. Defaults to 'post'."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:17 of
+msgid "Float value of embedding dropout. Defaults to 0.2."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:20 of
+msgid "Float value of RNN interlayers dropout Defaults to 0.2."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:23 of
+msgid ""
+"Float value of attention dropout to pass to `Attention` constructor "
+"Defaults to 0.0."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:27 of
+msgid ""
+"Probability of applying full teacher forcing method at each step. "
+"Defaults to 1.0."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:31 of
+msgid ""
+"If teacher forcing is not applying, this value indicates probability of "
+"using target token from next step. Defaults to 0.5."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:35 of
+msgid "Type of RNN to use. Could be one of ['gru', 'lstm']. Defaults to 'gru'."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:38 of
+msgid "Number of layers to use in RNN. Defaults to 2."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN:41 of
+msgid "Whether to tie embedding and output weights. Defaults to True."
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN.forward_cl:1 of
+msgid "(BT, BTC@?) -> (BTC, BTT@?)"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN.forward_step:1 of
+msgid "(BT, BTC@?, hBC@?) -> (BTC, hBC, BTT@?)"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN.input_ports:3 of
+msgid "*targets* : axes: (batch, time);  elements_type: LabelsType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN.input_ports:5
+#: nemo.backends.pytorch.common.search.GreedySearch.input_ports:3 of
+msgid ""
+"*encoder_outputs* : axes: (batch, time, dimension);  elements_type: "
+"ChannelType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN.output_ports:3 of
+msgid "*log_probs* : axes: (batch, time, dimension);  elements_type: LogprobsType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.DecoderRNN.output_ports:5
+#: nemo.backends.pytorch.common.search.GreedySearch.output_ports:5 of
+msgid ""
+"*attention_weights* : axes: (batch, time, time);  elements_type: "
+"ChannelType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.EncoderRNN:1 of
+msgid "Simple RNN-based encoder using GRU cells"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.EncoderRNN.input_ports:3 of
+msgid "*inputs* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.EncoderRNN.input_ports:5 of
+msgid "*input_lens* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.EncoderRNN.output_ports:3 of
+msgid "*outputs* : axes: (batch, time, dimension);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.rnn.EncoderRNN.output_ports:5 of
+msgid "*hidden* : axes: (batch, time, dimension);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.GreedySearch:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.NonTrainableNM`"
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.GreedySearch:1 of
+msgid "Greedy translation search."
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:3
+#: nemo.backends.pytorch.common.search.GreedySearch:3 of
+msgid "For encoder-decoder based models."
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:5
+#: nemo.backends.pytorch.common.search.GreedySearch:5 of
+msgid "Neural module with `.forward_step(...)` function."
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:7
+#: nemo.backends.pytorch.common.search.GreedySearch:7 of
+msgid "Label position of padding symbol"
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:11
+#: nemo.backends.pytorch.common.search.GreedySearch:11 of
+msgid "Label position of end of string symbol"
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:13
+#: nemo.backends.pytorch.common.search.GreedySearch:13 of
+msgid "Maximum length of sample when doing inference"
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:15
+#: nemo.backends.pytorch.common.search.GreedySearch:15 of
+msgid ""
+"When there is no encoder outputs passed to forward, batch size will be "
+"used for determine number of samples to infer. Defaults to None."
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.GreedySearch.output_ports:3 of
+msgid "*predictions* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.common.search.GreedySearch`"
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:1 of
+msgid "Beam translation search."
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch:19 of
+msgid ""
+"Number of beams (e.g. candidates) to generate and keep while doing "
+"inference. Defaults to 8."
+msgstr ""
+
+#: nemo.backends.pytorch.common.search.BeamSearch.choose:1 of
+msgid "(*[BK]*, BK, int) -> *[BK]*"
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.DataLayerNM`"
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer:1 of
+msgid ""
+"DataLayer Neural Module which emits zeros. This module should be used for"
+" debugging/benchmarking purposes."
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer:4 of
+msgid "(int) size of the underlying dataset"
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer:5 of
+msgid "which output ports it should have"
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer:6 of
+msgid "Dtype of the output tensors."
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer:7 of
+msgid "Size of batches to output."
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer:9 of
+msgid ""
+"If None, this will be inferred from output_ports. Else, specifies the "
+"shape of the output tensors. Defaults to None."
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer.data_iterator:1 of
+msgid ""
+"\"Iterator over the dataset. It is a good idea to return "
+"torch.utils.data.DataLoader here. Should implement either this or "
+"`dataset`. If this is implemented, `dataset` property should return None."
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer.dataset:1 of
+msgid ""
+"Should return an instance of torch.utils.data.Dataset. Should implement "
+"either this or `data_iterator`. If this is implemented, `data_iterator` "
+"should return None."
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer.input_ports:1 of
+msgid "DataLayer by definition does not have any input ports."
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer.input_ports
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer.output_ports of
+msgid "Returns"
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer.input_ports:3 of
+msgid "An empty dictionary."
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer.output_ports:1 of
+msgid "Returns definitions of module output ports"
+msgstr ""
+
+#: nemo.backends.pytorch.common.zero_data.ZerosDataLayer.output_ports:3 of
+msgid "A (dict) of module's output ports names to NeuralTypes mapping"
+msgstr ""
+

@@ -1,0 +1,101 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../asr/jasper.rst:4
+msgid "Jasper"
+msgstr ""
+
+#: ../../asr/jasper.rst:6
+msgid ""
+"Jasper (\"Just Another SPeech Recognizer\") :cite:`asr-models-"
+"li2019jasper`  is a deep time delay neural network (TDNN) comprising of "
+"blocks of 1D-convolutional layers. Jasper family of models are denoted as"
+" Jasper_[BxR] where B is the number of blocks, and R - the number of "
+"convolutional sub-blocks within a block. Each sub-block contains a 1-D "
+"convolution, batch normalization, ReLU, and dropout:"
+msgstr ""
+
+#: ../../asr/jasper.rst:13
+msgid "Pretrained models can be found at the following links:"
+msgstr ""
+
+#: ../../asr/jasper.rst:16
+msgid "Network"
+msgstr ""
+
+#: ../../asr/jasper.rst:16
+msgid "Dataset"
+msgstr ""
+
+#: ../../asr/jasper.rst:16
+msgid "Download Link"
+msgstr ""
+
+#: ../../asr/jasper.rst:18 ../../asr/jasper.rst:19
+msgid "Jasper10x5dr"
+msgstr ""
+
+#: ../../asr/jasper.rst:18
+msgid "Librispeech"
+msgstr ""
+
+#: ../../asr/jasper.rst:18
+msgid "`here <https://ngc.nvidia.com/catalog/models/nvidia:jaspernet10x5dr>`__"
+msgstr ""
+
+#: ../../asr/jasper.rst
+msgid "Librispeech,"
+msgstr ""
+
+#: ../../asr/jasper.rst
+msgid "Mozilla Common Voice,"
+msgstr ""
+
+#: ../../asr/jasper.rst
+msgid "WSJ,"
+msgstr ""
+
+#: ../../asr/jasper.rst
+msgid "Fisher,"
+msgstr ""
+
+#: ../../asr/jasper.rst
+msgid "Switchboard"
+msgstr ""
+
+#: ../../asr/jasper.rst:19
+msgid ""
+"`here "
+"<https://ngc.nvidia.com/catalog/models/nvidia:multidataset_jasper10x5dr>`__"
+msgstr ""
+
+#: ../../asr/jasper.rst:24
+msgid "Jasper15x5SEP"
+msgstr ""
+
+#: ../../asr/jasper.rst:24
+msgid "Aishell2"
+msgstr ""
+
+#: ../../asr/jasper.rst:24
+msgid ""
+"`here "
+"<https://ngc.nvidia.com/catalog/models/nvidia:aishell2_jasper10x5dr>`__"
+msgstr ""
+

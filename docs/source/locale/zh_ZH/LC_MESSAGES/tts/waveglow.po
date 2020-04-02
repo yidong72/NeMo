@@ -1,0 +1,54 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../tts/waveglow.rst:2
+msgid "Waveglow"
+msgstr ""
+
+#: ../../tts/waveglow.rst:4
+msgid ""
+"`Waveglow <https://arxiv.org/abs/1811.00002>`_ is an universal neural "
+"vocoder based on normalizing flows to generate audio. It converts mel "
+"spectrograms to waveforms."
+msgstr ""
+
+#: ../../tts/waveglow.rst:8
+msgid ""
+"NeMo currently does not decompose WaveGlow down to separate Neural "
+"Modules but rather treats the entire model as a Neural Module."
+msgstr ""
+
+#: ../../tts/waveglow.rst:12
+msgid "Tips"
+msgstr ""
+
+#: ../../tts/waveglow.rst:13
+msgid ""
+"Our pre-trained Waveglow should be able to used as a vocoder for most if "
+"not all languages! One can always train Waveglow on their own data by "
+"running waveglow.py from NeMo/examples/tts like so:"
+msgstr ""
+
+#: ../../tts/waveglow.rst:21
+msgid ""
+"Please note that training waveglow will take longer than training "
+"tacotron 2. Pre-trained model can be found `here "
+"<https://ngc.nvidia.com/catalog/models/nvidia:waveglow_ljspeech>`_."
+msgstr ""
+

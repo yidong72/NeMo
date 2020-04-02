@@ -1,0 +1,429 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../asr/tutorial.rst:2
+msgid "Tutorial"
+msgstr ""
+
+#: ../../asr/tutorial.rst:4
+msgid ""
+"Make sure you have installed ``nemo`` and the ``nemo_asr`` collection. "
+"See the :ref:`installation` section."
+msgstr ""
+
+#: ../../asr/tutorial.rst:8
+msgid ""
+"You only need to have ``nemo`` and the ``nemo_asr`` collection for this "
+"tutorial."
+msgstr ""
+
+#: ../../asr/tutorial.rst:10
+msgid ""
+"A more introductory, Jupyter notebook ASR tutorial can be found `on "
+"GitHub "
+"<https://github.com/NVIDIA/NeMo/tree/master/examples/asr/notebooks>`_."
+msgstr ""
+
+#: ../../asr/tutorial.rst:14
+msgid "Introduction"
+msgstr ""
+
+#: ../../asr/tutorial.rst:16
+msgid ""
+"This Automatic Speech Recognition (ASR) tutorial is focused on QuartzNet "
+":cite:`asr-tut-kriman2019quartznet` model. QuartzNet is a CTC-based :cite"
+":`asr-tut-graves2006` end-to-end model. The model is called \"end-to-"
+"end\" because it transcribes speech samples without any additional "
+"alignment information. CTC allows for finding an alignment between audio "
+"and text."
+msgstr ""
+
+#: ../../asr/tutorial.rst:21
+msgid "The CTC-ASR training pipeline consists of the following blocks:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:23
+msgid ""
+"Audio preprocessing (feature extraction): signal normalization, "
+"windowing, (log) spectrogram (or mel scale spectrogram, or MFCC)"
+msgstr ""
+
+#: ../../asr/tutorial.rst:24
+msgid ""
+"Neural acoustic model (which predicts a probability distribution P_t(c) "
+"over vocabulary characters c per each time step t given input features "
+"per each timestep)"
+msgstr ""
+
+#: ../../asr/tutorial.rst:25
+msgid "CTC loss function"
+msgstr ""
+
+#: ../../asr/tutorial.rst:33
+msgid "Get data"
+msgstr ""
+
+#: ../../asr/tutorial.rst:34
+msgid ""
+"We will be using an open-source LibriSpeech :cite:`asr-tut-"
+"panayotov2015librispeech` dataset. These scripts will download and "
+"convert LibriSpeech into format expected by `nemo_asr`:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:48
+msgid ""
+"You should have at least 52GB of disk space available if you've used "
+"``--data_set=dev_clean,train_clean_100``; and at least 250GB if you used "
+"``--data_set=ALL``. Also, it will take some time to download and process,"
+" so go grab a coffee. After downloading, you can remove the original "
+".tar.gz archives and .flac files to cut the disk usage in half."
+msgstr ""
+
+#: ../../asr/tutorial.rst:54
+msgid ""
+"After download and conversion, your `data` folder should contain 2 json "
+"files:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:56
+msgid "dev_clean.json"
+msgstr ""
+
+#: ../../asr/tutorial.rst:57
+msgid "train_clean_100.json"
+msgstr ""
+
+#: ../../asr/tutorial.rst:59
+msgid ""
+"In the tutorial we will use `train_clean_100.json` for training and "
+"`dev_clean.json` for evaluation. Each line in json file describes a "
+"training sample - `audio_filepath` contains path to the wav file, "
+"`duration` it's duration in seconds, and `text` is it's transcript:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:70
+msgid "Training"
+msgstr ""
+
+#: ../../asr/tutorial.rst:72
+msgid ""
+"We will train a small model from the QuartzNet family :cite:`asr-tut-"
+"kriman2019quartznet`. QuartzNet models are similar to time delay neural "
+"networks (TDNN) composed of 1D convolutions. However QuartzNet models use"
+" separable convolutions to reduce the total number of parameters. The "
+"Quartznet family of models are denoted as QuartzNet_[BxR] where B is the "
+"number of blocks, and R - the number of convolutional sub-blocks within a"
+" block. Each sub-block contains a 1-D separable convolution, batch "
+"normalization, and ReLU:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:83
+msgid ""
+"In the tutorial we will be using model [12x1] and will be using separable"
+" convolutions. The script below does both training (on "
+"`train_clean_100.json`) and evaluation (on `dev_clean.json`) on single "
+"GPU:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:87
+msgid "Run a Jupyter notebook and walk through this script step-by-step"
+msgstr ""
+
+#: ../../asr/tutorial.rst:90
+msgid "**Training script**"
+msgstr ""
+
+#: ../../asr/tutorial.rst:230
+msgid ""
+"This script trains should finish 50 epochs in about 7 hours on GTX 1080. "
+"You should get an evaluation WER of about 30%."
+msgstr ""
+
+#: ../../asr/tutorial.rst:237
+msgid "To improve your word error rates:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:234
+msgid "Train longer"
+msgstr ""
+
+#: ../../asr/tutorial.rst:235
+msgid "Train on more data"
+msgstr ""
+
+#: ../../asr/tutorial.rst:236
+msgid "Use larger model"
+msgstr ""
+
+#: ../../asr/tutorial.rst:237
+msgid ""
+"Train on several GPUs and use mixed precision (on NVIDIA Volta and Turing"
+" GPUs)"
+msgstr ""
+
+#: ../../asr/tutorial.rst:238
+msgid "Start with pre-trained checkpoints"
+msgstr ""
+
+#: ../../asr/tutorial.rst:242
+msgid "Mixed Precision training"
+msgstr ""
+
+#: ../../asr/tutorial.rst:243
+msgid ""
+"Mixed precision and distributed training in NeMo is based on `NVIDIA's "
+"APEX library <https://github.com/NVIDIA/apex>`_. Make sure it is "
+"installed."
+msgstr ""
+
+#: ../../asr/tutorial.rst:246
+msgid ""
+"To train with mixed-precision all you need is to set `optimization_level`"
+" parameter of `nemo.core.NeuralModuleFactory`  to "
+"`nemo.core.Optimization.mxprO1`. For example:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:257
+msgid ""
+"Because mixed precision requires Tensor Cores it only works on NVIDIA "
+"Volta and Turing based GPUs"
+msgstr ""
+
+#: ../../asr/tutorial.rst:260
+msgid "Multi-GPU training"
+msgstr ""
+
+#: ../../asr/tutorial.rst:262
+msgid "Enabling multi-GPU training with NeMo is easy:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:264
+msgid ""
+"First set `placement` to `nemo.core.DeviceType.AllGpu` in "
+"NeuralModuleFactory"
+msgstr ""
+
+#: ../../asr/tutorial.rst:265
+msgid ""
+"Have your script accept 'local_rank' argument and do not set it yourself:"
+" `parser.add_argument(\"--local_rank\", default=None, type=int)`"
+msgstr ""
+
+#: ../../asr/tutorial.rst:266
+msgid ""
+"Use `torch.distributed.launch` package to run your script like this "
+"(replace <num_gpus> with number of gpus):"
+msgstr ""
+
+#: ../../asr/tutorial.rst:274
+msgid "Large Training Example"
+msgstr ""
+
+#: ../../asr/tutorial.rst:276
+msgid ""
+"Please refer to the `<nemo_git_repo_root>/examples/asr/quartznet.py` for "
+"comprehensive example. It builds one train DAG and multiple validation "
+"DAGs. Each validation DAG shares the same model and parameters as the "
+"training DAG and can be used to evaluate a different evaluation dataset."
+msgstr ""
+
+#: ../../asr/tutorial.rst:280
+msgid ""
+"Assuming, you are working with Volta-based DGX, you can run training like"
+" this:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:286
+msgid ""
+"The command above should trigger 8-GPU training with mixed precision. In "
+"the command above various manifests (.json) files are various datasets. "
+"Substitute them with the ones containing your data."
+msgstr ""
+
+#: ../../asr/tutorial.rst:289
+msgid ""
+"You can pass several manifests (comma-separated) to train on a combined "
+"dataset like this: `--train_manifest=/manifests/librivox-train-"
+"all.json,/manifests/librivox-train-all-"
+"sp10pcnt.json,/manifests/cv/validated.json`. Here it combines 3 data "
+"sets: LibriSpeech, Mozilla Common Voice and LibriSpeech speed perturbed."
+msgstr ""
+
+#: ../../asr/tutorial.rst:293
+msgid "Fine-tuning"
+msgstr ""
+
+#: ../../asr/tutorial.rst:294
+msgid ""
+"Training time can be dramatically reduced if starting from a good pre-"
+"trained model:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:296
+msgid ""
+"Obtain a pre-trained model (encoder, decoder and configuration files) "
+"`from here "
+"<https://ngc.nvidia.com/catalog/models/nvidia:quartznet15x5>`_."
+msgstr ""
+
+#: ../../asr/tutorial.rst:297
+msgid ""
+"load pre-trained weights right after you've instantiated your encoder and"
+" decoder, like this:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:307
+msgid "When fine-tuning, use smaller learning rate."
+msgstr ""
+
+#: ../../asr/tutorial.rst:311
+msgid "Evaluation"
+msgstr ""
+
+#: ../../asr/tutorial.rst:313
+msgid ""
+"First download pre-trained model (encoder, decoder and configuration "
+"files) `from here "
+"<https://ngc.nvidia.com/catalog/models/nvidia:quartznet15x5>`_ into "
+"`<path_to_checkpoints>`. We will use this pre-trained model to measure "
+"WER on LibriSpeech dev-clean dataset."
+msgstr ""
+
+#: ../../asr/tutorial.rst:321
+msgid "Evaluation with Language Model"
+msgstr ""
+
+#: ../../asr/tutorial.rst:324
+msgid "Using KenLM"
+msgstr ""
+
+#: ../../asr/tutorial.rst:325
+msgid ""
+"We will be using `Baidu's CTC decoder with LM implementation. "
+"<https://github.com/PaddlePaddle/DeepSpeech>`_."
+msgstr ""
+
+#: ../../asr/tutorial.rst:327
+msgid "Perform the following steps:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:329
+msgid "Go to ``cd <nemo_git_repo_root>/scripts``"
+msgstr ""
+
+#: ../../asr/tutorial.rst:334
+msgid ""
+"Install Baidu's CTC decoders (NOTE: no need for \"sudo\" if inside the "
+"container):"
+msgstr ""
+
+#: ../../asr/tutorial.rst:331
+msgid "``sudo apt-get update && sudo apt-get install swig``"
+msgstr ""
+
+#: ../../asr/tutorial.rst:332
+msgid ""
+"``sudo apt-get install pkg-config libflac-dev libogg-dev libvorbis-dev "
+"libboost-dev``"
+msgstr ""
+
+#: ../../asr/tutorial.rst:333
+msgid ""
+"``sudo apt-get install libsndfile1-dev python-setuptools libboost-all-dev"
+" python-dev``"
+msgstr ""
+
+#: ../../asr/tutorial.rst:334
+msgid "``sudo apt-get install cmake``"
+msgstr ""
+
+#: ../../asr/tutorial.rst:335
+msgid "``./install_decoders.sh``"
+msgstr ""
+
+#: ../../asr/tutorial.rst:336
+msgid "Build 6-gram KenLM model on LibriSpeech ``./build_6-gram_OpenSLR_lm.sh``"
+msgstr ""
+
+#: ../../asr/tutorial.rst:337
+msgid "Run jasper_eval.py with the --lm_path flag"
+msgstr ""
+
+#: ../../asr/tutorial.rst:344
+msgid "Kaldi Compatibility"
+msgstr ""
+
+#: ../../asr/tutorial.rst:346
+msgid ""
+"The ``nemo_asr`` collection can also load datasets that are in a Kaldi-"
+"compatible format using the ``KaldiFeatureDataLayer``. In order to load "
+"your Kaldi-formatted data, you will need to have a directory that "
+"contains the following files:"
+msgstr ""
+
+#: ../../asr/tutorial.rst:349
+msgid ""
+"``feats.scp``, the file that maps from utterance IDs to the .ark files "
+"with the corresponding audio data."
+msgstr ""
+
+#: ../../asr/tutorial.rst:350
+msgid ""
+"``text``, the file that contains a mapping from the utterance IDs to "
+"transcripts."
+msgstr ""
+
+#: ../../asr/tutorial.rst:351
+msgid ""
+"(Optional) ``utt2dur``, the file that maps the utterance IDs to the audio"
+" file durations. This is required if you want to filter your audio based "
+"on duration."
+msgstr ""
+
+#: ../../asr/tutorial.rst:353
+msgid ""
+"Of course, you will also need the .ark files that contain the audio data "
+"in the location that ``feats.scp`` expects."
+msgstr ""
+
+#: ../../asr/tutorial.rst:355
+msgid ""
+"To load your Kaldi-formatted data, you can simply use the "
+"``KaldiFeatureDataLayer`` instead of the ``AudioToTextDataLayer``. The "
+"``KaldiFeatureDataLayer`` takes in an argument ``kaldi_dir`` instead of a"
+" ``manifest_filepath``, and this argument should be set to the directory "
+"that contains the files mentioned above. See `the documentation "
+"<https://nvidia.github.io/NeMo/collections/nemo_asr.html#nemo_asr.data_layer.KaldiFeatureDataLayer>`_"
+" for more detailed information about the arguments to this data layer."
+msgstr ""
+
+#: ../../asr/tutorial.rst:361
+msgid ""
+"If you are switching to a ``KaldiFeatureDataLayer``, be sure to set any "
+"``feat_in`` parameters to correctly reflect the dimensionality of your "
+"Kaldi features, such as in the encoder. Additionally, your data is likely"
+" already preprocessed (e.g. into MFCC format), in which case you can "
+"leave out any audio preprocessors like the "
+"``AudioToMelSpectrogramPreprocessor``."
+msgstr ""
+
+#: ../../asr/tutorial.rst:364
+msgid "References"
+msgstr ""
+
