@@ -1,0 +1,202 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../nlp/ner.rst:2
+msgid "Tutorial"
+msgstr ""
+
+#: ../../nlp/ner.rst:4
+msgid ""
+"Make sure you have ``nemo`` and ``nemo_nlp`` installed before starting "
+"this tutorial. See the :ref:`installation` section for more details."
+msgstr ""
+
+#: ../../nlp/ner.rst:9
+msgid ""
+"For pretraining BERT in NeMo and pretrained model checkpoints go to `BERT"
+" pretraining "
+"<https://nvidia.github.io/NeMo/nlp/bert_pretraining.html>`__."
+msgstr ""
+
+#: ../../nlp/ner.rst:15
+msgid "Introduction"
+msgstr ""
+
+#: ../../nlp/ner.rst:17
+msgid ""
+"This tutorial explains how to implement named entity recognition (NER) in"
+" NeMo. We'll show how to do this with a pre-trained BERT model, or with "
+"one that you trained yourself! For more details, check out our BERT "
+"pretraining tutorial."
+msgstr ""
+
+#: ../../nlp/ner.rst:21
+msgid ""
+"We recommend you try this out in a Jupyter notebook. It'll make debugging"
+" much easier! See examples/nlp/token_classification/NERWithBERT.ipynb. "
+"All code used in this tutorial is based on :ref:`ner_scripts`."
+msgstr ""
+
+#: ../../nlp/ner.rst:26
+msgid "Download Dataset"
+msgstr ""
+
+#: ../../nlp/ner.rst:28
+msgid ""
+"`CoNLL-2003`_ is a standard evaluation dataset for NER, but any NER "
+"dataset will work. The only requirement is that the data is splitted into"
+" 2 files: text.txt and labels.txt. The text.txt files should be formatted"
+" like this:"
+msgstr ""
+
+#: ../../nlp/ner.rst:38
+msgid "The labels.txt files should be formatted like this:"
+msgstr ""
+
+#: ../../nlp/ner.rst:46
+msgid ""
+"Each line of the text.txt file contains text sequences, where words are "
+"separated with spaces. The labels.txt file contains corresponding labels "
+"for each word in text.txt, the labels are separated with spaces. Each "
+"line of the files should follow the format: [WORD] [SPACE] [WORD] [SPACE]"
+" [WORD] (for text.txt) and [LABEL] [SPACE] [LABEL] [SPACE] [LABEL] (for "
+"labels.txt)."
+msgstr ""
+
+#: ../../nlp/ner.rst:48
+msgid ""
+"You can use `this`_ to convert CoNLL-2003 dataset to the format required "
+"for training."
+msgstr ""
+
+#: ../../nlp/ner.rst:55
+msgid "Training"
+msgstr ""
+
+#: ../../nlp/ner.rst:57
+msgid ""
+"First, we need to create our neural factory with the supported backend. "
+"How you should define it depends on whether you'd like to multi-GPU or "
+"mixed-precision training. This tutorial assumes that you're training on "
+"one GPU, without mixed precision (``optimization_level=\"O0\"``). If you "
+"want to use mixed precision, set ``optimization_level`` to ``O1`` or "
+"``O2``."
+msgstr ""
+
+#: ../../nlp/ner.rst:68
+msgid ""
+"Next, we'll need to define our tokenizer and our BERT model. There are a "
+"couple of different ways you can do this. Keep in mind that NER benefits "
+"from casing (\"New York City\" is easier to identify than \"new york "
+"city\"), so we recommend you use cased models."
+msgstr ""
+
+#: ../../nlp/ner.rst:70
+msgid ""
+"If you're using a standard BERT model, you should do it as follows. To "
+"see the full list of BERT model names, check out "
+"``nemo.collections.nlp.nm.trainables.get_bert_models_list()``"
+msgstr ""
+
+#: ../../nlp/ner.rst:78
+msgid ""
+"See examples/nlp/token_classification/token_classification.py on how to "
+"use a BERT model that you pre-trained yourself. Now, create the train and"
+" evaluation data layers:"
+msgstr ""
+
+#: ../../nlp/ner.rst:101
+msgid ""
+"We need to create the classifier to sit on top of the pretrained model "
+"and define the loss function:"
+msgstr ""
+
+#: ../../nlp/ner.rst:112
+msgid "Now, create the train and evaluation datasets:"
+msgstr ""
+
+#: ../../nlp/ner.rst:136
+msgid "Now, we will set up our callbacks. We will use 3 callbacks:"
+msgstr ""
+
+#: ../../nlp/ner.rst:138
+msgid "`SimpleLossLoggerCallback` to print loss values during training"
+msgstr ""
+
+#: ../../nlp/ner.rst:139
+msgid ""
+"`EvaluatorCallback` to evaluate our F1 score on the dev dataset. In this "
+"example, `EvaluatorCallback` will also output predictions to "
+"`output.txt`, which can be helpful with debugging what our model gets "
+"wrong."
+msgstr ""
+
+#: ../../nlp/ner.rst:140
+msgid "`CheckpointCallback` to save and restore checkpoints."
+msgstr ""
+
+#: ../../nlp/ner.rst:166
+msgid ""
+"Finally, we will define our learning rate policy and our optimizer, and "
+"start training."
+msgstr ""
+
+#: ../../nlp/ner.rst:182
+msgid ""
+"Tensorboard_ is a great debugging tool. It's not a requirement for this "
+"tutorial, but if you'd like to use it, you should install tensorboardX_ "
+"and run the following command during fine-tuning:"
+msgstr ""
+
+#: ../../nlp/ner.rst:194
+msgid "Training and inference scripts"
+msgstr ""
+
+#: ../../nlp/ner.rst:196
+msgid "To run the provided training script:"
+msgstr ""
+
+#: ../../nlp/ner.rst:202
+msgid "To run inference:"
+msgstr ""
+
+#: ../../nlp/ner.rst:209
+msgid ""
+"Note, label_ids.csv file will be generated during training and stored in "
+"the data_dir folder."
+msgstr ""
+
+#: ../../nlp/ner.rst:212
+msgid "Using Other BERT Models"
+msgstr ""
+
+#: ../../nlp/ner.rst:214
+msgid ""
+"In addition to using pre-trained BERT models from Google and BERT models "
+"that you've trained yourself, in NeMo it's possible to use other third-"
+"party BERT models as well, as long as the weights were exported with "
+"PyTorch. For example, if you want to fine-tune an NER task with SciBERT_."
+msgstr ""
+
+#: ../../nlp/ner.rst:227
+msgid ""
+"And then, when you load your BERT model, you should specify the name of "
+"the directory for the model name."
+msgstr ""
+

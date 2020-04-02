@@ -1,0 +1,787 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../collections/nemo_nlp.rst:2
+msgid "NeMo NLP collection"
+msgstr ""
+
+#: ../../collections/nemo_nlp.rst:5
+msgid "NLP data processing modules"
+msgstr ""
+
+#: ../../collections/nemo_nlp.rst:12
+msgid "NLP Tokenizers"
+msgstr ""
+
+#: nemo.collections.nlp.data.tokenizers.bert_tokenizer.NemoBertTokenizer:1
+#: nemo.collections.nlp.data.tokenizers.char_tokenizer.CharTokenizer:1
+#: nemo.collections.nlp.data.tokenizers.gpt2_tokenizer.NemoGPT2Tokenizer:1
+#: nemo.collections.nlp.data.tokenizers.sentencepiece_tokenizer.SentencePieceTokenizer:1
+#: nemo.collections.nlp.data.tokenizers.word_tokenizer.WordTokenizer:1
+#: nemo.collections.nlp.data.tokenizers.youtokentome_tokenizer.YouTokenToMeTokenizer:1
+#: of
+msgid ""
+"Bases: "
+":class:`nemo.collections.nlp.data.tokenizers.tokenizer_spec.TokenizerSpec`"
+msgstr ""
+
+#: nemo.collections.nlp.data.tokenizers.tokenizer_spec.TokenizerSpec:1 of
+msgid "Bases: :class:`abc.ABC`"
+msgstr ""
+
+#: ../../collections/nemo_nlp.rst:50
+msgid "NLP Neural Modules"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:1
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:1
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:1
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:1
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression:1
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier:1
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier:1
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:1
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:1
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:1
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:1
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator:1
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier:1
+#: of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.TrainableNM`"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:1
+#: of
+msgid ""
+"Neural module which consists of MLP followed by softmax classifier for "
+"each sequence in the batch."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier
+#: of
+msgid "Parameters"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:4
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier:4
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier:4
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:5
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:5
+#: of
+msgid "hidden size (d_model) of the Transformer"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:6
+#: of
+msgid ""
+"number of classes in softmax classifier, e.g. number of different "
+"sentiments"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:9
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression:7
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier:9
+#: of
+msgid "number of layers in classifier MLP"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:11
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression:9
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier:9
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier:11
+#: of
+msgid "activation function applied in classifier MLP layers"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:13
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier:11
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier:13
+#: of
+msgid "whether to apply log_softmax to MLP output"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:15
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression:11
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier:13
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier:15
+#: of
+msgid "dropout ratio applied to MLP"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier:17
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression:13
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier:15
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier:13
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.input_ports:4
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.output_ports:4
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.output_ports:6
+#: of
+msgid "TODO"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier.input_ports:1
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression.input_ports:1
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier.input_ports:1
+#: of
+msgid ""
+"Returns definitions of module input ports. hidden_states: embedding "
+"hidden states"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.output_ports:4
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.output_ports:4
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.output_ports:4
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier.input_ports:4
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression.input_ports:4
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier.input_ports:4
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier.input_ports:3
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM.output_ports:4
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM.output_ports:4
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.input_ports:6
+#: of
+msgid ""
+"*hidden_states* : axes: (batch, time, dimension);  elements_type: "
+"ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier.output_ports:1
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier.output_ports:1
+#: of
+msgid "Returns definitions of module output ports. logits: logits before loss"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_classification_nm.SequenceClassifier.output_ports:4
+#: of
+msgid "*logits* : axes: (batch, dimension);  elements_type: LogitsType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression:1
+#: of
+msgid ""
+"Neural module which consists of MLP, generates a single number prediction"
+" that could be used for a regression task. An example of this task would "
+"be semantic textual similatity task, for example, STS-B (from GLUE "
+"tasks)."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression:5
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier:5
+#: of
+msgid "the size of the hidden state for the dense layer"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression.output_ports:1
+#: of
+msgid "Returns definitions of module output ports. preds: predictions before loss"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.sequence_regression_nm.SequenceRegression.output_ports:4
+#: of
+msgid "*preds* : axes: (batch,);  elements_type: RegressionValuesType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier:1
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier:1
+#: of
+msgid ""
+"Neural module which consists of MLP followed by softmax classifier for "
+"each token in the sequence."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier:6
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier:6
+#: of
+msgid ""
+"number of classes in softmax classifier, e.g. size of the vocabulary in "
+"language modeling objective"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.BertTokenClassifier.output_ports:4
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier.output_ports:3
+#: of
+msgid "*logits* : axes: (batch, time, dimension);  elements_type: LogitsType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier.input_ports:1
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.input_ports:1
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.input_ports:1
+#: of
+msgid "Returns definitions of module input ports."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.token_classification_nm.TokenClassifier.output_ports:1
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.output_ports:1
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.output_ports:1
+#: of
+msgid "Returns definitions of module output ports."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:1
+#: of
+msgid ""
+"Neural module which consists of embedding layer followed by Transformer "
+"encoder."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:4
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:4
+#: of
+msgid "size of the vocabulary (number of tokens)"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:6
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:6
+#: of
+msgid ""
+"maximum allowed length of input sequences, feeding longer sequences will "
+"cause an error"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:8
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:8
+#: of
+msgid "dropout ratio applied to embeddings"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:9
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:9
+#: of
+msgid ""
+"bool, whether to learn positional encoding or use fixed sinusoidal "
+"encodings"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:11
+#: of
+msgid "number of layers in Transformer encoder"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:12
+#: of
+msgid ""
+"bool, whether to apply triangular future masking to the sequence of "
+"hidden states (which allows to use it for LM)"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:12
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:14
+#: of
+msgid "number of attention heads"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:13
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:15
+#: of
+msgid "number of neurons in the intermediate part of feed-forward network (FFN)"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:15
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:17
+#: of
+msgid "dropout ratio applied to FFN"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:16
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:18
+#: of
+msgid "dropout ratio applied to attention scores"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:17
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:19
+#: of
+msgid "dropout ratio applied to the output of attn layer"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:18
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM:20
+#: of
+msgid "activation function applied in intermediate FFN module"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM.input_ports:1
+#: of
+msgid ""
+"Returns definitions of module input ports. input_ids: ids of input tokens"
+" input_mask_src: input mask"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.input_ports:6
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.input_ports:6
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.input_ports:6
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM.input_ports:4
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM.input_ports:5
+#: of
+msgid "*input_ids* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM.input_ports:7
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM.input_ports:11
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM.input_ports:7
+#: of
+msgid "*input_mask_src* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerEncoderNM.output_ports:1
+#: of
+msgid ""
+"Returns definitions of module output ports. hidden_states: outputs hidden"
+" states"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:1
+#: of
+msgid ""
+"Neural module which consists of embedding layer followed by Transformer "
+"decoder."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM:11
+#: of
+msgid "number of layers in Transformer decoder"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM.input_ports:1
+#: of
+msgid ""
+"Returns definitions of module input ports. input_ids_tgt: ids of target "
+"sequence hidden_states_src: input hidden states input_mask_src: input "
+"token mask input_mask_tgt: target token mask"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM.input_ports:7
+#: of
+msgid "*input_ids_tgt* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM.input_ports:5
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM.input_ports:9
+#: of
+msgid ""
+"*hidden_states_src* : axes: (batch, time, dimension);  elements_type: "
+"ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM.input_ports:13
+#: of
+msgid "*input_mask_tgt* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.TransformerDecoderNM.output_ports:1
+#: of
+msgid ""
+"Returns definitions of module output ports. hidden_states: output hidden "
+"states"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:1
+#: of
+msgid "Neural module for greedy text generation with language model"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:3
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:3
+#: of
+msgid "module which maps input_ids into hidden_states"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:4
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:4
+#: of
+msgid "module which maps hidden_states into log_probs"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:5
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:5
+#: of
+msgid "maximum allowed length of generated sequences"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:6
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:6
+#: of
+msgid "index of padding token in the vocabulary"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:7
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:7
+#: of
+msgid "index of beginning of sequence token in the vocabulary"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:8
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:8
+#: of
+msgid "index of end of sequence token in the vocabulary"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:9
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM:9
+#: of
+msgid ""
+"size of the batch of generated sequences if no starting tokens are "
+"provided"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM.input_ports:1
+#: of
+msgid "Returns definitions of module input ports. input_ids:  input ids"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM.num_weights:1
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM.num_weights:1
+#: of
+msgid "Number of module's weights"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM.output_ports:1
+#: of
+msgid "Returns definitions of module output ports. output ids: output ids"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM.output_ports:4
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.GreedyLanguageGeneratorNM.output_ports:4
+#: of
+msgid "*output_ids* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:1
+#: of
+msgid "Neural module for beam search translation generation"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:11
+#: of
+msgid "size of the beam"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:12
+#: of
+msgid ""
+"maximum allowed difference between generated output and input sequence in"
+" case of conditional decoding"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM:14
+#: of
+msgid "parameter which penalizes shorter sequences"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM.input_ports:1
+#: of
+msgid ""
+"Returns definitions of module input ports. hidden_states_src: input "
+"hidden states input_mask_src: input mask"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.transformer.transformer_nm.BeamSearchTranslatorNM.output_ports:1
+#: of
+msgid "Returns definitions of module output ports. output_ids: output ids"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator:1
+#: of
+msgid ""
+"The generator module for state tracking model TRADE :param vocab: an "
+"instance of Vocab containing the vocabularey :type vocab: Vocab :param "
+"embeddings: word embedding matrix :type embeddings: Tensor :param "
+"hid_size: hidden size of the GRU decoder :type hid_size: int :param "
+"dropout: dropout of the GRU :type dropout: float :param slots: list of "
+"slots :type slots: list :param nb_gate: number of gates :type nb_gate: "
+"int :param teacher_forcing: 0.5 :type teacher_forcing: float"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.input_ports:3
+#: of
+msgid ""
+"*encoder_hidden* : axes: (batch, time, dimension);  elements_type: "
+"ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.input_ports:5
+#: of
+msgid ""
+"*encoder_outputs* : axes: (batch, time, dimension);  elements_type: "
+"ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.input_ports:7
+#: of
+msgid "*input_lens* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.input_ports:9
+#: of
+msgid "*src_ids* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.input_ports:11
+#: of
+msgid "*targets* : axes: (batch, dimension, time);  elements_type: LabelsType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.output_ports:3
+#: of
+msgid ""
+"point_outputs: outputs of the generator gate_outputs: outputs of gating "
+"heads"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.output_ports:6
+#: of
+msgid ""
+"*point_outputs* : axes: (batch, time, dimension, dimension);  "
+"elements_type: LogitsType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.dialogue_state_tracking.trade_generator_nm.TRADEGenerator.output_ports:8
+#: of
+msgid ""
+"*gate_outputs* : axes: (batch, dimension, dimension);  elements_type: "
+"LogitsType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier:1
+#: of
+msgid ""
+"The softmax classifier for the joint intent classification and slot "
+"filling task which  consists of a dense layer + relu + softmax for "
+"predicting the slots and similar for predicting the intents."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier:7
+#: of
+msgid "number of intents"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier:9
+#: of
+msgid "number of slots"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier:11
+#: of
+msgid "dropout to be applied to the layer"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.input_ports:4
+#: of
+msgid "hidden_states:"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.output_ports:3
+#: of
+msgid "intent_logits:"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.output_ports:6
+#: of
+msgid "slot_logits:"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.output_ports:8
+#: of
+msgid "*intent_logits* : axes: (batch, dimension);  elements_type: LogitsType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.joint_intent_slot.joint_intent_slot_classifier_nm.JointIntentSlotClassifier.output_ports:10
+#: of
+msgid "*slot_logits* : axes: (batch, time, dimension);  elements_type: LogitsType"
+msgstr ""
+
+#: ../../collections/nemo_nlp.rst:103
+msgid "NLP Hugging Face Neural Modules"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:1 of
+msgid ""
+"BERT wraps around the Huggingface implementation of BERT from their "
+"transformers repository for easy use within NeMo."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:4
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:4
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:4
+#: of
+msgid ""
+"If using a pretrained model, this should be the model's name. Otherwise, "
+"should be left as None."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:7
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:7
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:7
+#: of
+msgid "path to model configuration file. Optional."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:9
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:9
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:9
+#: of
+msgid "Size of the vocabulary file, if not using a pretrained model."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:12
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:12
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:12
+#: of
+msgid "Size of the encoder and pooler layers."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:14
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:14
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:14
+#: of
+msgid "Number of hidden layers in the encoder."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:16
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:16
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:16
+#: of
+msgid "Number of attention heads for each layer."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:18
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:18
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:18
+#: of
+msgid "Size of intermediate layers in the encoder."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:20
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:20
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:20
+#: of
+msgid ""
+"Activation function for encoder and pooler layers; \"gelu\", \"relu\", "
+"and \"swish\" are supported."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:23
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT:23
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:23
+#: of
+msgid "The maximum number of tokens in a"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.hidden_size:1
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.hidden_size:1
+#: of
+msgid "Property returning hidden size."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.list_pretrained_models
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.hidden_size
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.list_pretrained_models
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.hidden_size
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.list_pretrained_models
+#: of
+msgid "Returns"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.hidden_size:3
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.hidden_size:3
+#: of
+msgid "Hidden size."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.input_ports:1
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.input_ports:1
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.input_ports:1
+#: of
+msgid ""
+"Returns definitions of module input ports. input_ids: input token ids "
+"token_type_ids: segment type ids attention_mask: attention mask"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.input_ports:8
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.input_ports:8
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.input_ports:8
+#: of
+msgid "*token_type_ids* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.input_ports:10
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.input_ports:10
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.input_ports:10
+#: of
+msgid "*attention_mask* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.list_pretrained_models:1
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.list_pretrained_models:1
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.list_pretrained_models:1
+#: of
+msgid "List all available pre-trained models (e.g. weights) for this NM."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.list_pretrained_models:3
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.list_pretrained_models:3
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.list_pretrained_models:3
+#: of
+msgid ""
+"A list of PretrainedModelInfo tuples. The pretrained_model_name field of "
+"the tuple can be used to retrieve pre-trained model's weights (pass it as"
+" pretrained_model_name argument to the module's constructor)"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.bert_nm.BERT.output_ports:1
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta.output_ports:1
+#: of
+msgid ""
+"Returns definitions of module output ports. hidden_states: output "
+"embedding"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert:1 of
+msgid ""
+"ALBERT wraps around the Huggingface implementation of ALBERT from their "
+"transformers repository for easy use within NeMo."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.hidden_size:1
+#: of
+msgid "Property returning hidden size. :returns: Hidden size."
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.albert_nm.Albert.output_ports:1
+#: of
+msgid "Returns definitions of module input ports. hidden_states: output embedding"
+msgstr ""
+
+#: nemo.collections.nlp.nm.trainables.common.huggingface.roberta_nm.Roberta:1
+#: of
+msgid ""
+"ROBERTA wraps around the Huggingface implementation of ROBERTA from their"
+" transformers repository for easy use within NeMo."
+msgstr ""
+

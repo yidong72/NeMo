@@ -1,0 +1,240 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../tutorials/neuraltypes.rst:2
+msgid "Neural Types"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:5
+msgid "Basics"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:7
+msgid ""
+"All input and output ports of every neural module in NeMo are typed. The "
+"type system's goal is check compatibility of connected input/output port "
+"pairs. The type system's constraints are checked when the user connects "
+"modules with each other and before any training or inference is started."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:12
+msgid ""
+"Neural Types are implemented with the Python class "
+":class:`NeuralType<nemo.core.neural_types.NeuralType>` and helper classes"
+" derived from :class:`ElementType<nemo.core.neural_types.ElementType>`, "
+":class:`AxisType<nemo.core .neural_types.AxisType>` and "
+":class:`AxisKindAbstract<nemo.core.neural_types.AxisKindAbstract>`."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:16
+msgid "**A Neural Type contains two categories of information:**"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:18
+msgid ""
+"**axes** - represents what varying a particular axis means (e.g. batch, "
+"time, etc.)"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:19
+msgid ""
+"**elements_type** - represents the semantics and properties of what is "
+"stored inside the activations (audio signal,text embedding, logits, etc.)"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:22
+msgid ""
+"To instantiate a NeuralType you need to pass it the following arguments: "
+"`axes: Optional[Tuple] = None, elements_type: ElementType = VoidType(), "
+"optional=False`. Typically, the only place where you need to instantiate "
+":class:`NeuralType<nemo.core.neural_types.NeuralType>` objects are inside"
+" your module's `input_ports` and `output_ports` properties."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:28
+msgid ""
+"Consider an example below. It represents an (audio) data layer output "
+"ports, used in Speech recognition collection."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:45
+msgid "A less verbose version of exactly the same output ports looks like this:"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:59
+msgid "Neural type comparison"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:61
+msgid ""
+"Two :class:`NeuralType<nemo.core.neural_types.NeuralType>` objects are "
+"compared using ``.compare`` method. The result is from the "
+":class:`NeuralTypeComparisonResult<nemo.core.neural_types.NeuralTypeComparisonResult>`:"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:81
+msgid "Special cases"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:83
+msgid ""
+"**Void** element types. Sometimes, it is necessary to have a "
+"functionality similar to \"void*\" in C/C++. That, is if we still want to"
+" enforce order and axes' semantics but should be able to accept elements "
+"of any type. This can be achieved by using an instance of "
+":class:`VoidType<nemo.core.neural_types.VoidType>` as ``elements_type`` "
+"argument."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:84
+msgid ""
+"**Big void** this type will effectively disable any type checks. This is "
+"how to create such type: ``NeuralType()``. The result of its comparison "
+"to any other type will always be SAME."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:85
+msgid ""
+"**AxisKind.Any** this axis kind is used to represent any axis. This is "
+"useful, for example, in losses where a specific loss module can be used "
+"in difference applications and therefore with different axis kinds"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:88
+msgid "Inheritance"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:90
+msgid ""
+"Type inheritance is a very powerful tool in programming. NeMo's neural "
+"types support inheritance. Consider the following example below."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:93
+msgid ""
+"**Example.** We want to represent the following. A module's A output "
+"(out1) produces mel-spectrogram signal, while module's B output produces "
+"mffc-spectrogram. We also want to a thrid module C which can perform data"
+" augmentation with any kind of spectrogram. With NeMo neural types "
+"representing this semantics is easy:"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:109
+msgid ""
+"This happens because both ``MelSpectrogramType`` and "
+"``MFCCSpectrogramType`` inherit from ``SpectrogramType`` class. Notice, "
+"that mfcc and mel spectrograms aren't interchangable, which is why "
+"``out1.compare(input) == INCOMPATIBLE``"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:113
+msgid "Advanced usage"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:115
+msgid ""
+"**Extending with user-defined types.** If you need to add your own "
+"element types, create a new class inheriting from "
+":class:`ElementType<nemo.core.neural_types.ElementType>`. Instead of "
+"using built-in axes kinds from "
+":class:`AxisKind<nemo.core.neural_types.AxisKind>`, you can define your "
+"own by creating a new Python enum which should inherit from "
+":class:`AxisKindAbstract<nemo.core.neural_types.AxisKindAbstract>`."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:120
+msgid ""
+"**Lists**. Sometimes module's input or output should be a list (possibly "
+"nested) of Tensors. NeMo's "
+":class:`AxisType<nemo.core.neural_types.AxisType>` class accepts "
+"``is_list`` argument which could be set to True. Consider the example "
+"below:"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:137
+msgid ""
+"In this example, first two axes are lists. That is the object are list of"
+" lists of rank 3 tensors with dimensions (32x128x256). Note that all list"
+" axes must come before any tensor axis."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:141
+msgid ""
+"We strongly recommend this to be avoided, if possible, and tensors used "
+"instead (perhaps) with padding."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:144
+msgid ""
+"**Named tuples (structures).** To represent struct-like objects, for "
+"example, bounding boxes in computer vision, use the following syntax:"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:161
+msgid ""
+"In the example above, we create a special \"element type\" class for "
+"BoundingBox which stores exactly 4 values. We also, add our own axis kind"
+" (Image). So the final Neural Type (T1) represents lists (for batch) of "
+"lists (for image) of bounding boxes. Under the hood it should be "
+"list(lists(4x1 tensors))."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:166
+msgid "**Neural Types help us to debug models**"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:168
+msgid ""
+"There is a large class of errors, which will not produce runtime or "
+"compile exception. For example:"
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:170
+msgid "\"Rank matches but semantics doesn't\"."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:172
+msgid ""
+"For example, Module A produces data in the format [Batch, Time, Dim] "
+"whereas Module B  expects format [Time, Batch, Dim]. A simple axes "
+"transpose will solve this error."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:174
+msgid "\"Concatenating wrong dimensions\"."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:176
+msgid ""
+"For example, module should concatenate (add) two input tensors X and Y "
+"along dimension 0. But tensor X is in format [B, T, D] while tensor Y=[T,"
+" B, D] and concat . ."
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:178
+msgid "\"Dimensionality mismatch\""
+msgstr ""
+
+#: ../../tutorials/neuraltypes.rst:180
+msgid ""
+"A module expects image of size 224x224 but gets 256x256. The type "
+"comparison will result in ``NeuralTypeComparisonResult.DIM_INCOMPATIBLE``"
+" ."
+msgstr ""
+

@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../nlp/question_answering.rst:4
+msgid "Tutorial"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:6
+msgid ""
+"In this tutorial, we are going to implement a Question Answering system "
+"using the SQuAD dataset with pretrained BERT-like models based on `BERT: "
+"Pre-training of Deep Bidirectional Transformers for Language "
+"Understanding <https://arxiv.org/abs/1810.04805>`_ :cite:`nlp-qa-"
+"devlin2018bert`. All code used in this tutorial is based on "
+"``examples/nlp/question_answering/question_answering_squad.py``."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:11
+msgid ""
+"Currently, there are 3 pretrained back-bone models supported, on which "
+"the question answering task SQuAD can be fine-tuned: BERT, ALBERT and "
+"RoBERTa. These are pretrained model checkpoints from `transformers "
+"<https://huggingface.co/transformers>`__ . Apart from these, the user can"
+" also do fine-tuning on a custom BERT checkpoint, specified by the "
+"`--bert_checkpoint` argument. The pretrained back-bone models can be "
+"specified `--pretrained_model_name`. See the list of available pre-"
+"trained models `here "
+"<https://huggingface.co/transformers/pretrained_models.html>`__."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:21
+msgid "Download pretrained models"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:23
+msgid ""
+"Finetuned SQuAD models and model configuration files can be downloaded at"
+" following links."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:25
+msgid ""
+"BERT Base uncased models (~330M parameters) finetuned on SQuADv1.1 or "
+"SQuADv2.0 dataset: "
+"`https://ngc.nvidia.com/catalog/models/nvidia:bertbaseuncasedsquadv1 "
+"<https://ngc.nvidia.com/catalog/models/nvidia:bertbaseuncasedsquadv1>`__ "
+"`https://ngc.nvidia.com/catalog/models/nvidia:bertbaseuncasedsquadv2 "
+"<https://ngc.nvidia.com/catalog/models/nvidia:bertbaseuncasedsquadv2>`__"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:29
+msgid ""
+"BERT Large uncased models (~110M parameters) finetuned on SQuADv1.1 or "
+"SQuADv2.0 dataset: "
+"`https://ngc.nvidia.com/catalog/models/nvidia:bertlargeuncasedsquadv1 "
+"<https://ngc.nvidia.com/catalog/models/nvidia:bertlargeuncasedsquadv1>`__"
+" `https://ngc.nvidia.com/catalog/models/nvidia:bertlargeuncasedsquadv2 "
+"<https://ngc.nvidia.com/catalog/models/nvidia:bertlargeuncasedsquadv2>`__"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:36
+msgid ""
+"For pretraining BERT in NeMo and pretrained model checkpoints go to `BERT"
+" pretraining "
+"<https://nvidia.github.io/NeMo/nlp/bert_pretraining.html>`__."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:38
+msgid "Model results:"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:43
+msgid "Model"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:41
+msgid "SQuADv1.1"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:41
+msgid "SQuADv2.0"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:43
+msgid "EM"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:43
+msgid "F1"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:45
+msgid "BERT-base-uncased"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:45
+msgid "82.74%"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:45
+msgid "89.79%"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:45
+msgid "71.24%"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:45
+msgid "74.32%"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:47
+msgid "BERT-large-uncased"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:47
+msgid "85.79%"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:47
+msgid "92.28%"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:47
+msgid "80.17%"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:47
+msgid "83.32%"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:51
+msgid "Preliminaries"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:53
+msgid ""
+"**Model details** This model trains token-level classifier to predict the"
+" start and end position of the answer span in context. The loss is "
+"composed of the sum of the cross entropy loss of the start `S_loss` and "
+"end positions `E_loss`:"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:57
+msgid "`S_loss` + `E_loss`"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:59
+msgid ""
+"At inference, the longest answer span that minimizes this loss is used as"
+" prediction."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:61
+msgid "**Datasets.**"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:63
+msgid "This model can work with any dataset that follows the format:"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:65
+msgid "training file: a `json` file of this structure"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:67
+msgid ""
+"{\"data\":[{\"title\": \"string\", \"paragraphs\": [{\"context\": "
+"\"string\", \"qas\": [{\"question\": \"string\", \"is_impossible\": "
+"\"bool\", \"id\": \"number\", \"answers\": [{\"answer_start\": "
+"\"number\", \"text\": \"string\", }]}]}]}]} \"answers\" can also be empty"
+" if the model should also learn questions with impossible answers. In "
+"this case pass `--version_2_with_negative`"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:70
+msgid ""
+"evaluation file: a `json` file that follows the training file format only"
+" that it can provide more than one entry for \"answers\" to the same "
+"question"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:73
+msgid ""
+"test file: a `json` file that follows the training file format only that "
+"it does not require the \"answers\" keyword."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:76
+msgid ""
+"Currently, the datasets that we provide pre-processing script for is "
+"SQuAD v1.1 and v2.0 which can be downloaded from "
+"`https://rajpurkar.github.io/SQuAD-explorer/ <https://rajpurkar.github.io"
+"/SQuAD-explorer/>`_. You can find the pre-processing script in "
+"``examples/nlp/question_answering/get_squad.py``."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:83
+msgid "Code structure"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:85
+msgid ""
+"First, we instantiate Neural Module Factory which defines 1) backend "
+"(PyTorch), 2) mixed precision optimization level, 3) local rank of the "
+"GPU, and 4) an experiment manager that creates a timestamped folder to "
+"store checkpoints, relevant outputs, log files, and TensorBoard graphs."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:100
+msgid ""
+"Next, we define all Neural Modules participating in our question "
+"answering classification pipeline."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:102
+msgid ""
+"Process data: the `BertQuestionAnsweringDataLayer` is supposed to do the "
+"preprocessing of raw data into the format data supported by "
+"`SquadDataset`."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:104
+msgid ""
+"Training and evaluation each require their own "
+"`BertQuestionAnsweringDataLayer`. DataLayer is an extra layer to do the "
+"semantic checking for your dataset and convert it into DataLayerNM."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:132
+msgid ""
+"Load the pretrained model and get the hidden states for the corresponding"
+" inputs."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:145
+msgid ""
+"Define the tokenizer which transforms text into BERT tokens, using "
+"`NemoBertTokenizer`. This will tokenize text following the mapping of the"
+" original BERT model."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:153
+msgid "Create the classifier head for our task."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:163
+msgid "Create loss function"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:169
+msgid "Create the pipelines for the train and evaluation processes."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:203
+msgid ""
+"Create relevant callbacks for saving checkpoints, printing training "
+"progresses and evaluating results."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:234
+msgid "Finally, we define the optimization parameters and run the whole pipeline."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:251
+msgid "Model training"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:253
+msgid "To run on a single GPU, run:"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:260
+msgid ""
+"To train a question answering model on SQuAD using multi-gpu, run "
+"``question_answering_squad.py`` located at "
+"``examples/nlp/question_answering``:"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:276
+msgid ""
+"For model configuration files and checkpoints, see "
+":ref:`pretrained_models_squad`."
+msgstr ""
+
+#: ../../nlp/question_answering.rst:278
+msgid "To run evaluation:"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:289
+msgid "To run inference:"
+msgstr ""
+
+#: ../../nlp/question_answering.rst:302
+msgid "References"
+msgstr ""
+

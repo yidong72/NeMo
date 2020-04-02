@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../index.rst:2
+msgid "NVIDIA Neural Modules Developer Guide"
+msgstr ""
+
+#: ../../index.rst:20
+msgid ""
+"Neural Modules (NeMo) is a framework-agnostic toolkit for building AI "
+"applications powered by Neural Modules. Current support is for PyTorch "
+"framework."
+msgstr ""
+
+#: ../../index.rst:22
+msgid ""
+"A \"Neural Module\" is a block of code that computes a set of outputs "
+"from a set of inputs."
+msgstr ""
+
+#: ../../index.rst:24
+msgid "Neural Modules’ inputs and outputs have Neural Type for semantic checking."
+msgstr ""
+
+#: ../../index.rst:26
+msgid ""
+"An application built with NeMo is a Directed Acyclic Graph (DAG) of "
+"connected modules enabling researchers to define and build new speech and"
+" nlp networks easily through API Compatible modules."
+msgstr ""
+
+#: ../../index.rst:30
+msgid "Introduction"
+msgstr ""
+
+#: ../../index.rst:32
+msgid "See this video for a walk-through."
+msgstr ""
+
+#: ../../index.rst:42
+msgid "Core Concepts and Features"
+msgstr ""
+
+#: ../../index.rst:44
+msgid "`NeuralModule` class - represents and implements a neural module."
+msgstr ""
+
+#: ../../index.rst:45
+msgid ""
+"`NmTensor` - represents activations which flow between neural modules' "
+"ports."
+msgstr ""
+
+#: ../../index.rst:46
+msgid "`NeuralType` - represents types of modules' ports and NmTensors."
+msgstr ""
+
+#: ../../index.rst:47
+msgid "`NeuralFactory` - to create neural modules and manage training."
+msgstr ""
+
+#: ../../index.rst:48
+msgid ""
+"`Lazy execution` - when describing activation flow between neural "
+"modules, nothing happens until an \"action\" (such as "
+"`optimizer.optimize(...)` is called."
+msgstr ""
+
+#: ../../index.rst:49
+msgid ""
+"`Collections` - NeMo comes with collections - related group of modules "
+"such as `nemo_asr` (for Speech Recognition) and `nemo_nlp` for NLP"
+msgstr ""
+
+#: ../../index.rst:53
+msgid "Requirements"
+msgstr ""
+
+#: ../../index.rst:55
+msgid "Python 3.6 or 3.7"
+msgstr ""
+
+#: ../../index.rst:56
+msgid "PyTorch 1.4 or later with GPU support"
+msgstr ""
+
+#: ../../index.rst:57
+msgid ""
+"(optional for best performance) NVIDIA APEX: "
+"https://github.com/NVIDIA/apex"
+msgstr ""
+
+#: ../../index.rst:62
+msgid "Getting started"
+msgstr ""
+
+#: ../../index.rst:64
+msgid ""
+"You can use NVIDIA `NGC NeMo container "
+"<https://ngc.nvidia.com/catalog/containers/nvidia:nemo>`_ for the latest "
+"NeMo release and all dependencies."
+msgstr ""
+
+#: ../../index.rst:78
+msgid "and begin using NeMo immediately."
+msgstr ""
+
+#: ../../index.rst:80
+msgid ""
+"If you have all requirements installed (or are using `NGC PyTorch "
+"container <https://ngc.nvidia.com/catalog/containers/nvidia:pytorch>`_ ),"
+" then you can simply use pip to install the latest released version "
+"(**currently 0.9.0**) of NeMo and its collections:"
+msgstr ""
+
+#: ../../index.rst:88
+msgid "Tutorials"
+msgstr ""
+
+#: ../../index.rst:90
+msgid ":ref:`Speech recognition <asr-docs>`"
+msgstr ""
+
+#: ../../index.rst:91
+msgid ":ref:`Natural language processing <nlp-docs>`"
+msgstr ""
+
+#: ../../index.rst:92
+msgid ":ref:`Speech synthesis <tts-docs>`"
+msgstr ""
+
+#: ../../index.rst:95
+msgid "Installing From Github"
+msgstr ""
+
+#: ../../index.rst:97
+msgid ""
+"If you prefer to use NeMo's latest development version (from GitHub) "
+"follow the steps below:"
+msgstr ""
+
+#: ../../index.rst:99
+msgid "Clone the repository ``git clone https://github.com/NVIDIA/NeMo.git``"
+msgstr ""
+
+#: ../../index.rst:100
+msgid "Go to NeMo folder and install the toolkit and collections:"
+msgstr ""
+
+#: ../../index.rst:107
+msgid "reinstall.sh install NeMo in development mode."
+msgstr ""
+
+#: ../../index.rst:110
+msgid "Unittests"
+msgstr ""
+
+#: ../../index.rst:112
+msgid "This command runs unittests:"
+msgstr ""
+
+#: ../../index.rst:120
+msgid "Building Docker Container"
+msgstr ""
+
+#: ../../index.rst:122
+msgid ""
+"The NeMo Docker image requires Docker Buildx which is included in Docker "
+"19.03 and layer. To build a custom NeMo Docker image, run"
+msgstr ""
+
+#: ../../index.rst:128
+msgid ""
+"The ``NEMO_VERSION`` build arg is required. We recommend always setting "
+"to ``git describe --tags`` so that the build is traceable and replicable."
+" At runtime, the value of ``NEMO_VERSION`` specified at build time is "
+"exposed as an environment variable."
+msgstr ""
+
+#: ../../index.rst:131
+msgid ""
+"You may also specify a build arg ``BASE_IMAGE`` to override the "
+"underlying version of PyTorch used, though there are no compatability "
+"guarantees."
+msgstr ""
+
+#: ../../index.rst:133
+msgid ""
+"For development purposes, you can also create a Docker image containing "
+"only NeMo's dependencies, and map your local development branch into the "
+"container at runtime."
+msgstr ""
+

@@ -1,0 +1,538 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../collections/nemo_tts.rst:2
+msgid "NeMo TTS collection"
+msgstr ""
+
+#: ../../collections/nemo_tts.rst:5
+msgid "Speech data processing modules"
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.DataLayerNM`"
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:1 of
+msgid "Data Layer for general speech tasks that loads only the audio."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:3 of
+msgid ""
+"Module which reads speech data. It accepts comma-separated JSON manifest "
+"files describing the wav audio files and their metadata. JSON files "
+"should be of the following format::"
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM
+#: nemo.collections.tts.waveglow_modules.WaveGlowLoss
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM of
+msgid "Parameters"
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:12 of
+msgid "path to JSON containing data."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:14 of
+msgid "batch sizelse."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:16 of
+msgid ""
+"All training files which have a duration less than min_duration are "
+"dropped. Note: Duration is read from the manifest JSON. Defaults to 0.1."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:21 of
+msgid ""
+"All training files which have a duration more than max_duration are "
+"dropped. Note: Duration is read from the manifest JSON. Defaults to None."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:26 of
+msgid ""
+"Whether to use trim silence from beginning and end of audio signal using "
+"librosa.effects.trim(). Defaults to False."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:30 of
+msgid "See PyTorch DataLoader. Defaults to False."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:33 of
+msgid "See PyTorch DataLoader. Defaults to True."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:36 of
+msgid "See PyTorch DataLoader. Defaults to 0."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer:39 of
+msgid ""
+"Number of samples to load per audiofile. Defaults to 0 which indicates to"
+" load the whole file."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer.data_iterator:1 of
+msgid ""
+"\"Iterator over the dataset. It is a good idea to return "
+"torch.utils.data.DataLoader here. Should implement either this or "
+"`dataset`. If this is implemented, `dataset` property should return None."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer.dataset:1 of
+msgid ""
+"Should return an instance of torch.utils.data.Dataset. Should implement "
+"either this or `data_iterator`. If this is implemented, `data_iterator` "
+"should return None."
+msgstr ""
+
+#: nemo.collections.tts.data_layers.AudioDataLayer.output_ports:1
+#: nemo.collections.tts.tacotron2_modules.MakeGate.output_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder.output_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer.output_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder.output_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.output_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet.output_ports:1
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding.output_ports:1
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM.output_ports:1
+#: nemo.collections.tts.waveglow_modules.WaveGlowLoss.output_ports:1
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM.output_ports:1 of
+msgid "Returns definitions of module output ports."
+msgstr ""
+
+#: ../../collections/nemo_tts.rst:13
+msgid "Tacotron 2 modules"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.MakeGate:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.NonTrainableNM`"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.MakeGate:1 of
+msgid "MakeGate is a helper Neural Module that makes the target stop value."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.MakeGate.input_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder.input_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer.input_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder.input_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.input_ports:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet.input_ports:1
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding.input_ports:1
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM.input_ports:1
+#: nemo.collections.tts.waveglow_modules.WaveGlowLoss.input_ports:1
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM.input_ports:1 of
+msgid "Returns definitions of module input ports."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.MakeGate.input_ports:3
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.input_ports:13 of
+msgid "*target_len* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.MakeGate.input_ports:5
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder.input_ports:7
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.input_ports:9 of
+msgid ""
+"*mel_target* : axes: (batch, dimension, time);  elements_type: "
+"MelSpectrogramType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.MakeGate.output_ports:3
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.input_ports:11 of
+msgid "*gate_target* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss:1
+#: nemo.collections.tts.waveglow_modules.WaveGlowLoss:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.LossNM`"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss:1 of
+msgid ""
+"Tacoton2Loss implements the loss function of Tacotron 2. The loss "
+"function is the mean squared error between the reference mel spectrogram "
+"and the mel spectrogram predicted by the decoder + the mean squared error"
+" between the reference mel spectrogram and the mel spectrogram predicted "
+"by the post net + the cross entropy error between the stop values and the"
+" reference mel length."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss:8 of
+msgid ""
+"In the evaluation case, when we don't use teacher forcing, if the "
+"generated mel is shorter than the reference mel, we pad the generated mel"
+" with this value. Default is ~log(1e-5)."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.input_ports:3 of
+msgid ""
+"*mel_out* : axes: (batch, dimension, time);  elements_type: "
+"MelSpectrogramType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.input_ports:5 of
+msgid ""
+"*mel_out_postnet* : axes: (batch, dimension, time);  elements_type: "
+"MelSpectrogramType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.input_ports:7 of
+msgid "*gate_out* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.input_ports:15 of
+msgid "*seq_len* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Loss.output_ports:3
+#: nemo.collections.tts.waveglow_modules.WaveGlowLoss.output_ports:3 of
+msgid "*loss* : axes: None;  elements_type: LossType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder:1
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet:1
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding:1
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.TrainableNM`"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet:1 of
+msgid ""
+"Tacotron2Postnet implements the postnet part of Tacotron 2. It takes a "
+"mel spectrogram as generated by the decoder and corrects errors within "
+"the generated mel spectrogram."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:6
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:4
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet:5 of
+msgid "The size or dimensionality of the mel spectrogram"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet:7 of
+msgid "Hidden size of convolutions. Defaults to 512."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet:10 of
+msgid "Kernel size of convolutions. Defaults to 5."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet:13 of
+msgid "Number of convolution layers. Defaults to 5."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet.input_ports:3 of
+msgid ""
+"*mel_input* : axes: (batch, dimension, time);  elements_type: "
+"MelSpectrogramType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder.output_ports:3
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer.output_ports:3
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Postnet.output_ports:3 of
+msgid ""
+"*mel_output* : axes: (batch, dimension, time);  elements_type: "
+"MelSpectrogramType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:1 of
+msgid ""
+"Tacotron2Decoder implements the attention, decoder, and prenet parts of "
+"Tacotron 2. It takes the encoded text and produces mel spectrograms. The "
+"decoder contains two rnns, one is called the decoder rnn and the other is"
+" called the attention rnn."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:8
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:6 of
+msgid "The number of frames we predict at each decoder time step. Defaults to 1"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:11
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:9 of
+msgid "The size of the encoded text. Defaults to 512."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:14
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:12 of
+msgid ""
+"A number in [0, 1). When teacher forcing is not used, the model predict a"
+" stopping value at each model time step. The model will stop if the value"
+" is greater than gate_threshold. Defaults to 0.5."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:19
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:17 of
+msgid "The hidden dimension of the prenet. Defaults to 256."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:21
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:19 of
+msgid ""
+"When not teacher forcing, the maximum number of frames to predict. "
+"Defaults to 1000."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:24
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:22 of
+msgid "The hidden dimension of the decoder rnn. Defaults to 1024."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:27
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:25 of
+msgid "Dropout probability for the decoder rnn. Defaults to 0.1."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:30
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:28 of
+msgid "Dropout probability for the attention rnn. Defaults to 0.1."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:33
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:31 of
+msgid "The hidden dimension of the attention rnn. Defaults to 1024."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:36
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:34 of
+msgid "The hidden dimension of the attention mechanism. Defaults to 128."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:39
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:37 of
+msgid ""
+"The number of convolution filters for the location part of the attention "
+"mechanism. Defaults to 32."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder:43
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:41 of
+msgid ""
+"The kernel size of the convolution for the location part of the attention"
+" mechanism. Defaults to 31."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder.input_ports:3
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer.input_ports:3
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder.output_ports:3 of
+msgid ""
+"*char_phone_encoded* : axes: (batch, time, dimension);  elements_type: "
+"EncodedRepresentation"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder.input_ports:5
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer.input_ports:5
+#: of
+msgid "*encoded_length* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder.output_ports:5
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer.output_ports:5
+#: of
+msgid "*gate_output* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Decoder.output_ports:7
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer.output_ports:7
+#: of
+msgid "*alignments* : axes: (batch, time, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:1 of
+msgid "Bases: :class:`nemo.collections.tts.tacotron2_modules.Tacotron2Decoder`"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer:1 of
+msgid ""
+"Tacotron2DecoderInfer is an inference Neural Module used in place of the "
+"Tacotron2Decoder NM."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2DecoderInfer.output_ports:9
+#: of
+msgid "*mel_len* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder:1 of
+msgid ""
+"Tacotron2Encoder is the encoder part of Tacotron 2. It takes embedded "
+"text as input and creates an encoded representation of the text that can "
+"be used with downstream attention and decoders."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder:5 of
+msgid "The number of convolution layers inside the encoder. Defaults to 5."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder:8 of
+msgid ""
+"The size of the embedded text. It will also be the output size of the "
+"encoded text. Defaults to 512."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder:11 of
+msgid "The kernel size of the convolution layers. Defaults to 3"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder.input_ports:3
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding.output_ports:3 of
+msgid ""
+"*char_phone_embeddings* : axes: (batch, dimension, time);  elements_type:"
+" EmbeddedTextType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.Tacotron2Encoder.input_ports:5 of
+msgid "*embedding_length* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding:1 of
+msgid "TextEmbedding embeds the encoded character labels to an embedding space"
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding:3 of
+msgid ""
+"The number of character labels. The input char_phone's second axis dim "
+"size should be n_symbols."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding:6 of
+msgid "The size of the embedding dimension. Defaults to 512."
+msgstr ""
+
+#: nemo.collections.tts.tacotron2_modules.TextEmbedding.input_ports:3 of
+msgid "*char_phone* : axes: (batch, time);  elements_type: LabelsType"
+msgstr ""
+
+#: ../../collections/nemo_tts.rst:21
+msgid "Waveglow modules"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:1 of
+msgid ""
+"WaveGlowNM implements the Waveglow model in whole. This NM is meant to be"
+" used during training"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:5
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:4 of
+msgid "Size of input mel spectrogram Defaults to 80."
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:8
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:7 of
+msgid "Number of normalizing flows/layers of waveglow. Defaults to 12"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:11
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:10 of
+msgid ""
+"Each audio/spec pair is split in n_group number of groups. It must be "
+"divisible by 2 as halves are split this way. Defaults to 8"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:14 of
+msgid ""
+"After n_early_every layers, n_early_size number of groups are skipped to "
+"the output of the Neural Module. Defaults to 4"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:18 of
+msgid ""
+"The number of groups to skip to the output at every n_early_every layers."
+" Defaults to 2"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:24
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:22 of
+msgid "The number of layers of the wavenet submodule. Defaults to 8"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:27
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:25 of
+msgid "The number of channels of the wavenet submodule. Defaults to 512"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:30
+#: nemo.collections.tts.waveglow_modules.WaveGlowNM:28 of
+msgid "The kernel size of the wavenet submodule. Defaults to 3"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:1 of
+msgid "Bases: :class:`nemo.collections.tts.waveglow_modules.WaveGlowNM`"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:1 of
+msgid ""
+"WaveGlowInferNM is the inference Neural Module for WaveGlowNM. This NM is"
+" meant to be used during inference. Keep in mind, the inference module "
+"runs in the reverse order of the training module."
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:15 of
+msgid ""
+"After n_early_every layers, n_early_size number of groups are added as "
+"input to the current layer. Defaults to 4"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:19 of
+msgid ""
+"The number of groups to sample at every n_early_every layers. The sampled"
+" values are then passed through the remaining layer. Defaults to 2"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM:33 of
+msgid ""
+"Standard deviation of the normal distribution from which we sample z. "
+"Defaults to 0.6."
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowInferNM.input_ports:3 of
+msgid ""
+"*mel_spectrogram* : axes: (batch, dimension, time);  elements_type: "
+"MelSpectrogramType"
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowLoss:1 of
+msgid ""
+"WaveGlowLoss implements the waveglow loss which aims to maximize the log-"
+"likelihood of the audio given the mel spectrogram. This loss is expressed"
+" as the log-likelihood of a standard normal distribution and the sum of "
+"the log of the determinant of the Jacobians of the mapping from x, audio,"
+" to z, the normal distribution. The second term can be further split in "
+"the contribution by the affine coupling layer, log_s, and the 1x1 "
+"invertible convolution layer, log_det_W."
+msgstr ""
+
+#: nemo.collections.tts.waveglow_modules.WaveGlowLoss:9 of
+msgid ""
+"Standard deviation of the normal distribution that we are aiming to "
+"model. Defaults to 1."
+msgstr ""
+

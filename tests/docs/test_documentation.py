@@ -23,10 +23,10 @@ from sphinx.application import Sphinx
 
 
 class DocTest(TestCase):
-    source_dir = u'docs/sources/source/'
-    config_dir = u'docs/sources/source/'
-    output_dir = u'docs/sources/source/test_build'
-    doctree_dir = u'docs/sources/source/test_build/doctrees'
+    source_dir = u'docs/source/'
+    config_dir = u'docs/source/'
+    output_dir = u'docs/source/test_build'
+    doctree_dir = u'docs/source/test_build/doctrees'
 
     all_files = True
 

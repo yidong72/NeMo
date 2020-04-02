@@ -1,0 +1,512 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2018-2020, NVIDIA
+# This file is distributed under the same license as the nemo package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nemo 0.10.0b10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: ../../collections/nemo_asr.rst:2
+msgid "NeMo ASR collection"
+msgstr ""
+
+#: ../../collections/nemo_asr.rst:5
+msgid "Speech data processing modules"
+msgstr ""
+
+#: nemo.collections.asr.data_layer:1 of
+msgid "This package contains Neural Modules responsible for ASR data layers."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:1
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:1
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:1
+#: nemo.collections.asr.data_layer.TranscriptDataLayer:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.DataLayerNM`"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:1 of
+msgid "Data Layer for general ASR tasks."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:3 of
+msgid ""
+"Module which reads ASR labeled data. It accepts comma-separated JSON "
+"manifest files describing the correspondence between wav audio files and "
+"their transcripts. JSON files should be of the following format::"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer
+#: nemo.collections.asr.data_layer.TranscriptDataLayer
+#: nemo.collections.asr.jasper.JasperDecoderForCTC
+#: nemo.collections.asr.jasper.JasperDecoderForClassification
+#: nemo.collections.asr.jasper.JasperEncoder of
+msgid "Parameters"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:11
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:11 of
+msgid "Dataset parameter. Path to JSON containing data."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:14 of
+msgid ""
+"Dataset parameter. List of characters that can be output by the ASR "
+"model. For Jasper, this is the 28 character set {a-z '}. The CTC blank "
+"symbol is automatically added later for models using ctc."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:17
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:19
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:18 of
+msgid "batch size"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:19
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:21 of
+msgid ""
+"Target sampling rate for data. Audio files will be resampled to "
+"sample_rate if it is not already. Defaults to 16000."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:23
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:25 of
+msgid ""
+"Bool indicating whether the audio file is saved as int data or float "
+"data. Defaults to False."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:29 of
+msgid ""
+"Dataset parameter. End of string symbol id used for seq2seq models. "
+"Defaults to None."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:27
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:33 of
+msgid ""
+"Dataset parameter. All training files which have a duration less than "
+"min_duration are dropped. Note: Duration is read from the manifest JSON. "
+"Defaults to 0.1."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:32
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:38 of
+msgid ""
+"Dataset parameter. All training files which have a duration more than "
+"max_duration are dropped. Note: Duration is read from the manifest JSON. "
+"Defaults to None."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:43 of
+msgid ""
+"Dataset parameter. Whether to use automatic text cleaning. It is highly "
+"recommended to manually clean text for best results. Defaults to True."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:37
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:48 of
+msgid ""
+"Whether to use trim silence from beginning and end of audio signal using "
+"librosa.effects.trim(). Defaults to False."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:41
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:52 of
+msgid ""
+"Dataset parameter. Controls whether the dataloader loads the audio signal"
+" and transcript or just the transcript. Defaults to True."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:46
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:57
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:35 of
+msgid "See PyTorch DataLoader. Defaults to False."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:49
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:60
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:37 of
+msgid "See PyTorch DataLoader. Defaults to True."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:52
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:63
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:39 of
+msgid "See PyTorch DataLoader. Defaults to 0."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer:66 of
+msgid "Currently disabled."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer.data_iterator:1
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer.data_iterator:1
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer.data_iterator:1
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.data_iterator:1 of
+msgid ""
+"\"Iterator over the dataset. It is a good idea to return "
+"torch.utils.data.DataLoader here. Should implement either this or "
+"`dataset`. If this is implemented, `dataset` property should return None."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer.dataset:1
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer.dataset:1
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer.dataset:1
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.dataset:1 of
+msgid ""
+"Should return an instance of torch.utils.data.Dataset. Should implement "
+"either this or `data_iterator`. If this is implemented, `data_iterator` "
+"should return None."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer.output_ports:1
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer.output_ports:1
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer.output_ports:1
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.output_ports:1
+#: nemo.collections.asr.jasper.JasperDecoderForCTC.output_ports:1
+#: nemo.collections.asr.jasper.JasperDecoderForClassification.output_ports:1
+#: nemo.collections.asr.jasper.JasperEncoder.output_ports:1 of
+msgid "Returns definitions of module output ports."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer.output_ports:3 of
+msgid "*audio_signal* : axes: (batch, time);  elements_type: AudioSignal"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer.output_ports:5 of
+msgid "*a_sig_length* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer.output_ports:7 of
+msgid "*transcripts* : axes: (batch, time);  elements_type: LabelsType"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToTextDataLayer.output_ports:9
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer.output_ports:7 of
+msgid "*transcript_length* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:1 of
+msgid "Data layer for reading generic Kaldi-formatted data."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:3 of
+msgid ""
+"Module that reads ASR labeled data that is in a Kaldi-compatible format. "
+"It assumes that you have a directory that contains:"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:6 of
+msgid "feats.scp: A mapping from utterance IDs to .ark files that"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:7 of
+msgid "contains the corresponding MFCC (or other format) data"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:8 of
+msgid "text: A mapping from utterance IDs to transcripts"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:10 of
+msgid "utt2dur (optional): A mapping from utterance IDs to audio durations,"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:10 of
+msgid "needed if you want to filter based on duration"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:12 of
+msgid "Directory that contains the above files."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:14 of
+msgid ""
+"List of characters that can be output by the ASR model, e.g. {a-z '} for "
+"Jasper. The CTC blank symbol is automatically added later for models "
+"using CTC."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:20 of
+msgid "End of string symbol used for seq2seq models. Defaults to None."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:23 of
+msgid ""
+"All training files which have a duration less than min_duration are "
+"dropped. Can't be used if the `utt2dur` file does not exist. Defaults to "
+"None."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:27 of
+msgid ""
+"All training files which have a duration more than max_duration are "
+"dropped. Can't be used if the `utt2dur` file does not exist. Defaults to "
+"None."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer:31 of
+msgid ""
+"Whether to use automatic text cleaning. It is highly recommended to "
+"manually clean text for best results. Defaults to True."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer.output_ports:3 of
+msgid ""
+"*processed_signal* : axes: (batch, dimension, time);  elements_type: "
+"SpectrogramType"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.KaldiFeatureDataLayer.output_ports:5 of
+msgid "*transcripts* : axes: (batch, time);  elements_type: ChannelType"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer:1 of
+msgid ""
+"A simple Neural Module for loading textual transcript data. The path, "
+"labels, and eos_id arguments are dataset parameters."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer:4 of
+msgid "Label position of padding symbol"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer:6 of
+msgid "Size of batches to generate in data loader"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer:8 of
+msgid "Whether we drop last (possibly) incomplete batch. Defaults to False."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer:11 of
+msgid ""
+"Number of processes to work on data loading (0 for just main process). "
+"Defaults to 0."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.output_ports:6 of
+msgid "texts:"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.output_ports:4
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.output_ports:9 of
+msgid "0: AxisType(BatchTag)"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.output_ports:6 of
+msgid "1: AxisType(TimeTag)"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.output_ports:9 of
+msgid "texts_length:"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.output_ports:11 of
+msgid "*texts* : axes: (batch, time);  elements_type: LabelsType"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.TranscriptDataLayer.output_ports:13 of
+msgid "*texts_length* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:1 of
+msgid "Data Layer for general speech classification."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:3 of
+msgid ""
+"Module which reads speech recognition with target label. It accepts "
+"comma-separated JSON manifest files describing the correspondence between"
+" wav audio files and their target labels. JSON files should be of the "
+"following format::"
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:14 of
+msgid ""
+"Dataset parameter. List of target classes that can be output by the "
+"speech recognition model."
+msgstr ""
+
+#: nemo.collections.asr.data_layer.AudioToSpeechLabelDataLayer:55 of
+msgid ""
+"Optional dictionary of str -> kwargs (dict) which is parsed and used to "
+"initialize an AudioAugmentor. Note: It is crucial that each individual "
+"augmentation has a keyword `prob`, that defines a float probability in "
+"the the range [0, 1] of this augmentation being applied. If this keyword "
+"is not present, then the augmentation is disabled and a warning is "
+"logged."
+msgstr ""
+
+#: ../../collections/nemo_asr.rst:13
+msgid "Automatic Speech Recognition modules"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForCTC:1
+#: nemo.collections.asr.jasper.JasperDecoderForClassification:1
+#: nemo.collections.asr.jasper.JasperEncoder:1 of
+msgid "Bases: :class:`nemo.backends.pytorch.nm.TrainableNM`"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForCTC:1 of
+msgid ""
+"Jasper Decoder creates the final layer in Jasper that maps from the "
+"outputs of Jasper Encoder to the vocabulary of interest."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForCTC:4
+#: nemo.collections.asr.jasper.JasperDecoderForClassification:4
+#: nemo.collections.asr.jasper.JasperEncoder:52 of
+msgid "Number of channels being input to this module"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForCTC:6
+#: nemo.collections.asr.jasper.JasperDecoderForClassification:6 of
+msgid ""
+"Number of characters in ASR model's vocab/labels. This count should not "
+"include the CTC blank symbol."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForCTC:9
+#: nemo.collections.asr.jasper.JasperDecoderForClassification:9
+#: nemo.collections.asr.jasper.JasperEncoder:72 of
+msgid ""
+"Describes how neural network parameters are initialized. Options are "
+"['xavier_uniform', 'xavier_normal', 'kaiming_uniform','kaiming_normal']. "
+"Defaults to \"xavier_uniform\"."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForCTC.input_ports:1
+#: nemo.collections.asr.jasper.JasperDecoderForClassification.input_ports:1
+#: nemo.collections.asr.jasper.JasperEncoder.input_ports:1 of
+msgid "Returns definitions of module input ports."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForCTC.input_ports:3 of
+msgid ""
+"*encoder_output* : axes: (batch, dimension, time);  elements_type: "
+"AcousticEncodedRepresentation"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForCTC.output_ports:3 of
+msgid "*output* : axes: (batch, time, dimension);  elements_type: LogprobsType"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperDecoderForClassification:1 of
+msgid ""
+"Jasper Decoder creates the final layer in Jasper that maps from the "
+"outputs of Jasper Encoder to one class label."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:1 of
+msgid ""
+"Jasper Encoder creates the pre-processing (prologue), Jasper convolution "
+"block, and the first 3 post-processing (epilogue) layers as described in "
+"Jasper (https://arxiv.org/abs/1904.03288)"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:5 of
+msgid ""
+"A list of dictionaries. Each element in the list represents the "
+"configuration of one Jasper Block. Each element should contain::      {"
+"         # Required parameters         'filters' (int) # Number of output"
+" channels,         'repeat' (int) # Number of sub-blocks,         "
+"'kernel' (int) # Size of conv kernel,         'stride' (int) # Conv "
+"stride         'dilation' (int) # Conv dilation         'dropout' (float)"
+" # Dropout probability         'residual' (bool) # Whether to use "
+"residual or not.         # Optional parameters         'residual_dense' "
+"(bool) # Whether to use Dense Residuals             # or not. 'residual' "
+"must be True for 'residual_dense'             # to be enabled."
+"             # Defaults to False.         'separable' (bool) # Whether to"
+" use separable convolutions.             # Defaults to False         "
+"'groups' (int) # Number of groups in each conv layer.             # "
+"Defaults to 1         'heads' (int) # Sharing of separable filters"
+"             # Defaults to -1         'tied' (bool)  # Whether to use the"
+" same weights for all             # sub-blocks.             # Defaults to"
+" False         'se' (bool)  # Whether to add Squeeze and Excitation"
+"             # sub-blocks.             # Defaults to False         "
+"'se_reduction_ratio' (int)  # The reduction ratio of the Squeeze"
+"             # sub-module.             # Must be an integer > 1."
+"             # Defaults to 16         'kernel_size_factor' (float)  # "
+"Conv kernel size multiplier             # Can be either an int or float"
+"             # Kernel size is recomputed as below:             # "
+"new_kernel_size = int(max(1, (kernel_size * kernel_width)))             #"
+" to prevent kernel sizes than 1.             # Note: If rescaled kernel "
+"size is an even integer,             # adds 1 to the rescaled kernel size"
+" to allow \"same\"             # padding.     }"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:5 of
+msgid ""
+"A list of dictionaries. Each element in the list represents the "
+"configuration of one Jasper Block. Each element should contain::"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:49 of
+msgid ""
+"Activation function used for each sub-blocks. Can be one of "
+"[\"hardtanh\", \"relu\", \"selu\"]."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:54 of
+msgid ""
+"Normalization to be used in each sub-block. Can be one of [\"batch\", "
+"\"layer\", \"instance\", \"group\"] Defaults to \"batch\"."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:58 of
+msgid ""
+"Type of residual connection. Can be \"add\" or \"max\". Defaults to "
+"\"add\"."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:62 of
+msgid ""
+"Number of groups for \"group\" normalization type. If set to -1, number "
+"of channels is used. Defaults to -1."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:66 of
+msgid ""
+"Controls the use of sequence length masking prior to convolutions. "
+"Defaults to True."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder:70 of
+msgid "Defaults to 1."
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder.input_ports:3 of
+msgid ""
+"*audio_signal* : axes: (batch, dimension, time);  elements_type: "
+"SpectrogramType"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder.input_ports:5 of
+msgid "*length* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder.output_ports:3 of
+msgid ""
+"*outputs* : axes: (batch, dimension, time);  elements_type: "
+"AcousticEncodedRepresentation"
+msgstr ""
+
+#: nemo.collections.asr.jasper.JasperEncoder.output_ports:5 of
+msgid "*encoded_lengths* : axes: (batch,);  elements_type: LengthsType"
+msgstr ""
+
