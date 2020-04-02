@@ -19,31 +19,31 @@ msgstr ""
 
 #: ../../index.rst:2
 msgid "NVIDIA Neural Modules Developer Guide"
-msgstr ""
+msgstr "NVIDIA Neural Modules 开发者指南(中文版)"
 
 #: ../../index.rst:20
 msgid ""
 "Neural Modules (NeMo) is a framework-agnostic toolkit for building AI "
 "applications powered by Neural Modules. Current support is for PyTorch "
 "framework."
-msgstr ""
+msgstr "Neural Modules (NeMo) 是一个用神经模块来构建 AI 应用的工具包，它与具体的框架无关。当前支持 PyTorch 框架。"
 
 #: ../../index.rst:22
 msgid ""
 "A \"Neural Module\" is a block of code that computes a set of outputs "
 "from a set of inputs."
-msgstr ""
+msgstr "一个“神经模块”指的是，根据一系列的输入来计算一系列输出的代码块。"
 
 #: ../../index.rst:24
 msgid "Neural Modules’ inputs and outputs have Neural Type for semantic checking."
-msgstr ""
+msgstr "神经模块的输入和输出的神经类型会有语义检查。"
 
 #: ../../index.rst:26
 msgid ""
 "An application built with NeMo is a Directed Acyclic Graph (DAG) of "
 "connected modules enabling researchers to define and build new speech and"
 " nlp networks easily through API Compatible modules."
-msgstr ""
+msgstr "用 NeMo 构建的应用，是一个由连接在一起的模块构成的有向无环图，研究者们可以很容易地通过 API 兼容的模块，定义和构建新的语音或语言神经网络。"
 
 #: ../../index.rst:30
 msgid "Introduction"
