@@ -148,12 +148,10 @@ def create_pipeline(num_samples=-1, batch_size=32, data_prefix='train', is_train
         num_samples=num_samples,
         ignore_extra_tokens=args.ignore_extra_tokens,
         ignore_start_end=args.ignore_start_end,
-        prob_to_change=args.prob_to_change, # ASD
-        augmentation=is_training, # ASD
         do_lower_case=args.do_lower_case)
 
-    # if is_training:
-    #   dataset = LabeledAugmentation(dataset=dataset, augmentation_func=lambda x, y, z: value_replacement(x, y, z, args.prob_to_change))
+    if is_training:
+      dataset = LabeledAugmentation(dataset=dataset, augmentation_func=lambda x, y, z: value_replacement(x, y, z, args.prob_to_change))
 
     data_layer = BertJointIntentSlotDataLayer(
         dataset=dataset,

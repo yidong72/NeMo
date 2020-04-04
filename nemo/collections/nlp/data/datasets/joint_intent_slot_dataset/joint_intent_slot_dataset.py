@@ -32,38 +32,6 @@ from nemo.collections.nlp.data.datasets.datasets_utils import get_stats
 
 __all__ = ['BertJointIntentSlotDataset', 'BertJointIntentSlotInferDataset', 'LabeledAugmentation', 'value_replacement']
 
-
-
-def get_slot_value_mapping(
-    queries,
-    pad_label,
-    raw_slots=None,
-):
-    slot_values = defaultdict(set)
-    for i, query in enumerate(queries):
-        words = query.strip().split()
-        for j, word in enumerate(words):
-            if raw_slots[i][j] != pad_label:
-                slot_values[raw_slots[i][j]].add(word)
-    for k, v in slot_values.items():
-        slot_values[k] = list(v)
-    return slot_values
-
-def do_augmentation(
-    query,
-    raw_slot,
-    prob_to_change,
-    slot_to_value_mapping,
-):
-    words = query.strip().split()
-    for j, word in enumerate(words):
-        alternative_values = slot_to_value_mapping.get(raw_slot[j], None)
-        if alternative_values:
-            if random.random() < prob_to_change:
-                words[j] = random.choice(alternative_values)
-
-    return words
-
 def value_replacement(
     words,
     raw_slot,
@@ -82,7 +50,6 @@ def get_features(
     query,
     max_seq_length,
     tokenizer,
-    slot_to_value_mapping,
     pad_label=128,
     raw_slot=None,
     ignore_extra_tokens=False,
@@ -143,6 +110,9 @@ def get_features(
     return (input_ids, segment_ids, input_mask, loss_mask, subtokens_mask, slots)
 
 
+
+
+
 class BertJointIntentSlotDataset(Dataset):
     """
     Creates dataset to use for the task of joint intent
@@ -175,13 +145,11 @@ class BertJointIntentSlotDataset(Dataset):
         slot_file,
         max_seq_length,
         tokenizer,
-        prob_to_change,
         num_samples=-1,
         pad_label=128,
         ignore_extra_tokens=False,
         ignore_start_end=False,
         do_lower_case=False,
-        augmentation=False,
     ):
         if num_samples == 0:
             raise ValueError("num_samples has to be positive", num_samples)
@@ -201,7 +169,6 @@ class BertJointIntentSlotDataset(Dataset):
 
         assert len(slot_lines) == len(input_lines)
 
-        self.prob_to_change = prob_to_change
         dataset = list(zip(slot_lines, input_lines))
 
         if num_samples > 0:
@@ -220,47 +187,41 @@ class BertJointIntentSlotDataset(Dataset):
 
         self.queries = queries
         self.max_seq_length = max_seq_length
-        self.ignore_extra_tokens = ignore_extra_tokens
-        self.ignore_start_end = ignore_start_end
-        self.slot_to_value_mapping = get_slot_value_mapping(queries=self.queries, raw_slots=self.raw_slots, pad_label=self.pad_label)
+
+        features = list(zip(*[get_features(
+            queries[idx],
+            max_seq_length,
+            tokenizer,
+            pad_label=pad_label,
+            raw_slot=self.raw_slots[idx],
+            ignore_extra_tokens=ignore_extra_tokens,
+            ignore_start_end=ignore_start_end,
+            with_label=True,
+        ) for idx in range(len(queries))]))
+
+        self.all_input_ids = features[0]
+        self.all_segment_ids = features[1]
+        self.all_input_mask = features[2]
+        self.all_loss_mask = features[3]
+        self.all_subtokens_mask = features[4]
+        self.all_slots = features[5]
         self.all_intents = raw_intents
-
-        self.augmentation=augmentation
-
+        # self.max_seq_length = features[6]
 
 
     def __len__(self):
-        return len(self.queries)
+        return len(self.all_input_ids)
 
     def __getitem__(self, idx):
-        query=self.queries[idx]
-        if self.augmentation:
-            words = do_augmentation(
-                query, 
-                self.raw_slots[idx], 
-                slot_to_value_mapping=self.slot_to_value_mapping, 
-                prob_to_change=self.prob_to_change)
-            query = " ".join(words)
-        features =  get_features(
-                    query=query,
-                    max_seq_length=self.max_seq_length,
-                    tokenizer=self.tokenizer,
-                    pad_label=self.pad_label,
-                    raw_slot=self.raw_slots[idx],
-                    ignore_extra_tokens=self.ignore_extra_tokens,
-                    ignore_start_end=self.ignore_start_end,
-                    slot_to_value_mapping=self.slot_to_value_mapping,
-                    with_label=self.raw_slots is not None)
         return (
-            np.array(features[0]),
-            np.array(features[1]),
-            np.array(features[2], dtype=np.long),
-            np.array(features[3]),
-            np.array(features[4]),
+            np.array(self.all_input_ids[idx]),
+            np.array(self.all_segment_ids[idx]),
+            np.array(self.all_input_mask[idx], dtype=np.long),
+            np.array(self.all_loss_mask[idx]),
+            np.array(self.all_subtokens_mask[idx]),
             self.all_intents[idx],
-            np.array(features[5]),
+            np.array(self.all_slots[idx]),
         )
-
 
 class BertJointIntentSlotInferDataset(Dataset):
     """
@@ -320,6 +281,32 @@ class LabeledAugmentation(Dataset):
         return len(self._dataset)
 
     def __getitem__(self, idx):
+        words = self.augmentation_func(
+            self._dataset.queries[idx].strip().split(),
+            self._dataset.raw_slots[idx],
+            self.slot_value_mapping)
+        query = " ".join(words)
+        features =  get_features(
+                    query=query,
+                    max_seq_length=self._dataset.max_seq_length,
+                    tokenizer=self._dataset.tokenizer,
+                    pad_label=self._dataset.pad_label,
+                    raw_slot=self._dataset.raw_slots[idx],
+                    ignore_extra_tokens=self._dataset.ignore_extra_tokens,
+                    ignore_start_end=self._dataset.ignore_start_end,
+                    with_label=self._dataset.raw_slots is not None)
+        return (
+            np.array(features[0]),
+            np.array(features[1]),
+            np.array(features[2], dtype=np.long),
+            np.array(features[3]),
+            np.array(features[4]),
+            self._dataset.all_intents[idx],
+            np.array(features[5]),
+        )
+
+
+    def asd(self):
         words = self._dataset.all_words[idx]
         # raw_slot = self._dataset.all_slots[idx]
         raw_slot = self._dataset[idx][6]
