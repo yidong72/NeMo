@@ -30,7 +30,7 @@ import random
 from nemo import logging
 from nemo.collections.nlp.data.datasets.datasets_utils import get_stats
 
-__all__ = ['BertJointIntentSlotDataset', 'BertJointIntentSlotInferDataset']
+__all__ = ['BertJointIntentSlotDataset', 'BertJointIntentSlotInferDataset', 'LabeledAugmentation', 'value_replacement']
 
 
 
@@ -64,6 +64,19 @@ def do_augmentation(
 
     return words
 
+def value_replacement(
+    words,
+    raw_slot,
+    slot_to_value_mapping,
+    prob_to_change,
+):
+    for j, word in enumerate(words):
+        alternative_values = slot_to_value_mapping.get(raw_slot[j], None)
+        if alternative_values:
+            if random.random() < prob_to_change:
+                words[j] = random.choice(alternative_values)
+
+    return words
 
 def get_features(
     query,
@@ -192,7 +205,7 @@ class BertJointIntentSlotDataset(Dataset):
         if num_samples > 0:
             dataset = dataset[:num_samples]
 
-        raw_slots, queries, raw_intents = [], [], []
+        raw_slots, queries, raw_intents, self.all_words = [], [], [], []
         for slot_line, input_line in dataset:
             raw_slots.append([int(slot) for slot in slot_line.strip().split()])
             parts = input_line.strip().split()
@@ -200,6 +213,7 @@ class BertJointIntentSlotDataset(Dataset):
             query = ' '.join(parts[:-1])
             if do_lower_case:
                 query = query.lower()
+            self.all_words.append(query.strip().split())
             queries.append(query)
 
         self.queries = queries
@@ -213,6 +227,8 @@ class BertJointIntentSlotDataset(Dataset):
         self.all_intents = raw_intents
 
         self.augmentation=augmentation
+
+
 
     def __len__(self):
         return len(self.queries)
@@ -286,3 +302,89 @@ class BertJointIntentSlotInferDataset(Dataset):
             np.array(self.all_loss_mask[idx]),
             np.array(self.all_subtokens_mask[idx]),
         )
+
+
+class LabeledAugmentation(Dataset):
+
+    def __init__(self, dataset, augmentation_func):
+        self._dataset = dataset
+        self.slot_value_mapping = self.get_slot_value_mapping(all_words=self._dataset.all_words, pad_label=self._dataset.pad_label, raw_slots=self._dataset.raw_slots)
+        self.augmentation_func = augmentation_func
+
+    def __len__(self):
+        return len(self._dataset)
+
+    def __getitem__(self, idx):
+        words = self._dataset.all_words[idx]
+        # raw_slot = self._dataset.all_slots[idx]
+        raw_slot = self._dataset[idx][6]
+        max_seq_length = self._dataset.max_seq_length
+        ignore_start_end = self._dataset.ignore_start_end
+        ignore_extra_tokens = self._dataset.ignore_extra_tokens
+        words = self.augmentation_func(words, raw_slot, self.slot_value_mapping)
+
+        subtokens = [self._dataset.tokenizer.cls_token]
+        loss_mask = [1 - self._dataset.ignore_start_end]
+        subtokens_mask = [0]
+        slots = [self._dataset.pad_label]
+
+        for j, word in enumerate(words):
+            word_tokens = self._dataset.tokenizer.text_to_tokens(word)
+            subtokens.extend(word_tokens)
+
+            loss_mask.append(1)
+            loss_mask.extend([not self._dataset.ignore_extra_tokens] * (len(word_tokens) - 1))
+
+            subtokens_mask.append(1)
+            subtokens_mask.extend([0] * (len(word_tokens) - 1))
+
+            slots.extend([raw_slot[j]] * len(word_tokens))
+
+        subtokens.append(self._dataset.tokenizer.sep_token)
+        loss_mask.append(1 - self._dataset.ignore_start_end)
+        subtokens_mask.append(0)
+        input_mask = [1] * len(subtokens)
+        slots.append(self._dataset.pad_label)
+
+        if len(subtokens) > max_seq_length:
+            subtokens = [self._dataset.tokenizer.cls_token] + subtokens[-max_seq_length + 1 :]
+            input_mask = [1] + input_mask[-max_seq_length + 1 :]
+            loss_mask = [1 - ignore_start_end] + loss_mask[-max_seq_length + 1 :]
+            subtokens_mask = [0] + subtokens_mask[-max_seq_length + 1 :]
+            slots = [self._dataset.pad_label] + slots[-max_seq_length + 1 :]
+
+        input_ids = [self._dataset.tokenizer.tokens_to_ids(t) for t in subtokens]
+
+        if len(subtokens) < max_seq_length:
+            extra = max_seq_length - len(subtokens)
+            input_ids = input_ids + [0] * extra
+            loss_mask = loss_mask + [0] * extra
+            subtokens_mask = subtokens_mask + [0] * extra
+            input_mask = input_mask + [0] * extra
+
+            slots = slots + [self._dataset.pad_label] * extra
+
+        segment_ids = [0] * max_seq_length
+        return (np.array(input_ids), np.array(segment_ids), np.array(input_mask, dtype=np.long), np.array(loss_mask), np.array(subtokens_mask), self._dataset.all_intents[idx], np.array(slots))
+
+    def get_slot_value_mapping(
+        self,
+        all_words,
+        pad_label,
+        raw_slots=None):
+        slot_values = defaultdict(set)
+        for i, words in enumerate(all_words):
+            for j, word in enumerate(words):
+                if raw_slots[i][j] != pad_label:
+                    slot_values[raw_slots[i][j]].add(word)
+        for k, v in slot_values.items():
+            slot_values[k] = list(v)
+        return slot_values
+
+
+
+
+class UnlabeledAugmentation(Dataset):
+
+    def __init__(self, dataset):
+        self.dataset = dataset
