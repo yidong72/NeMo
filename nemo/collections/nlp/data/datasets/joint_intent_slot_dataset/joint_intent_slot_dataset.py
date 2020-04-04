@@ -54,9 +54,9 @@ def get_features(
     raw_slot=None,
     ignore_extra_tokens=False,
     ignore_start_end=False,
-    with_label=False,
 ):
 
+    with_label = raw_slot is not None
     words = query.strip().split()
     subtokens = [tokenizer.cls_token]
     loss_mask = [1 - ignore_start_end]
@@ -193,10 +193,9 @@ class BertJointIntentSlotDataset(Dataset):
             max_seq_length,
             tokenizer,
             pad_label=pad_label,
-            raw_slot=self.raw_slots[idx],
+            raw_slot=None if self.raw_slots is None else self.raw_slots[idx],
             ignore_extra_tokens=ignore_extra_tokens,
             ignore_start_end=ignore_start_end,
-            with_label=True,
         ) for idx in range(len(queries))]))
 
         self.all_input_ids = features[0]
@@ -291,10 +290,9 @@ class LabeledAugmentation(Dataset):
                     max_seq_length=self._dataset.max_seq_length,
                     tokenizer=self._dataset.tokenizer,
                     pad_label=self._dataset.pad_label,
-                    raw_slot=self._dataset.raw_slots[idx],
+                    raw_slot=None if self._dataset.raw_slots is None else self._dataset.raw_slots[idx],
                     ignore_extra_tokens=self._dataset.ignore_extra_tokens,
-                    ignore_start_end=self._dataset.ignore_start_end,
-                    with_label=self._dataset.raw_slots is not None)
+                    ignore_start_end=self._dataset.ignore_start_end)
         return (
             np.array(features[0]),
             np.array(features[1]),
@@ -304,60 +302,6 @@ class LabeledAugmentation(Dataset):
             self._dataset.all_intents[idx],
             np.array(features[5]),
         )
-
-
-    def asd(self):
-        words = self._dataset.all_words[idx]
-        # raw_slot = self._dataset.all_slots[idx]
-        raw_slot = self._dataset[idx][6]
-        max_seq_length = self._dataset.max_seq_length
-        ignore_start_end = self._dataset.ignore_start_end
-        ignore_extra_tokens = self._dataset.ignore_extra_tokens
-        words = self.augmentation_func(words, raw_slot, self.slot_value_mapping)
-
-        subtokens = [self._dataset.tokenizer.cls_token]
-        loss_mask = [1 - self._dataset.ignore_start_end]
-        subtokens_mask = [0]
-        slots = [self._dataset.pad_label]
-
-        for j, word in enumerate(words):
-            word_tokens = self._dataset.tokenizer.text_to_tokens(word)
-            subtokens.extend(word_tokens)
-
-            loss_mask.append(1)
-            loss_mask.extend([not self._dataset.ignore_extra_tokens] * (len(word_tokens) - 1))
-
-            subtokens_mask.append(1)
-            subtokens_mask.extend([0] * (len(word_tokens) - 1))
-
-            slots.extend([raw_slot[j]] * len(word_tokens))
-
-        subtokens.append(self._dataset.tokenizer.sep_token)
-        loss_mask.append(1 - self._dataset.ignore_start_end)
-        subtokens_mask.append(0)
-        input_mask = [1] * len(subtokens)
-        slots.append(self._dataset.pad_label)
-
-        if len(subtokens) > max_seq_length:
-            subtokens = [self._dataset.tokenizer.cls_token] + subtokens[-max_seq_length + 1 :]
-            input_mask = [1] + input_mask[-max_seq_length + 1 :]
-            loss_mask = [1 - ignore_start_end] + loss_mask[-max_seq_length + 1 :]
-            subtokens_mask = [0] + subtokens_mask[-max_seq_length + 1 :]
-            slots = [self._dataset.pad_label] + slots[-max_seq_length + 1 :]
-
-        input_ids = [self._dataset.tokenizer.tokens_to_ids(t) for t in subtokens]
-
-        if len(subtokens) < max_seq_length:
-            extra = max_seq_length - len(subtokens)
-            input_ids = input_ids + [0] * extra
-            loss_mask = loss_mask + [0] * extra
-            subtokens_mask = subtokens_mask + [0] * extra
-            input_mask = input_mask + [0] * extra
-
-            slots = slots + [self._dataset.pad_label] * extra
-
-        segment_ids = [0] * max_seq_length
-        return (np.array(input_ids), np.array(segment_ids), np.array(input_mask, dtype=np.long), np.array(loss_mask), np.array(subtokens_mask), self._dataset.all_intents[idx], np.array(slots))
 
     def get_slot_value_mapping(
         self,
@@ -372,7 +316,6 @@ class LabeledAugmentation(Dataset):
         for k, v in slot_values.items():
             slot_values[k] = list(v)
         return slot_values
-
 
 
 
