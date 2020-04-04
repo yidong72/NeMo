@@ -82,20 +82,15 @@ def get_features(
     query,
     max_seq_length,
     tokenizer,
-    prob_to_change,
     slot_to_value_mapping,
     pad_label=128,
     raw_slot=None,
     ignore_extra_tokens=False,
     ignore_start_end=False,
     with_label=False,
-    augmentation=False,
 ):
 
-    if augmentation:
-        words = do_augmentation(query, raw_slot, slot_to_value_mapping=slot_to_value_mapping, prob_to_change=prob_to_change)
-    else:
-        words = query.strip().split()
+    words = query.strip().split()
     subtokens = [tokenizer.cls_token]
     loss_mask = [1 - ignore_start_end]
     subtokens_mask = [0]
@@ -191,6 +186,13 @@ class BertJointIntentSlotDataset(Dataset):
         if num_samples == 0:
             raise ValueError("num_samples has to be positive", num_samples)
 
+        self.ignore_extra_tokens = ignore_extra_tokens
+        self.ignore_start_end = ignore_start_end
+        self.do_lower_case = do_lower_case
+        self.pad_label = pad_label
+        self.tokenizer = tokenizer
+
+
         with open(slot_file, 'r') as f:
             slot_lines = f.readlines()
 
@@ -205,9 +207,9 @@ class BertJointIntentSlotDataset(Dataset):
         if num_samples > 0:
             dataset = dataset[:num_samples]
 
-        raw_slots, queries, raw_intents, self.all_words = [], [], [], []
+        self.raw_slots, queries, raw_intents, self.all_words = [], [], [], []
         for slot_line, input_line in dataset:
-            raw_slots.append([int(slot) for slot in slot_line.strip().split()])
+            self.raw_slots.append([int(slot) for slot in slot_line.strip().split()])
             parts = input_line.strip().split()
             raw_intents.append(int(parts[-1]))
             query = ' '.join(parts[:-1])
@@ -218,9 +220,6 @@ class BertJointIntentSlotDataset(Dataset):
 
         self.queries = queries
         self.max_seq_length = max_seq_length
-        self.tokenizer = tokenizer
-        self.pad_label = pad_label
-        self.raw_slots = raw_slots
         self.ignore_extra_tokens = ignore_extra_tokens
         self.ignore_start_end = ignore_start_end
         self.slot_to_value_mapping = get_slot_value_mapping(queries=self.queries, raw_slots=self.raw_slots, pad_label=self.pad_label)
@@ -234,8 +233,16 @@ class BertJointIntentSlotDataset(Dataset):
         return len(self.queries)
 
     def __getitem__(self, idx):
+        query=self.queries[idx]
+        if self.augmentation:
+            words = do_augmentation(
+                query, 
+                self.raw_slots[idx], 
+                slot_to_value_mapping=self.slot_to_value_mapping, 
+                prob_to_change=self.prob_to_change)
+            query = " ".join(words)
         features =  get_features(
-                    query=self.queries[idx],
+                    query=query,
                     max_seq_length=self.max_seq_length,
                     tokenizer=self.tokenizer,
                     pad_label=self.pad_label,
@@ -243,9 +250,7 @@ class BertJointIntentSlotDataset(Dataset):
                     ignore_extra_tokens=self.ignore_extra_tokens,
                     ignore_start_end=self.ignore_start_end,
                     slot_to_value_mapping=self.slot_to_value_mapping,
-                    with_label=self.raw_slots is not None,
-                    prob_to_change=self.prob_to_change,
-                    augmentation=self.augmentation)
+                    with_label=self.raw_slots is not None)
         return (
             np.array(features[0]),
             np.array(features[1]),
@@ -388,3 +393,4 @@ class UnlabeledAugmentation(Dataset):
 
     def __init__(self, dataset):
         self.dataset = dataset
+
