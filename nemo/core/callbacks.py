@@ -624,7 +624,7 @@ class WandbCallback(ActionCallback):
             if self.step % self._update_freq == 0 and self._update_freq > 0:
                 tensors_logged = {t.name: self.registered_tensors[t.unique_name].cpu() for t in self._train_tensors}
                 # Always log learning rate
-                tensors_logged['LR'] = self.learning_rate
+                tensors_logged['misc/lr'] = self.learning_rate
                 self.wandb_log(tensors_logged)
 
     def on_epoch_start(self):
@@ -635,7 +635,7 @@ class WandbCallback(ActionCallback):
         if self.global_rank is None or self.global_rank == 0:
             # always log epoch num and epoch_time
             epoch_time = time.time() - self._last_epoch_start
-            self.wandb_log({"epoch": self.epoch_num, "epoch_time": epoch_time})
+            self.wandb_log({"misc/epoch": self.epoch_num, "misc/epoch_time": epoch_time})
 
     def wandb_log(self, tensors_logged):
         if _WANDB_AVAILABLE:
