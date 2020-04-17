@@ -83,6 +83,7 @@ class SchemaPreprocessor:
 
         self.is_trainable = is_trainable
         self.datasets = datasets
+        self.mode = mode
 
         for dataset_split in ['train', 'test', 'dev']:
             if dataset_split not in self.datasets:

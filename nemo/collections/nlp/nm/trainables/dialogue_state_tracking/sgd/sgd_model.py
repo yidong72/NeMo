@@ -157,23 +157,30 @@ class SGDModel(TrainableNM):
             num_services, (config["MAX_NUM_CAT_SLOT"] + config["MAX_NUM_NONCAT_SLOT"]) * embedding_dim
         )
 
-        # initialize schema embeddings from the BERT generated embeddings
-        schema_embeddings = schema_emb_processor.get_schema_embeddings()
-        self.intents_emb.weight.data.copy_(
-            torch.from_numpy(np.stack(schema_embeddings['intent_emb']).reshape(num_services, -1))
-        )
-        self.cat_slot_emb.weight.data.copy_(
-            torch.from_numpy(np.stack(schema_embeddings['cat_slot_emb']).reshape(num_services, -1))
-        )
-        self.cat_slot_value_emb.weight.data.copy_(
-            torch.from_numpy(np.stack(schema_embeddings['cat_slot_value_emb']).reshape(num_services, -1))
-        )
-        self.noncat_slot_emb.weight.data.copy_(
-            torch.from_numpy(np.stack(schema_embeddings['noncat_slot_emb']).reshape(num_services, -1))
-        )
-        self.req_slot_emb.weight.data.copy_(
-            torch.from_numpy(np.stack(schema_embeddings['req_slot_emb']).reshape(num_services, -1))
-        )
+        if schema_emb_processor.mode == 'random':
+            self.intents_emb.weight.data.normal_(0, 0.1)
+            self.cat_slot_emb.weight.data.normal_(0, 0.1)
+            self.cat_slot_value_emb.weight.data.normal_(0, 0.1)
+            self.noncat_slot_emb.weight.data.normal_(0, 0.1)
+            self.req_slot_emb.weight.data.normal_(0, 0.1)
+        else:
+            # initialize schema embeddings from the BERT generated embeddings
+            schema_embeddings = schema_emb_processor.get_schema_embeddings()
+            self.intents_emb.weight.data.copy_(
+                torch.from_numpy(np.stack(schema_embeddings['intent_emb']).reshape(num_services, -1))
+            )
+            self.cat_slot_emb.weight.data.copy_(
+                torch.from_numpy(np.stack(schema_embeddings['cat_slot_emb']).reshape(num_services, -1))
+            )
+            self.cat_slot_value_emb.weight.data.copy_(
+                torch.from_numpy(np.stack(schema_embeddings['cat_slot_value_emb']).reshape(num_services, -1))
+            )
+            self.noncat_slot_emb.weight.data.copy_(
+                torch.from_numpy(np.stack(schema_embeddings['noncat_slot_emb']).reshape(num_services, -1))
+            )
+            self.req_slot_emb.weight.data.copy_(
+                torch.from_numpy(np.stack(schema_embeddings['req_slot_emb']).reshape(num_services, -1))
+            )
 
         if not schema_emb_processor.is_trainable:
             self.intents_emb.weight.requires_grad = False
