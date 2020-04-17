@@ -625,6 +625,7 @@ class WandbCallback(ActionCallback):
                 tensors_logged = {t.name: self.registered_tensors[t.unique_name].cpu() for t in self._train_tensors}
                 # Always log learning rate
                 tensors_logged['misc/lr'] = self.learning_rate
+                tensors_logged['misc/step'] = self.step
                 self.wandb_log(tensors_logged)
 
     def on_epoch_start(self):
