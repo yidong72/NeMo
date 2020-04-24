@@ -177,6 +177,10 @@ gettext:
 	$(SPHINXBUILD) -b gettext $(I18NSPHINXOPTS) $(BUILDDIR)/locale
 	@echo
 	@echo "Build finished. The message catalogs are in $(BUILDDIR)/locale."
+	@echo "Now you can generate so files (must be in the source dir) by running:"
+	@echo
+	@echo "sphinx-intl update -p ../build/locale/ -l zh"
+	@echo
 
 .PHONY: changes
 changes:

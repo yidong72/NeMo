@@ -8,120 +8,147 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nemo 0.10.0b10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 10:41-0700\n"
+"POT-Creation-Date: 2020-04-24 14:57-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.7.0\n"
+"Generated-By: Babel 2.6.0\n"
 
-#: ../../index.rst:2
+# 0e173490a623474abe64aed6425069b7
+#: ../../source/index.rst:2
 msgid "NVIDIA Neural Modules Developer Guide"
 msgstr "NVIDIA Neural Modules 开发者指南(中文版)"
 
-#: ../../index.rst:20
+# 84e730e9d58b421d8a4c9981cc76a7e0
+#: ../../source/index.rst:19
 msgid ""
 "Neural Modules (NeMo) is a framework-agnostic toolkit for building AI "
 "applications powered by Neural Modules. Current support is for PyTorch "
 "framework."
 msgstr "Neural Modules (NeMo) 是一个用神经模块来构建 AI 应用的工具包，它与具体的框架无关。当前支持 PyTorch 框架。"
 
-#: ../../index.rst:22
+# 441068ce1c6d4586a0ac26ac998b98ee
+#: ../../source/index.rst:21
 msgid ""
 "A \"Neural Module\" is a block of code that computes a set of outputs "
 "from a set of inputs."
 msgstr "一个“神经模块”指的是，根据一系列的输入来计算一系列输出的代码块。"
 
-#: ../../index.rst:24
+# 8cc89d288ad1455eb5f491acbcfe7087
+#: ../../source/index.rst:23
 msgid "Neural Modules’ inputs and outputs have Neural Type for semantic checking."
 msgstr "神经模块的输入和输出的神经类型会有语义检查。"
 
-#: ../../index.rst:26
+# 63e8f6d3ae81423b84bba0604c2baf53
+#: ../../source/index.rst:25
 msgid ""
 "An application built with NeMo is a Directed Acyclic Graph (DAG) of "
 "connected modules enabling researchers to define and build new speech and"
 " nlp networks easily through API Compatible modules."
 msgstr "用 NeMo 构建的应用，是一个由连接在一起的模块构成的有向无环图，研究者们可以很容易地通过 API 兼容的模块，定义和构建新的语音或语言神经网络。"
 
-#: ../../index.rst:30
+# a648a27a7b574a8788481c9ab4be0475
+#: ../../source/index.rst:27
+msgid "!!CHANGE!!"
+msgstr ""
+
+# 15dd3676b1e247019ff3e97182856b3b
+#: ../../source/index.rst:30
 msgid "Introduction"
 msgstr ""
 
-#: ../../index.rst:32
+# 10982cf8d8ee4a0c965426d97fb3f1af
+#: ../../source/index.rst:32
 msgid "See this video for a walk-through."
 msgstr ""
 
-#: ../../index.rst:42
+# 3543aa94446446acb045d6b0b42ca629
+#: ../../source/index.rst:42
 msgid "Core Concepts and Features"
 msgstr ""
 
-#: ../../index.rst:44
+# b563eee93a854d3fb4345b7d19fc541c
+#: ../../source/index.rst:44
 msgid "`NeuralModule` class - represents and implements a neural module."
 msgstr ""
 
-#: ../../index.rst:45
+# 2a78bbbb54e54469be866b8397aa83c4
+#: ../../source/index.rst:45
 msgid ""
 "`NmTensor` - represents activations which flow between neural modules' "
 "ports."
 msgstr ""
 
-#: ../../index.rst:46
+# 2636ca8fb5b34bb19a20fc99a8e1c8da
+#: ../../source/index.rst:46
 msgid "`NeuralType` - represents types of modules' ports and NmTensors."
 msgstr ""
 
-#: ../../index.rst:47
+# b24972d5c06b4f928712c0687a1068a2
+#: ../../source/index.rst:47
 msgid "`NeuralFactory` - to create neural modules and manage training."
 msgstr ""
 
-#: ../../index.rst:48
+# eecb062db50b4df5a7100a187ae19349
+#: ../../source/index.rst:48
 msgid ""
 "`Lazy execution` - when describing activation flow between neural "
 "modules, nothing happens until an \"action\" (such as "
 "`optimizer.optimize(...)` is called."
 msgstr ""
 
-#: ../../index.rst:49
+# 13cda4a875be4b38af74f6ffae6d5670
+#: ../../source/index.rst:49
 msgid ""
 "`Collections` - NeMo comes with collections - related group of modules "
 "such as `nemo_asr` (for Speech Recognition) and `nemo_nlp` for NLP"
 msgstr ""
 
-#: ../../index.rst:53
+# 4e3779781628456cba2ce3c4df888b9b
+#: ../../source/index.rst:53
 msgid "Requirements"
 msgstr ""
 
-#: ../../index.rst:55
+# 02fc929b9d6b4885a9304cc3dcb390e1
+#: ../../source/index.rst:55
 msgid "Python 3.6 or 3.7"
 msgstr ""
 
-#: ../../index.rst:56
+# ca8c5917ab9f4e43b29a31b1ecc0bc69
+#: ../../source/index.rst:56
 msgid "PyTorch 1.4 or later with GPU support"
 msgstr ""
 
-#: ../../index.rst:57
+# 3611f05b2ff5490fa34c27e8c89d1b81
+#: ../../source/index.rst:57
 msgid ""
 "(optional for best performance) NVIDIA APEX: "
 "https://github.com/NVIDIA/apex"
 msgstr ""
 
-#: ../../index.rst:62
+# c2bc8352c08446e4bec4684dd3c976fd
+#: ../../source/index.rst:62
 msgid "Getting started"
 msgstr ""
 
-#: ../../index.rst:64
+# f9e9d50ea4ba469384b9a2c3acfcc230
+#: ../../source/index.rst:64
 msgid ""
 "You can use NVIDIA `NGC NeMo container "
 "<https://ngc.nvidia.com/catalog/containers/nvidia:nemo>`_ for the latest "
 "NeMo release and all dependencies."
 msgstr ""
 
-#: ../../index.rst:78
+# 09eaebb5f25a4778bff4fef8c0011a33
+#: ../../source/index.rst:78
 msgid "and begin using NeMo immediately."
 msgstr ""
 
-#: ../../index.rst:80
+# b75b9bb1b4b342b990860599886b1164
+#: ../../source/index.rst:80
 msgid ""
 "If you have all requirements installed (or are using `NGC PyTorch "
 "container <https://ngc.nvidia.com/catalog/containers/nvidia:pytorch>`_ ),"
@@ -129,63 +156,77 @@ msgid ""
 "(**currently 0.9.0**) of NeMo and its collections:"
 msgstr ""
 
-#: ../../index.rst:88
+# a2600317118d4486adddec126e97ec24
+#: ../../source/index.rst:88
 msgid "Tutorials"
 msgstr ""
 
-#: ../../index.rst:90
+# cce58a71051c410da212f950249c40c7
+#: ../../source/index.rst:90
 msgid ":ref:`Speech recognition <asr-docs>`"
 msgstr ""
 
-#: ../../index.rst:91
+# 96225a08eb55435f920524a0c4839752
+#: ../../source/index.rst:91
 msgid ":ref:`Natural language processing <nlp-docs>`"
 msgstr ""
 
-#: ../../index.rst:92
+# 1f8b1accd26344aaad1564ece227a00e
+#: ../../source/index.rst:92
 msgid ":ref:`Speech synthesis <tts-docs>`"
 msgstr ""
 
-#: ../../index.rst:95
+# 62ab70fc95b441c48d7131c89e240a49
+#: ../../source/index.rst:95
 msgid "Installing From Github"
 msgstr ""
 
-#: ../../index.rst:97
+# a2285f99a9244a1fa455deec30f28ea3
+#: ../../source/index.rst:97
 msgid ""
 "If you prefer to use NeMo's latest development version (from GitHub) "
 "follow the steps below:"
 msgstr ""
 
-#: ../../index.rst:99
+# f88b9cd104a34b0386a1f4e2e13b2f46
+#: ../../source/index.rst:99
 msgid "Clone the repository ``git clone https://github.com/NVIDIA/NeMo.git``"
 msgstr ""
 
-#: ../../index.rst:100
+# 0455c6bb88134beca67d2a0dd91ebb23
+#: ../../source/index.rst:100
 msgid "Go to NeMo folder and install the toolkit and collections:"
 msgstr ""
 
-#: ../../index.rst:107
+# 3263c29ed0fe46b292e702b31f2ab22c
+#: ../../source/index.rst:107
 msgid "reinstall.sh install NeMo in development mode."
 msgstr ""
 
-#: ../../index.rst:110
+# c34e1d454c91453cad1a565ad76c36c1
+#: ../../source/index.rst:110
 msgid "Unittests"
 msgstr ""
 
-#: ../../index.rst:112
+# 7aae9c66ecd741599c61e82ed4b464fa
+#: ../../source/index.rst:112
 msgid "This command runs unittests:"
 msgstr ""
 
-#: ../../index.rst:120
+# 89501a33557d4e1daae3cab0cca21392
+#: ../../source/index.rst:120
 msgid "Building Docker Container"
 msgstr ""
 
-#: ../../index.rst:122
+# dfed504f112643268bb882d529b529d5
+#: ../../source/index.rst:122
 msgid ""
 "The NeMo Docker image requires Docker Buildx which is included in Docker "
 "19.03 and layer. To build a custom NeMo Docker image, run"
 msgstr ""
 
-#: ../../index.rst:128
+# 0c73fe48d3da4f138afd66aa80ef2606
+#: ../../source/index.rst:128
 msgid ""
 "The ``NEMO_VERSION`` build arg is required. We recommend always setting "
 "to ``git describe --tags`` so that the build is traceable and replicable."
@@ -193,17 +234,23 @@ msgid ""
 "exposed as an environment variable."
 msgstr ""
 
-#: ../../index.rst:131
+# fc66f7e8d7ee452aa9d250cd494539d6
+#: ../../source/index.rst:131
 msgid ""
 "You may also specify a build arg ``BASE_IMAGE`` to override the "
 "underlying version of PyTorch used, though there are no compatability "
 "guarantees."
 msgstr ""
 
-#: ../../index.rst:133
+# d328984997b349e7abc793e07493ed52
+#: ../../source/index.rst:133
 msgid ""
 "For development purposes, you can also create a Docker image containing "
 "only NeMo's dependencies, and map your local development branch into the "
 "container at runtime."
 msgstr ""
+
+# b0c5f13ca5ed43e8a50d1427630fecea
+#~ msgid "Zmiana"
+#~ msgstr ""
 
