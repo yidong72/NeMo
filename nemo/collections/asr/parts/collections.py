@@ -80,7 +80,7 @@ class AudioText(_Collection):
     """List of audio-transcript text correspondence with preprocessing."""
 
     OUTPUT_TYPE = collections.namedtuple(
-        typename='AudioTextEntity', field_names='id audio_file duration text_tokens speaker',
+        typename='AudioTextEntity', field_names='id audio_file duration text_tokens text_raw speaker',
     )
 
     def __init__(
@@ -132,7 +132,7 @@ class AudioText(_Collection):
                 continue
 
             total_duration += duration
-            data.append(output_type(id_, audio_file, duration, text_tokens, speaker))
+            data.append(output_type(id_, audio_file, duration, text_tokens, text, speaker))
 
             # Max number of entities filter.
             if len(data) == max_number:
