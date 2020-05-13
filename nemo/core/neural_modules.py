@@ -66,6 +66,12 @@ class NeuralModule(NeuralInterface):
     """
 
     def __init__(self, name=None):
+        """
+        Initializes the Neural Module instance. Add module to the registry.
+
+        Args:
+            name: Name of the module instance. If empty, module registry will generate a new name (DEFAULT: None).
+        """
         # Initialize the inferface.
         super().__init__()
 
