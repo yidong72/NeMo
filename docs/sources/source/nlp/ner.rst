@@ -59,7 +59,7 @@ First, we need to create our neural factory with the supported backend. How you 
     .. code-block:: python
 
         WORK_DIR = "path_to_output_dir"
-        nf = nemo.core.NeuralModuleFactory(backend=nemo.core.Backend.PyTorch,
+        nf = nemo.core.NeuralModuleFactory(
                                            local_rank=None,
                                            optimization_level="O0",
                                            log_dir=WORK_DIR,

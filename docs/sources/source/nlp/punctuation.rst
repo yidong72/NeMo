@@ -92,7 +92,7 @@ Then, we need to create our neural factory with the supported backend. This tuto
 
     .. code-block:: python
 
-        nf = nemo.core.NeuralModuleFactory(backend=nemo.core.Backend.PyTorch,
+        nf = nemo.core.NeuralModuleFactory(
                                            local_rank=None,
                                            optimization_level="O1",
                                            log_dir=WORK_DIR,

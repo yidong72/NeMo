@@ -39,7 +39,7 @@ parser.add_argument("--max_seq_length", default=64, type=int)
 
 args = parser.parse_args()
 
-nf = nemo.core.NeuralModuleFactory(backend=nemo.core.Backend.PyTorch)
+nf = nemo.core.NeuralModuleFactory()
 
 pretrained_bert_model = nemo_nlp.nm.trainables.get_huggingface_model(
     bert_config=args.bert_config, pretrained_model_name=args.pretrained_model_name

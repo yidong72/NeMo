@@ -57,7 +57,7 @@ text.txt 每一行包含文本序列，其中词以空格来进行分隔。label
     .. code-block:: python
 
         WORK_DIR = "path_to_output_dir"
-        nf = nemo.core.NeuralModuleFactory(backend=nemo.core.Backend.PyTorch,
+        nf = nemo.core.NeuralModuleFactory(
                                            local_rank=None,
                                            optimization_level="O0",
                                            log_dir=WORK_DIR,
