@@ -116,6 +116,8 @@ class GPT2(TrainableNM):
 
         super().__init__()
 
+        model = GPT2Model.from_pretrained(pretrained_model_name)
+
         # Check that only one of pretrained_model_name, config_filename, and
         # vocab_size was passed in
         total = 0
@@ -172,18 +174,20 @@ class GPT2(TrainableNM):
         """
         return self._hidden_size
 
-    @staticmethod
-    def list_pretrained_models() -> Optional[List[PretrainedModelInfo]]:
-        pretrained_models = []
-        for key, value in BERT_PRETRAINED_MODEL_ARCHIVE_MAP.items():
-            model_info = PretrainedModelInfo(
-                pretrained_model_name=key,
-                description="weights by HuggingFace",
-                parameters=BERT_PRETRAINED_CONFIG_ARCHIVE_MAP[key],
-                location=value,
-            )
-            pretrained_models.append(model_info)
-        return pretrained_models
+    # @staticmethod
+    # def list_pretrained_models() -> Optional[List[PretrainedModelInfo]]:
+    #     pretrained_models = []
+    #     for key, value in BERT_PRETRAINED_MODEL_ARCHIVE_MAP.items():
+    #         model_info = PretrainedModelInfo(
+    #             pretrained_model_name=key,
+    #             description="weights by HuggingFace",
+    #             parameters=BERT_PRETRAINED_CONFIG_ARCHIVE_MAP[key],
+    #             location=value,
+    #         )
+    #         pretrained_models.append(model_info)
+    #     return pretrained_models
 
     def forward(self, input_ids, token_type_ids, attention_mask):
-        return self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)[0]
+        return self.model(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)[0]
+
+    def generate(self, )
