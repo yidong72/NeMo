@@ -43,42 +43,42 @@ class ASRConvCTCModel(NeMoModel):
         )
         self._operation_mode = OperationMode.training
 
-        # self.__training_neural_graph = NeuralGraph(operation_mode=OperationMode.training)
-        self.__training_neural_graph = NeuralGraph(operation_mode=OperationMode.both)
-        with self.__training_neural_graph:
-            # Copy one input port definitions - using "user" port names.
-            self.__training_neural_graph.inputs["input_signal"] = preprocessor.input_ports["input_signal"]
-            self.__training_neural_graph.inputs["length"] = preprocessor.input_ports["length"]
-            # Bind the selected inputs. Connect the modules
-            i_processed_signal, i_processed_signal_len = preprocessor(
-                input_signal=self.__training_neural_graph.inputs["input_signal"],
-                length=self.__training_neural_graph.inputs["length"],
-            )
-            if spec_augmentation is not None:
-                i_processed_signal = spec_augmentation(input_spec=i_processed_signal)
-            i_encoded, i_encoded_len = encoder(audio_signal=i_processed_signal, length=i_processed_signal_len)
-            i_log_probs = decoder(encoder_output=i_encoded)
-            # Bind the selected outputs.
-            self.__training_neural_graph.outputs["log_probs"] = i_log_probs
-            self.__training_neural_graph.outputs["encoded_len"] = i_encoded_len
-
-        # self.__evaluation_neural_graph = NeuralGraph(operation_mode=OperationMode.evaluation)
-        self.__evaluation_neural_graph = NeuralGraph(operation_mode=OperationMode.both)
-        with self.__evaluation_neural_graph:
-            # Copy one input port definitions - using "user" port names.
-            self.__evaluation_neural_graph.inputs["input_signal"] = preprocessor.input_ports["input_signal"]
-            self.__evaluation_neural_graph.inputs["length"] = preprocessor.input_ports["length"]
-            # Bind the selected inputs. Connect the modules
-            i_processed_signal, i_processed_signal_len = preprocessor(
-                input_signal=self.__evaluation_neural_graph.inputs["input_signal"],
-                length=self.__evaluation_neural_graph.inputs["length"],
-            )
-            # Notice lack of speck augmentation for inference
-            i_encoded, i_encoded_len = encoder(audio_signal=i_processed_signal, length=i_processed_signal_len)
-            i_log_probs = decoder(encoder_output=i_encoded)
-            # Bind the selected outputs.
-            self.__evaluation_neural_graph.outputs["log_probs"] = i_log_probs
-            self.__evaluation_neural_graph.outputs["encoded_len"] = i_encoded_len
+        # # self.__training_neural_graph = NeuralGraph(operation_mode=OperationMode.training)
+        # self.__training_neural_graph = NeuralGraph(operation_mode=OperationMode.both)
+        # with self.__training_neural_graph:
+        #     # Copy one input port definitions - using "user" port names.
+        #     self.__training_neural_graph.inputs["input_signal"] = preprocessor.input_ports["input_signal"]
+        #     self.__training_neural_graph.inputs["length"] = preprocessor.input_ports["length"]
+        #     # Bind the selected inputs. Connect the modules
+        #     i_processed_signal, i_processed_signal_len = preprocessor(
+        #         input_signal=self.__training_neural_graph.inputs["input_signal"],
+        #         length=self.__training_neural_graph.inputs["length"],
+        #     )
+        #     if spec_augmentation is not None:
+        #         i_processed_signal = spec_augmentation(input_spec=i_processed_signal)
+        #     i_encoded, i_encoded_len = encoder(audio_signal=i_processed_signal, length=i_processed_signal_len)
+        #     i_log_probs = decoder(encoder_output=i_encoded)
+        #     # Bind the selected outputs.
+        #     self.__training_neural_graph.outputs["log_probs"] = i_log_probs
+        #     self.__training_neural_graph.outputs["encoded_len"] = i_encoded_len
+        #
+        # # self.__evaluation_neural_graph = NeuralGraph(operation_mode=OperationMode.evaluation)
+        # self.__evaluation_neural_graph = NeuralGraph(operation_mode=OperationMode.both)
+        # with self.__evaluation_neural_graph:
+        #     # Copy one input port definitions - using "user" port names.
+        #     self.__evaluation_neural_graph.inputs["input_signal"] = preprocessor.input_ports["input_signal"]
+        #     self.__evaluation_neural_graph.inputs["length"] = preprocessor.input_ports["length"]
+        #     # Bind the selected inputs. Connect the modules
+        #     i_processed_signal, i_processed_signal_len = preprocessor(
+        #         input_signal=self.__evaluation_neural_graph.inputs["input_signal"],
+        #         length=self.__evaluation_neural_graph.inputs["length"],
+        #     )
+        #     # Notice lack of speck augmentation for inference
+        #     i_encoded, i_encoded_len = encoder(audio_signal=i_processed_signal, length=i_processed_signal_len)
+        #     i_log_probs = decoder(encoder_output=i_encoded)
+        #     # Bind the selected outputs.
+        #     self.__evaluation_neural_graph.outputs["log_probs"] = i_log_probs
+        #     self.__evaluation_neural_graph.outputs["encoded_len"] = i_encoded_len
 
     def __instantiate_modules(
         self, preprocessor_params, encoder_params, decoder_params, spec_augment_params=None,
@@ -115,11 +115,37 @@ class ASRConvCTCModel(NeMoModel):
 
     @property
     def train_graph(self) -> NeuralGraph:
-        return self.__training_neural_graph
+        return None
+        #return self.__training_neural_graph
 
     @property
     def eval_graph(self) -> NeuralGraph:
-        return self.__evaluation_neural_graph
+        return None
+        #return self.__evaluation_neural_graph
+
+    def train_call(self, **kwargs):
+        i_processed_signal, i_processed_signal_len = self._preprocessor(
+            input_signal=kwargs["input_signal"],
+            length=kwargs["length"],
+        )
+        if self._spec_augmentation is not None:
+            i_processed_signal = self._spec_augmentation(input_spec=i_processed_signal)
+        i_encoded, i_encoded_len = self._encoder(audio_signal=i_processed_signal, length=i_processed_signal_len)
+        i_log_probs = self._decoder(encoder_output=i_encoded)
+        # # Bind the selected outputs.
+        # self.__training_neural_graph.outputs["log_probs"] = i_log_probs
+        # self.__training_neural_graph.outputs["encoded_len"] = i_encoded_len
+        return i_log_probs, i_encoded_len
+
+    def eval_call(self, **kwargs):
+        i_processed_signal, i_processed_signal_len = self._preprocessor(
+            input_signal=kwargs["input_signal"],
+            length=kwargs["length"],
+        )
+        # Notice lack of speck augmentation for inference
+        i_encoded, i_encoded_len = self._encoder(audio_signal=i_processed_signal, length=i_processed_signal_len)
+        i_log_probs = self._decoder(encoder_output=i_encoded)
+        return i_log_probs, i_encoded_len
 
     @property
     @add_port_docs()
