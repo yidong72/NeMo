@@ -50,7 +50,7 @@ class NeMoModel(NeuralModule):
             return self.train_call(**kwargs)
 
         else:
-            #return self.eval_graph(**kwargs)
+            # return self.eval_graph(**kwargs)
             return self.eval_call(**kwargs)
 
     @classmethod

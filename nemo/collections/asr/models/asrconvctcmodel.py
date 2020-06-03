@@ -116,17 +116,16 @@ class ASRConvCTCModel(NeMoModel):
     @property
     def train_graph(self) -> NeuralGraph:
         return None
-        #return self.__training_neural_graph
+        # return self.__training_neural_graph
 
     @property
     def eval_graph(self) -> NeuralGraph:
         return None
-        #return self.__evaluation_neural_graph
+        # return self.__evaluation_neural_graph
 
     def train_call(self, **kwargs):
         i_processed_signal, i_processed_signal_len = self._preprocessor(
-            input_signal=kwargs["input_signal"],
-            length=kwargs["length"],
+            input_signal=kwargs["input_signal"], length=kwargs["length"],
         )
         if self._spec_augmentation is not None:
             i_processed_signal = self._spec_augmentation(input_spec=i_processed_signal)
@@ -139,8 +138,7 @@ class ASRConvCTCModel(NeMoModel):
 
     def eval_call(self, **kwargs):
         i_processed_signal, i_processed_signal_len = self._preprocessor(
-            input_signal=kwargs["input_signal"],
-            length=kwargs["length"],
+            input_signal=kwargs["input_signal"], length=kwargs["length"],
         )
         # Notice lack of speck augmentation for inference
         i_encoded, i_encoded_len = self._encoder(audio_signal=i_processed_signal, length=i_processed_signal_len)
