@@ -12,6 +12,7 @@ import nemo.utils.argparse as nm_argparse
 from nemo.collections.asr.helpers import monitor_asr_train_progress, process_evaluation_batch, process_evaluation_epoch
 from nemo.utils import logging
 from nemo.utils.lr_policies import CosineAnnealing
+import wandb
 
 
 def parse_args():
@@ -43,6 +44,7 @@ def parse_args():
 
     # Create new args
     parser.add_argument("--exp_name", default="QuartzNet", type=str)
+    parser.add_argument("--project", default="quartznet-single-node", type=str)
     parser.add_argument("--beta1", default=0.95, type=float)
     parser.add_argument("--beta2", default=0.5, type=float)
     parser.add_argument("--warmup_steps", default=1000, type=int)
@@ -199,6 +201,13 @@ def create_all_dags(args, neural_factory):
         )
 
         callbacks.append(chpt_callback)
+        # Log training metrics to wandb
+    wand_callback = nemo.core.WandbCallback(train_tensors=[loss_t],
+                                            wandb_name=args.exp_name, wandb_project=args.project,
+                                            update_freq=args.update_freq,
+                                            args=args
+                                            )
+    callbacks.append(wand_callback)
 
     # assemble eval DAGs
     for i, eval_dl in enumerate(data_layers_eval):
@@ -220,6 +229,8 @@ def create_all_dags(args, neural_factory):
             user_epochs_done_callback=partial(process_evaluation_epoch, tag=tagname),
             eval_step=args.eval_freq,
             tb_writer=neural_factory.tb_writer,
+            wandb_name=args.exp_name,
+            wandb_project=args.project,
         )
 
         callbacks.append(eval_callback)
