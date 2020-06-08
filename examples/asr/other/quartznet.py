@@ -135,6 +135,7 @@ def create_all_dags(args, neural_factory):
 
     # (QuartzNet uses the Jasper baseline encoder and decoder)
     for freeze_lyr in range(args.freeze_from,len(quartz_params["JasperEncoder"]['jasper'])):
+        logging.info(f"Freezing layer: {freeze_lyr}")
         quartz_params["JasperEncoder"]['jasper'][freeze_lyr]['freeze'] = True
 
     encoder = nemo_asr.JasperEncoder(
