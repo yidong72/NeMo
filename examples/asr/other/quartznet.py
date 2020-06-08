@@ -51,6 +51,7 @@ def parse_args():
     parser.add_argument("--load_dir", default=None, type=str)
     parser.add_argument("--synced_bn", action='store_true', help="Use synchronized batch norm")
     parser.add_argument("--synced_bn_groupsize", default=0, type=int)
+    parser.add_argument("--update_freq", default=50, type=int, help="Metrics update freq")
     parser.add_argument("--freeze_from", default=0, type=int)
 
     args = parser.parse_args()
