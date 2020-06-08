@@ -130,6 +130,9 @@ def create_all_dags(args, neural_factory):
     )
 
     # (QuartzNet uses the Jasper baseline encoder and decoder)
+    for freeze_lyr in range(0,len(quartz_params["JasperEncoder"]['jasper'])):
+        quartz_params["JasperEncoder"]['jasper'][freeze_lyr]['freeze'] = True
+
     encoder = nemo_asr.JasperEncoder(
         feat_in=quartz_params["AudioToMelSpectrogramPreprocessor"]["features"], **quartz_params["JasperEncoder"],
     )
@@ -142,6 +145,11 @@ def create_all_dags(args, neural_factory):
 
     greedy_decoder = nemo_asr.GreedyCTCDecoder()
 
+    logging.info('================================')
+    logging.info(f"Number of parameters in encoder: {encoder.num_weights}")
+    logging.info(f"Number of parameters in decoder: {decoder.num_weights}")
+    logging.info(f"Total number of parameters in model: " f"{decoder.num_weights + encoder.num_weights}")
+    logging.info('================================')
     # create augmentation modules (only used for training) if their configs
     # are present
 

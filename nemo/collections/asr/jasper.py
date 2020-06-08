@@ -187,6 +187,7 @@ class JasperEncoder(TrainableNM):
             se_interpolation_mode = lcfg.get('se_interpolation_mode', 'nearest')
             kernel_size_factor = lcfg.get('kernel_size_factor', 1.0)
             stride_last = lcfg.get('stride_last', False)
+            freeze = lcfg.get('freeze',False)
             encoder_layers.append(
                 JasperBlock(
                     feat_in,
@@ -212,6 +213,7 @@ class JasperEncoder(TrainableNM):
                     se_interpolation_mode=se_interpolation_mode,
                     kernel_size_factor=kernel_size_factor,
                     stride_last=stride_last,
+                    freeze=freeze,
                 )
             )
             feat_in = lcfg['filters']

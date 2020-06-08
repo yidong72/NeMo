@@ -270,6 +270,7 @@ class JasperBlock(nn.Module):
         se_context_window=None,
         se_interpolation_mode='nearest',
         stride_last=False,
+        freeze=False,
     ):
         super(JasperBlock, self).__init__()
 
@@ -287,6 +288,7 @@ class JasperBlock(nn.Module):
         self.separable = separable
         self.residual_mode = residual_mode
         self.se = se
+        self.freeze = freeze
 
         inplanes_loop = inplanes
         conv = nn.ModuleList()
@@ -380,6 +382,14 @@ class JasperBlock(nn.Module):
             self.res = None
 
         self.mout = nn.Sequential(*self._get_act_dropout_layer(drop_prob=dropout, activation=activation))
+        if self.freeze:
+            for param in self.mconv.parameters():
+                param.requires_grad = False
+            for param in self.mout.parameters():
+                param.requires_grad = False
+            if self.res:
+                for param in self.res.parameters():
+                    param.requires_grad = False
 
     def _get_conv(
         self,
