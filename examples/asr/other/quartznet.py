@@ -49,6 +49,7 @@ def parse_args():
     parser.add_argument("--load_dir", default=None, type=str)
     parser.add_argument("--synced_bn", action='store_true', help="Use synchronized batch norm")
     parser.add_argument("--synced_bn_groupsize", default=0, type=int)
+    parser.add_argument("--freeze_from", default=0, type=int)
 
     args = parser.parse_args()
     if args.max_steps is not None:
@@ -130,7 +131,7 @@ def create_all_dags(args, neural_factory):
     )
 
     # (QuartzNet uses the Jasper baseline encoder and decoder)
-    for freeze_lyr in range(0,len(quartz_params["JasperEncoder"]['jasper'])):
+    for freeze_lyr in range(args.freeze_from,len(quartz_params["JasperEncoder"]['jasper'])):
         quartz_params["JasperEncoder"]['jasper'][freeze_lyr]['freeze'] = True
 
     encoder = nemo_asr.JasperEncoder(
