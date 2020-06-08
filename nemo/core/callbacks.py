@@ -501,7 +501,17 @@ class CheckpointCallback(NeMoCallback):
     def on_action_start(self, state):
         num_parameters = 0
         unique_mod_names = set()
+        frozen_modules = {}
         for module in AppState().modules:
+            all_wts = module.get_weights()
+            if all_wts:
+                freeze_names = [key for key in all_wts.keys() if all_wts[key][1] == False]
+                if len(freeze_names) > 0:
+                    frozen_modules[module] = freeze_names
+                module.unfreeze()
+            # for name, param in module._pt_module.named_parameters():
+            #     if weights is None or name in weights:
+            #         param.requires_grad = True
             if module.num_weights > 0:
                 if str(module) in unique_mod_names:
                     raise NotImplementedError(
@@ -515,6 +525,13 @@ class CheckpointCallback(NeMoCallback):
             logging.info(f"{name}")
         logging.info(f"Total model parameters: {num_parameters}")
         self.__restore_from(self._load_from_folder, state)
+        for mod in frozen_modules:
+            num_parameters -= mod.num_weights
+            mod.freeze(frozen_modules[mod])
+            num_parameters += mod.num_weights
+
+        logging.info(f"Total model parameters after refreezing: {num_parameters}")
+
 
     def on_step_end(self, state):
         step = state["step"]
