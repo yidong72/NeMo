@@ -84,7 +84,9 @@ class NemoBertTokenizer(TokenizerSpec):
                 "Bert_derivative value {bert_derivative} is not currently supported"
                 + " Please choose from the following list: {TOKENIZERS.keys()}"
             )
+        import pdb
 
+        pdb.set_trace()
         if pretrained_model:
             self.tokenizer = tokenizer_cls.from_pretrained(pretrained_model)
         elif vocab_file:

@@ -64,8 +64,6 @@ parser.add_argument(
 )
 parser.add_argument("--bert_checkpoint", default=None, type=str)
 parser.add_argument("--bert_config", default=None, type=str, help="Path to bert config file in json format")
-parser.add_argument("--punct_classifier_checkpoint", default=None, type=str)
-parser.add_argument("--capit_classifier_checkpoint", default=None, type=str)
 parser.add_argument(
     "--tokenizer_model",
     default=None,
