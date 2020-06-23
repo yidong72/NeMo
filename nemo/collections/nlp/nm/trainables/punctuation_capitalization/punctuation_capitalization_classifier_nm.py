@@ -54,6 +54,7 @@ class PunctCapitTokenClassifier(TrainableNM):
         return {
             "punct_logits": NeuralType(('B', 'T', 'D'), LogitsType()),
             "capit_logits": NeuralType(('B', 'T', 'D'), LogitsType()),
+            "part_sent_logits": NeuralType(('B', 'D'), LogitsType()),
         }
 
     def __init__(
@@ -67,6 +68,8 @@ class PunctCapitTokenClassifier(TrainableNM):
         log_softmax=True,
         dropout=0.0,
         use_transformer_pretrained=True,
+        part_sent_num_layers=2,
+        add_part_sent_head=False
     ):
         # Pass name up the module class hierarchy.
         super().__init__()
@@ -77,7 +80,11 @@ class PunctCapitTokenClassifier(TrainableNM):
         self.capit_mlp = MultiLayerPerceptron(
             hidden_size, capit_num_classes, self._device, capit_num_layers, activation, log_softmax
         )
-
+        if add_part_sent_head:
+            self.part_sent_mlp = MultiLayerPerceptron(
+            hidden_size, 2, self._device, part_sent_num_layers, activation, log_softmax
+        )
+        self.add_part_sent_head = add_part_sent_head
         if use_transformer_pretrained:
             self.apply(lambda module: transformer_weights_init(module, xavier=False))
         # self.to(self._device) # sometimes this is necessary
@@ -89,4 +96,7 @@ class PunctCapitTokenClassifier(TrainableNM):
         hidden_states = self.dropout(hidden_states)
         punct_logits = self.punct_mlp(hidden_states)
         capit_logits = self.capit_mlp(hidden_states)
-        return punct_logits, capit_logits
+        output = [punct_logits, capit_logits]
+        if self.add_part_sent_head:
+            output.append(self.part_sent_mlp(hidden_states[:, 0]))
+        return output

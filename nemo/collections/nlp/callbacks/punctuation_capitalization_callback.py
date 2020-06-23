@@ -17,7 +17,7 @@
 import numpy as np
 import torch
 
-from nemo import logging
+from nemo.utils import logging
 from nemo.collections.nlp.utils.callback_utils import get_classification_report, plot_confusion_matrix, tensor2list
 
 __all__ = ['eval_iter_callback', 'eval_epochs_done_callback']
@@ -52,8 +52,23 @@ def eval_iter_callback(tensors, global_vars):
     global_vars['punct_labels'].extend(tensor2list(output['punct_labels'][subtokens_mask]))
     global_vars['capit_labels'].extend(tensor2list(output['capit_labels'][subtokens_mask]))
 
+    if 'part_sent_logits' in output:
+        if 'part_sent_preds' not in global_vars:
+            global_vars['part_sent_preds'] = []
+            global_vars['part_sent_labels'] = []
+        global_vars['part_sent_preds'].extend(tensor2list(torch.argmax(output['part_sent_logits'], -1)))
+        global_vars['part_sent_labels'].extend(tensor2list(output['part_sent_labels']))
 
-def eval_epochs_done_callback(global_vars, punct_label_ids, capit_label_ids, graph_fold=None, normalize_cm=True):
+def _get_result_dict(tag, class_report):
+    results = {}
+    for label in class_report:
+        label_name = label[: label.index('(label id') - 1] if 'label id' in label else label
+        results[tag + 'F1 ' + label_name] = round(class_report[label]['f1-score'] * 100, 2)
+        results[tag + 'PR ' + label_name] = round(class_report[label]['precision'] * 100, 2)
+        results[tag + 'R ' + label_name] = round(class_report[label]['recall'] * 100, 2)
+    return results
+
+def eval_epochs_done_callback(global_vars, punct_label_ids, capit_label_ids, part_sent_label_ids=None, graph_fold=None, normalize_cm=True):
     '''
     Args:
       graph_fold (str): path to output folder
@@ -62,21 +77,19 @@ def eval_epochs_done_callback(global_vars, punct_label_ids, capit_label_ids, gra
     '''
     results = {}
     punct_class_report = _eval_epochs_done_callback('punct', global_vars, punct_label_ids, graph_fold, normalize_cm)
-    for label in punct_class_report:
-        if label != 'accuracy':
-            label_name = label[: label.index('(label id') - 1] if 'label id' in label else label
-            results['pF1 ' + label_name] = round(punct_class_report[label]['f1-score'] * 100, 2)
-            results['pPR ' + label_name] = round(punct_class_report[label]['precision'] * 100, 2)
-            results['pR ' + label_name] = round(punct_class_report[label]['recall'] * 100, 2)
-
+    results.update(_get_result_dict('p', punct_class_report))
+    
     capit_class_report = _eval_epochs_done_callback('capit', global_vars, capit_label_ids, graph_fold, normalize_cm)
-    for label in capit_class_report:
-        if label != 'accuracy':
-            label_name = label[: label.index('(label id') - 1] if 'label id' in label else label
-            results['cF1: ' + label_name] = round(capit_class_report[label]['f1-score'] * 100, 2)
-            results['pPR ' + label_name] = round(capit_class_report[label]['precision'] * 100, 2)
-            results['pR ' + label_name] = round(capit_class_report[label]['recall'] * 100, 2)
+    results.update(_get_result_dict('c', capit_class_report))
 
+    if 'part_sent_preds' in global_vars:
+        part_sent_labels = np.asarray(global_vars['part_sent_labels'])
+        part_sent_preds = np.asarray(global_vars['part_sent_preds'])
+        part_sent_class_report = _eval_epochs_done_callback('part_sent', global_vars, part_sent_label_ids, graph_fold, normalize_cm)
+        results.update(_get_result_dict('t', part_sent_class_report))
+        part_sent_acc = np.mean(part_sent_labels == part_sent_preds)
+        logging.info(f'Partial sent task accuracy: {part_sent_acc}')
+        results['Part_sent_acc'] = round(part_sent_acc * 100, 2)
     logging.info(f'results: {results}')
     return results
 
