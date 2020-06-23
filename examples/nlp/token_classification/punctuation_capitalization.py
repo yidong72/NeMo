@@ -89,6 +89,11 @@ parser.add_argument(
     + "Only applicable when tokenizer is build with vocab file",
 )
 parser.add_argument(
+    "--add_part_sent_head",
+    action='store_true',
+    help="Whether to a head to BeRT that would be responsible for detecting whether the sentence is partial or not."
+)
+parser.add_argument(
     "--work_dir",
     default='output',
     type=str,
@@ -193,25 +198,14 @@ hidden_size = model.hidden_size
 
 
 def create_pipeline(
-    pad_label=args.none_label,
-    max_seq_length=args.max_seq_length,
-    batch_size=args.batch_size,
-    num_gpus=args.num_gpus,
     mode='train',
     punct_label_ids=None,
     capit_label_ids=None,
-    ignore_extra_tokens=args.ignore_extra_tokens,
-    ignore_start_end=args.ignore_start_end,
-    overwrite_processed_files=args.overwrite_processed_files,
-    dropout=args.fc_dropout,
-    punct_num_layers=args.punct_num_fc_layers,
-    capit_num_layers=args.capit_num_fc_layers,
+    part_sent_label_ids=None,
     classifier=PunctCapitTokenClassifier,
 ):
 
     logging.info(f"Loading {mode} data...")
-    shuffle = args.shuffle_data if mode == 'train' else False
-
     text_file = f'{args.data_dir}/text_{mode}.txt'
     label_file = f'{args.data_dir}/labels_{mode}.txt'
 
@@ -232,25 +226,27 @@ def create_pipeline(
         tokenizer=tokenizer,
         text_file=text_file,
         label_file=label_file,
-        pad_label=pad_label,
+        pad_label=args.none_label,
         punct_label_ids=punct_label_ids,
         capit_label_ids=capit_label_ids,
-        max_seq_length=max_seq_length,
-        batch_size=batch_size,
-        shuffle=shuffle,
-        ignore_extra_tokens=ignore_extra_tokens,
-        ignore_start_end=ignore_start_end,
-        overwrite_processed_files=overwrite_processed_files,
+        max_seq_length=args.max_seq_length,
+        batch_size=args.batch_size,
+        shuffle=args.shuffle_data if mode == 'train' else False,
+        ignore_extra_tokens=args.ignore_extra_tokens,
+        ignore_start_end=args.ignore_start_end,
+        overwrite_processed_files=args.overwrite_processed_files,
         num_workers=args.num_workers,
         pin_memory=args.enable_pin_memory,
+        part_sent_label_ids=part_sent_label_ids,
+        add_part_sent_head=args.add_part_sent_head,
     )
 
-    (input_ids, input_type_ids, input_mask, loss_mask, subtokens_mask, punct_labels, capit_labels) = data_layer()
-
+    data = data_layer()
     if mode == 'train':
         punct_label_ids = data_layer.dataset.punct_label_ids
         capit_label_ids = data_layer.dataset.capit_label_ids
         class_weights = None
+        part_sent_label_ids = data_layer.dataset.part_sent_label_ids if args.add_part_sent_head else None
 
         if args.use_weighted_loss_punct:
             logging.info(f"Using weighted loss for punctuation task")
@@ -261,38 +257,38 @@ def create_pipeline(
             hidden_size=hidden_size,
             punct_num_classes=len(punct_label_ids),
             capit_num_classes=len(capit_label_ids),
-            dropout=dropout,
-            punct_num_layers=punct_num_layers,
-            capit_num_layers=capit_num_layers,
+            dropout=args.fc_dropout,
+            punct_num_layers=args.punct_num_fc_layers,
+            capit_num_layers=args.capit_num_fc_layers,
         )
 
         punct_loss = CrossEntropyLossNM(logits_ndim=3, weight=class_weights)
         capit_loss = CrossEntropyLossNM(logits_ndim=3)
         task_loss = LossAggregatorNM(num_inputs=2, weights=[args.punct_loss_weight, 1.0 - args.punct_loss_weight])
 
-    hidden_states = model(input_ids=input_ids, token_type_ids=input_type_ids, attention_mask=input_mask)
+    hidden_states = model(input_ids=data.input_ids, token_type_ids=data.input_type_ids, attention_mask=data.input_mask)
 
     punct_logits, capit_logits = classifier(hidden_states=hidden_states)
 
     if mode == 'train':
-        punct_loss = punct_loss(logits=punct_logits, labels=punct_labels, loss_mask=loss_mask)
-        capit_loss = capit_loss(logits=capit_logits, labels=capit_labels, loss_mask=loss_mask)
+        punct_loss = punct_loss(logits=punct_logits, labels=data.punct_labels, loss_mask=data.loss_mask)
+        capit_loss = capit_loss(logits=capit_logits, labels=data.capit_labels, loss_mask=data.loss_mask)
         task_loss = task_loss(loss_1=punct_loss, loss_2=capit_loss)
 
-        steps_per_epoch = len(data_layer) // (batch_size * num_gpus)
+        steps_per_epoch = len(data_layer) // (args.batch_size * args.num_gpus)
 
         losses = [task_loss, punct_loss, capit_loss]
         logits = [punct_logits, capit_logits]
-        return losses, logits, steps_per_epoch, punct_label_ids, capit_label_ids, classifier
+        return losses, logits, steps_per_epoch, punct_label_ids, capit_label_ids, part_sent_label_ids, classifier
     else:
-        tensors_to_evaluate = [punct_logits, capit_logits, punct_labels, capit_labels, subtokens_mask]
+        tensors_to_evaluate = [punct_logits, capit_logits, data.punct_labels, data.capit_labels, data.subtokens_mask]
         return tensors_to_evaluate, data_layer
 
 
-(losses, train_logits, steps_per_epoch, punct_label_ids, capit_label_ids, classifier) = create_pipeline()
+(losses, train_logits, steps_per_epoch, punct_label_ids, capit_label_ids, part_sent_label_ids, classifier) = create_pipeline()
 
 eval_tensors, data_layer = create_pipeline(
-    mode='dev', punct_label_ids=punct_label_ids, capit_label_ids=capit_label_ids, classifier=classifier
+    mode='dev', punct_label_ids=punct_label_ids, capit_label_ids=capit_label_ids, part_sent_label_ids=part_sent_label_ids, classifier=classifier
 )
 
 logging.info(f"steps_per_epoch = {steps_per_epoch}")

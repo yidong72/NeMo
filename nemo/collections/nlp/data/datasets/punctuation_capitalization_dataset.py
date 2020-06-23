@@ -34,9 +34,11 @@ def get_features(
     tokenizer,
     punct_label_ids=None,
     capit_label_ids=None,
+    part_sent_label_ids=None,
     pad_label='O',
     punct_labels_lines=None,
     capit_labels_lines=None,
+    part_sent_labels=None,
     ignore_extra_tokens=False,
     ignore_start_end=False,
 ):
@@ -69,10 +71,15 @@ def get_features(
     sent_lengths = []
     punct_all_labels = []
     capit_all_labels = []
-    with_label = False
+    part_sent_all_labels = []
 
+    with_label = False
+    with_part_sent_head = False
     if punct_labels_lines and capit_labels_lines:
         with_label = True
+    if part_sent_labels is not None and part_sent_label_ids is not None:
+        with_part_sent_head = True
+
 
     for i, query in enumerate(queries):
         words = query.strip().split()
@@ -84,10 +91,13 @@ def get_features(
         if with_label:
             pad_id = punct_label_ids[pad_label]
             punct_labels = [pad_id]
-            punct_query_labels = [punct_label_ids[lab] for lab in punct_labels_lines[i]]
+            punct_query_labels = [punct_label_ids[label] for label in punct_labels_lines[i]]
 
             capit_labels = [pad_id]
-            capit_query_labels = [capit_label_ids[lab] for lab in capit_labels_lines[i]]
+            capit_query_labels = [capit_label_ids[label] for label in capit_labels_lines[i]]
+
+            if with_part_sent_head:
+                part_sent_query_label = part_sent_label_ids[part_sent_labels[i]]
 
         for j, word in enumerate(words):
             word_tokens = tokenizer.text_to_tokens(word)
@@ -118,6 +128,8 @@ def get_features(
             punct_all_labels.append(punct_labels)
             capit_labels.append(pad_id)
             capit_all_labels.append(capit_labels)
+            if with_part_sent_head:
+                part_sent_all_labels.append(part_sent_query_label)
 
     max_seq_length = min(max_seq_length, max(sent_lengths))
     logging.info(f'Max length: {max_seq_length}')
@@ -163,8 +175,10 @@ def get_features(
         if with_label:
             logging.info("punct_labels: %s" % " ".join(list(map(str, punct_all_labels[i]))))
             logging.info("capit_labels: %s" % " ".join(list(map(str, capit_all_labels[i]))))
+        if with_part_sent_head:
+            logging.info("part_sent_label_ids: %s. Label for current example: %s", part_sent_label_ids, part_sent_all_labels[i])
 
-    return (
+    output = [
         all_input_ids,
         all_segment_ids,
         all_input_mask,
@@ -174,7 +188,11 @@ def get_features(
         capit_all_labels,
         punct_label_ids,
         capit_label_ids,
-    )
+    ]
+    if part_sent_labels:
+        output.append(part_sent_all_labels)
+        output.append(part_sent_label_ids)
+    return output
 
 
 class BertPunctuationCapitalizationDataset(Dataset):
@@ -221,6 +239,8 @@ class BertPunctuationCapitalizationDataset(Dataset):
         pad_label='O',
         punct_label_ids=None,
         capit_label_ids=None,
+        part_sent_label_ids=None,
+        add_part_sent_head=False,
         ignore_extra_tokens=False,
         ignore_start_end=False,
         overwrite_processed_files=False,
@@ -239,7 +259,7 @@ class BertPunctuationCapitalizationDataset(Dataset):
         features_pkl = os.path.join(
             data_dir, "cached_{}_{}_{}_{}".format(filename, tokenizer_type, str(max_seq_length), str(vocab_size)),
         )
-
+        self.add_part_sent_head = add_part_sent_head
         master_device = not torch.distributed.is_initialized() or torch.distributed.get_rank() == 0
 
         if master_device and (not os.path.exists(features_pkl) or overwrite_processed_files):
@@ -254,10 +274,20 @@ class BertPunctuationCapitalizationDataset(Dataset):
             capit_unique_labels = set([])
             punct_labels_lines = []
             capit_labels_lines = []
+
+            if add_part_sent_head:
+                part_sent_unique_labels = set([])
+                part_sent_labels = []
             with open(label_file, 'r') as f:
                 for line in f:
-                    line = line.strip().split()
+                    if add_part_sent_head:
+                        line = line.strip().split('\t')
+                        assert len(line) == 2
+                        part_sent_labels.append(line[0])
+                        part_sent_unique_labels.update([line[0]])
+                        line = line[1]
 
+                    line = line.strip().split()
                     # extract punctuation and capitalization labels
                     punct_line, capit_line = zip(*line)
                     punct_labels_lines.append(punct_line)
@@ -267,10 +297,12 @@ class BertPunctuationCapitalizationDataset(Dataset):
                     capit_unique_labels.update(capit_line)
 
             if len(punct_labels_lines) != len(text_lines):
-                raise ValueError("Labels file should contain labels for every word")
-
-            dataset = list(zip(text_lines, punct_labels_lines, capit_labels_lines))
-
+                raise ValueError("Label files should contain labels for every word in text files")
+            
+            if add_part_sent_head:
+                dataset = list(zip(text_lines, punct_labels_lines, capit_labels_lines, part_sent_labels))
+            else:
+                dataset = list(zip(text_lines, punct_labels_lines, capit_labels_lines))
             if num_samples > 0:
                 dataset = dataset[:num_samples]
 
@@ -278,6 +310,9 @@ class BertPunctuationCapitalizationDataset(Dataset):
             text_lines = dataset[0]
             punct_labels_lines = dataset[1]
             capit_labels_lines = dataset[2]
+
+            if add_part_sent_head:
+                part_sent_labels = dataset[3]
 
             # for dev/test sets use label mapping from training set
             if punct_label_ids:
@@ -310,7 +345,7 @@ class BertPunctuationCapitalizationDataset(Dataset):
 
                 punct_label_ids = create_label_ids(punct_unique_labels)
                 capit_label_ids = create_label_ids(capit_unique_labels)
-
+                part_sent_label_ids = create_label_ids(part_sent_unique_labels)
             features = get_features(
                 text_lines,
                 max_seq_length,
@@ -322,6 +357,8 @@ class BertPunctuationCapitalizationDataset(Dataset):
                 capit_label_ids=capit_label_ids,
                 ignore_extra_tokens=ignore_extra_tokens,
                 ignore_start_end=ignore_start_end,
+                part_sent_label_ids=part_sent_label_ids if add_part_sent_head else None,
+                part_sent_labels=part_sent_labels if add_part_sent_head else None
             )
 
             pickle.dump(features, open(features_pkl, "wb"))
@@ -342,6 +379,9 @@ class BertPunctuationCapitalizationDataset(Dataset):
         self.capit_all_labels = features[6]
         self.punct_label_ids = features[7]
         self.capit_label_ids = features[8]
+        if add_part_sent_head:
+            self.all_part_sent_labels = features[9] 
+            self.part_sent_label_ids =  features[10]
 
         # save label_ids
         def get_stats_and_save(all_labels, label_ids, name):
@@ -365,7 +405,7 @@ class BertPunctuationCapitalizationDataset(Dataset):
         return len(self.all_input_ids)
 
     def __getitem__(self, idx):
-        return (
+        output = [
             np.array(self.all_input_ids[idx]),
             np.array(self.all_segment_ids[idx]),
             np.array(self.all_input_mask[idx], dtype=np.long),
@@ -373,7 +413,10 @@ class BertPunctuationCapitalizationDataset(Dataset):
             np.array(self.all_subtokens_mask[idx]),
             np.array(self.punct_all_labels[idx]),
             np.array(self.capit_all_labels[idx]),
-        )
+        ]
+        if self.add_part_sent_head:
+            output.append(self.all_part_sent_labels[idx])
+        return output
 
 
 class BertPunctuationCapitalizationInferDataset(Dataset):

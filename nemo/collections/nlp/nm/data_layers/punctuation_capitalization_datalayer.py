@@ -85,6 +85,7 @@ class PunctuationCapitalizationDataLayer(TextDataLayer):
             "subtokens_mask": NeuralType(('B', 'T'), ChannelType()),
             "punct_labels": NeuralType(('B', 'T'), LabelsType()),
             "capit_labels": NeuralType(('B', 'T'), LabelsType()),
+            "part_sent_labels": NeuralType(tuple('B'), LabelsType(), optional=True),
         }
 
     def __init__(
@@ -105,6 +106,8 @@ class PunctuationCapitalizationDataLayer(TextDataLayer):
         num_workers=-1,
         pin_memory=False,
         dataset_type=BertPunctuationCapitalizationDataset,
+        part_sent_label_ids=None,
+        add_part_sent_head=False,
     ):
         dataset_params = {
             'text_file': text_file,
@@ -118,6 +121,8 @@ class PunctuationCapitalizationDataLayer(TextDataLayer):
             'ignore_extra_tokens': ignore_extra_tokens,
             'ignore_start_end': ignore_start_end,
             'overwrite_processed_files': overwrite_processed_files,
+            'part_sent_label_ids': part_sent_label_ids,
+            'add_part_sent_head': add_part_sent_head,
         }
         super().__init__(
             dataset_type, dataset_params, batch_size, shuffle=shuffle, num_workers=num_workers, pin_memory=pin_memory
