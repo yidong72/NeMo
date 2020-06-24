@@ -276,14 +276,14 @@ def create_pipeline(
 
     hidden_states = model(input_ids=data.input_ids, token_type_ids=data.input_type_ids, attention_mask=data.input_mask)
 
-    logits = classifier(hidden_states=hidden_states)
-
+    punct_logits, capit_logits, part_sent_logits = classifier(hidden_states=hidden_states)
+    logits = [punct_logits, capit_logits]
     if mode == 'train':
-        punct_loss = punct_loss(logits=logits.punct_logits, labels=data.punct_labels, loss_mask=data.loss_mask)
-        capit_loss = capit_loss(logits=logits.capit_logits, labels=data.capit_labels, loss_mask=data.loss_mask)
+        punct_loss = punct_loss(logits=punct_logits, labels=data.punct_labels, loss_mask=data.loss_mask)
+        capit_loss = capit_loss(logits=capit_logits, labels=data.capit_labels, loss_mask=data.loss_mask)
 
         if args.add_part_sent_head:
-            part_sent_loss = part_sent_loss(logits=logits.part_sent_logits, labels=data.part_sent_labels)
+            part_sent_loss = part_sent_loss(logits=part_sent_logits, labels=data.part_sent_labels)
             task_loss = task_loss(loss_1=punct_loss, loss_2=capit_loss, loss_3=part_sent_loss)
         else:
             task_loss = task_loss(loss_1=punct_loss, loss_2=capit_loss)
@@ -292,9 +292,10 @@ def create_pipeline(
         losses = [task_loss, punct_loss, capit_loss]
         if args.add_part_sent_head:
             losses.append(part_sent_loss)
+            logits.append(part_sent_logits)
         return (
             losses,
-            [l for l in logits],
+            logits,
             steps_per_epoch,
             punct_label_ids,
             capit_label_ids,

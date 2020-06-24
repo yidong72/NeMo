@@ -257,8 +257,10 @@ class BertPunctuationCapitalizationDataset(Dataset):
         filename = filename[:-4]
         tokenizer_type = type(tokenizer.tokenizer).__name__
         vocab_size = getattr(tokenizer, "vocab_size", 0)
+        part_sent_head = 'with_part_sent_head' if add_part_sent_head else ''
+
         features_pkl = os.path.join(
-            data_dir, "cached_{}_{}_{}_{}".format(filename, tokenizer_type, str(max_seq_length), str(vocab_size)),
+            data_dir, "cached_{}_{}_{}_{}_{}".format(filename, tokenizer_type, str(max_seq_length), str(vocab_size), part_sent_head),
         )
         self.add_part_sent_head = add_part_sent_head
         master_device = not torch.distributed.is_initialized() or torch.distributed.get_rank() == 0
