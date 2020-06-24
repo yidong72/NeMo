@@ -54,7 +54,7 @@ class PunctCapitTokenClassifier(TrainableNM):
         return {
             "punct_logits": NeuralType(('B', 'T', 'D'), LogitsType()),
             "capit_logits": NeuralType(('B', 'T', 'D'), LogitsType()),
-            "part_sent_logits": NeuralType(('B', 'D'), LogitsType()),
+            "part_sent_logits": NeuralType(('B', 'D'), LogitsType(), optional=True),
         }
 
     def __init__(

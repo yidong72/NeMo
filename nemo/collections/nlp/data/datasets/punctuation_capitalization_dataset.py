@@ -286,7 +286,14 @@ class BertPunctuationCapitalizationDataset(Dataset):
                         part_sent_labels.append(line[0])
                         part_sent_unique_labels.update([line[0]])
                         line = line[1]
-
+                    else:
+                        line = line.strip().split('\t')
+                        if len(line) == 2:
+                            line = line[1]
+                        elif len(line) == 1:
+                            line = line[0]
+                        else:
+                            raise ValueError(f'Please refer to the docs for the correct labels format.')
                     line = line.strip().split()
                     # extract punctuation and capitalization labels
                     punct_line, capit_line = zip(*line)
@@ -345,7 +352,7 @@ class BertPunctuationCapitalizationDataset(Dataset):
 
                 punct_label_ids = create_label_ids(punct_unique_labels)
                 capit_label_ids = create_label_ids(capit_unique_labels)
-                part_sent_label_ids = create_label_ids(part_sent_unique_labels)
+                part_sent_label_ids = create_label_ids(part_sent_unique_labels) if add_part_sent_head else None
             features = get_features(
                 text_lines,
                 max_seq_length,

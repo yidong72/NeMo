@@ -59,13 +59,24 @@ def eval_iter_callback(tensors, global_vars):
         global_vars['part_sent_preds'].extend(tensor2list(torch.argmax(output['part_sent_logits'], -1)))
         global_vars['part_sent_labels'].extend(tensor2list(output['part_sent_labels']))
 
+    
+    # print(global_vars['punct_labels'])
+    # print(global_vars['punct_preds'])
+    # print(global_vars['part_sent_preds'])
+    # print(global_vars['part_sent_labels'])
+    # import pdb; pdb.set_trace()
+    # print()
+
 def _get_result_dict(tag, class_report):
     results = {}
     for label in class_report:
-        label_name = label[: label.index('(label id') - 1] if 'label id' in label else label
-        results[tag + 'F1 ' + label_name] = round(class_report[label]['f1-score'] * 100, 2)
-        results[tag + 'PR ' + label_name] = round(class_report[label]['precision'] * 100, 2)
-        results[tag + 'R ' + label_name] = round(class_report[label]['recall'] * 100, 2)
+        if label != 'accuracy':
+            label_name = label[: label.index('(label id') - 1] if 'label id' in label else label
+            results[tag + 'F1 ' + label_name] = round(class_report[label]['f1-score'] * 100, 2)
+            results[tag + 'PR ' + label_name] = round(class_report[label]['precision'] * 100, 2)
+            results[tag + 'R ' + label_name] = round(class_report[label]['recall'] * 100, 2)
+        else:
+            results[tag + 'Acc'] = round(class_report[label] * 100, 2)
     return results
 
 def eval_epochs_done_callback(global_vars, punct_label_ids, capit_label_ids, part_sent_label_ids=None, graph_fold=None, normalize_cm=True):

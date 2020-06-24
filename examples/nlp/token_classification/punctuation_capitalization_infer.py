@@ -139,8 +139,7 @@ classifier = nemo_nlp.nm.trainables.PunctCapitTokenClassifier(
 
 input_ids, input_type_ids, input_mask, loss_mask, subtokens_mask = data_layer()
 hidden_states = model(input_ids=input_ids, token_type_ids=input_type_ids, attention_mask=input_mask)
-punct_logits, capit_logits = classifier(hidden_states=hidden_states)
-
+punct_logits, capit_logits, _ = classifier(hidden_states=hidden_states)
 ###########################################################################
 evaluated_tensors = nf.infer(tensors=[punct_logits, capit_logits, subtokens_mask], checkpoint_dir=args.checkpoint_dir)
 
@@ -167,7 +166,6 @@ for i, query in enumerate(args.queries):
     for j, w in enumerate(words):
         punct_label = punct_labels_dict[punct_pred[j]]
         capit_label = capit_labels_dict[capit_pred[j]]
-
         if capit_label != args.none_label:
             w = w.capitalize()
         output += w
