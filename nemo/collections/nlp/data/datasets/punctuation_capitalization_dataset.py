@@ -80,7 +80,6 @@ def get_features(
     if part_sent_labels is not None and part_sent_label_ids is not None:
         with_part_sent_head = True
 
-
     for i, query in enumerate(queries):
         words = query.strip().split()
 
@@ -176,7 +175,9 @@ def get_features(
             logging.info("punct_labels: %s" % " ".join(list(map(str, punct_all_labels[i]))))
             logging.info("capit_labels: %s" % " ".join(list(map(str, capit_all_labels[i]))))
         if with_part_sent_head:
-            logging.info("part_sent_label_ids: %s. Label for current example: %s", part_sent_label_ids, part_sent_all_labels[i])
+            logging.info(
+                "part_sent_label_ids: %s. Label for current example: %s", part_sent_label_ids, part_sent_all_labels[i]
+            )
 
     output = [
         all_input_ids,
@@ -305,7 +306,7 @@ class BertPunctuationCapitalizationDataset(Dataset):
 
             if len(punct_labels_lines) != len(text_lines):
                 raise ValueError("Label files should contain labels for every word in text files")
-            
+
             if add_part_sent_head:
                 dataset = list(zip(text_lines, punct_labels_lines, capit_labels_lines, part_sent_labels))
             else:
@@ -365,7 +366,7 @@ class BertPunctuationCapitalizationDataset(Dataset):
                 ignore_extra_tokens=ignore_extra_tokens,
                 ignore_start_end=ignore_start_end,
                 part_sent_label_ids=part_sent_label_ids if add_part_sent_head else None,
-                part_sent_labels=part_sent_labels if add_part_sent_head else None
+                part_sent_labels=part_sent_labels if add_part_sent_head else None,
             )
 
             pickle.dump(features, open(features_pkl, "wb"))
@@ -387,8 +388,8 @@ class BertPunctuationCapitalizationDataset(Dataset):
         self.punct_label_ids = features[7]
         self.capit_label_ids = features[8]
         if add_part_sent_head:
-            self.all_part_sent_labels = features[9] 
-            self.part_sent_label_ids =  features[10]
+            self.all_part_sent_labels = features[9]
+            self.part_sent_label_ids = features[10]
 
         # save label_ids
         def get_stats_and_save(all_labels, label_ids, name):

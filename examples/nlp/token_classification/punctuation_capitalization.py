@@ -92,7 +92,7 @@ parser.add_argument(
 parser.add_argument(
     "--add_part_sent_head",
     action='store_true',
-    help="Whether to a head to BeRT that would be responsible for detecting whether the sentence is partial or not."
+    help="Whether to a head to BeRT that would be responsible for detecting whether the sentence is partial or not.",
 )
 parser.add_argument(
     "--work_dir",
@@ -262,7 +262,7 @@ def create_pipeline(
             punct_num_layers=args.punct_num_fc_layers,
             capit_num_layers=args.capit_num_fc_layers,
             part_sent_num_layers=args.part_sent_num_fc_layers,
-            add_part_sent_head=args.add_part_sent_head
+            add_part_sent_head=args.add_part_sent_head,
         )
 
         punct_loss = CrossEntropyLossNM(logits_ndim=3, weight=class_weights)
@@ -281,7 +281,7 @@ def create_pipeline(
     if mode == 'train':
         punct_loss = punct_loss(logits=logits.punct_logits, labels=data.punct_labels, loss_mask=data.loss_mask)
         capit_loss = capit_loss(logits=logits.capit_logits, labels=data.capit_labels, loss_mask=data.loss_mask)
-        
+
         if args.add_part_sent_head:
             part_sent_loss = part_sent_loss(logits=logits.part_sent_logits, labels=data.part_sent_labels)
             task_loss = task_loss(loss_1=punct_loss, loss_2=capit_loss, loss_3=part_sent_loss)
@@ -292,7 +292,15 @@ def create_pipeline(
         losses = [task_loss, punct_loss, capit_loss]
         if args.add_part_sent_head:
             losses.append(part_sent_loss)
-        return losses, [l for l in logits], steps_per_epoch, punct_label_ids, capit_label_ids, part_sent_label_ids, classifier
+        return (
+            losses,
+            [l for l in logits],
+            steps_per_epoch,
+            punct_label_ids,
+            capit_label_ids,
+            part_sent_label_ids,
+            classifier,
+        )
     else:
         tensors_to_evaluate = [l for l in logits] + [data.punct_labels, data.capit_labels, data.subtokens_mask]
         if args.add_part_sent_head:
@@ -300,10 +308,22 @@ def create_pipeline(
         return tensors_to_evaluate
 
 
-(losses, train_logits, steps_per_epoch, punct_label_ids, capit_label_ids, part_sent_label_ids, classifier) = create_pipeline()
+(
+    losses,
+    train_logits,
+    steps_per_epoch,
+    punct_label_ids,
+    capit_label_ids,
+    part_sent_label_ids,
+    classifier,
+) = create_pipeline()
 
 eval_tensors = create_pipeline(
-    mode='dev', punct_label_ids=punct_label_ids, capit_label_ids=capit_label_ids, part_sent_label_ids=part_sent_label_ids, classifier=classifier
+    mode='dev',
+    punct_label_ids=punct_label_ids,
+    capit_label_ids=capit_label_ids,
+    part_sent_label_ids=part_sent_label_ids,
+    classifier=classifier,
 )
 
 logging.info(f"steps_per_epoch = {steps_per_epoch}")
@@ -342,7 +362,9 @@ if args.wandb_project is not None:
 eval_callback = nemo.core.EvaluatorCallback(
     eval_tensors=eval_tensors,
     user_iter_callback=lambda x, y: eval_iter_callback(x, y),
-    user_epochs_done_callback=lambda x: eval_epochs_done_callback(x, punct_label_ids, capit_label_ids, part_sent_label_ids, graph_dir),
+    user_epochs_done_callback=lambda x: eval_epochs_done_callback(
+        x, punct_label_ids, capit_label_ids, part_sent_label_ids, graph_dir
+    ),
     tb_writer=nf.tb_writer,
     eval_step=args.eval_epoch_freq * steps_per_epoch,
     wandb_name=args.wandb_exp_name,

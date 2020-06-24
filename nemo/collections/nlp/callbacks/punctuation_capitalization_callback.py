@@ -17,24 +17,13 @@
 import numpy as np
 import torch
 
-from nemo.utils import logging
 from nemo.collections.nlp.utils.callback_utils import get_classification_report, plot_confusion_matrix, tensor2list
+from nemo.utils import logging
 
 __all__ = ['eval_iter_callback', 'eval_epochs_done_callback']
 
 
 def eval_iter_callback(tensors, global_vars):
-    if "punct_all_preds" not in global_vars.keys():
-        global_vars["punct_all_preds"] = []
-    if "punct_all_labels" not in global_vars.keys():
-        global_vars["punct_all_labels"] = []
-    if "capit_all_preds" not in global_vars.keys():
-        global_vars["capit_all_preds"] = []
-    if "capit_all_labels" not in global_vars.keys():
-        global_vars["capit_all_labels"] = []
-    if "all_subtokens_mask" not in global_vars.keys():
-        global_vars["all_subtokens_mask"] = []
-
     GLOBAL_KEYS = ['punct_labels', 'capit_labels', 'punct_preds', 'capit_preds']
     for key in GLOBAL_KEYS:
         if key not in global_vars:
@@ -47,7 +36,7 @@ def eval_iter_callback(tensors, global_vars):
             output[name[0]] = torch.cat(v)
 
     subtokens_mask = output['subtokens_mask'] > 0.5
-    global_vars['punct_preds'].extend(tensor2list(torch.argmax(output['punct_logits'], axis=-1)[subtokens_mask]))
+    punct_preds = torch.argmax(output['punct_logits'], axis=-1)
     global_vars['capit_preds'].extend(tensor2list(torch.argmax(output['capit_logits'], axis=-1)[subtokens_mask]))
     global_vars['punct_labels'].extend(tensor2list(output['punct_labels'][subtokens_mask]))
     global_vars['capit_labels'].extend(tensor2list(output['capit_labels'][subtokens_mask]))
@@ -56,16 +45,23 @@ def eval_iter_callback(tensors, global_vars):
         if 'part_sent_preds' not in global_vars:
             global_vars['part_sent_preds'] = []
             global_vars['part_sent_labels'] = []
-        global_vars['part_sent_preds'].extend(tensor2list(torch.argmax(output['part_sent_logits'], -1)))
-        global_vars['part_sent_labels'].extend(tensor2list(output['part_sent_labels']))
 
-    
-    # print(global_vars['punct_labels'])
-    # print(global_vars['punct_preds'])
-    # print(global_vars['part_sent_preds'])
-    # print(global_vars['part_sent_labels'])
-    # import pdb; pdb.set_trace()
-    # print()
+        num_examples = output['punct_logits'].shape[0]
+        part_sent_preds = tensor2list(torch.argmax(output['part_sent_logits'], -1))
+
+        for i in range(num_examples):
+            punct_pred = tensor2list(punct_preds[i, :][(output['subtokens_mask'] > 0.5)[i, :]])
+            # if the sentence is predicated to be partial, sent the punct of the last word to pad_label 'O'
+            if part_sent_preds[i] == 1:
+                punct_pred[-1] = 0
+                print('corrected')
+
+            global_vars['punct_preds'].extend(punct_pred)
+        global_vars['part_sent_labels'].extend(tensor2list(output['part_sent_labels']))
+        global_vars['part_sent_preds'].extend(part_sent_preds)
+    else:
+        global_vars['punct_preds'].extend(tensor2list(punct_preds[subtokens_mask]))
+
 
 def _get_result_dict(tag, class_report):
     results = {}
@@ -79,7 +75,10 @@ def _get_result_dict(tag, class_report):
             results[tag + 'Acc'] = round(class_report[label] * 100, 2)
     return results
 
-def eval_epochs_done_callback(global_vars, punct_label_ids, capit_label_ids, part_sent_label_ids=None, graph_fold=None, normalize_cm=True):
+
+def eval_epochs_done_callback(
+    global_vars, punct_label_ids, capit_label_ids, part_sent_label_ids=None, graph_fold=None, normalize_cm=True
+):
     '''
     Args:
       graph_fold (str): path to output folder
@@ -89,14 +88,16 @@ def eval_epochs_done_callback(global_vars, punct_label_ids, capit_label_ids, par
     results = {}
     punct_class_report = _eval_epochs_done_callback('punct', global_vars, punct_label_ids, graph_fold, normalize_cm)
     results.update(_get_result_dict('p', punct_class_report))
-    
+
     capit_class_report = _eval_epochs_done_callback('capit', global_vars, capit_label_ids, graph_fold, normalize_cm)
     results.update(_get_result_dict('c', capit_class_report))
 
     if 'part_sent_preds' in global_vars:
         part_sent_labels = np.asarray(global_vars['part_sent_labels'])
         part_sent_preds = np.asarray(global_vars['part_sent_preds'])
-        part_sent_class_report = _eval_epochs_done_callback('part_sent', global_vars, part_sent_label_ids, graph_fold, normalize_cm)
+        part_sent_class_report = _eval_epochs_done_callback(
+            'part_sent', global_vars, part_sent_label_ids, graph_fold, normalize_cm
+        )
         results.update(_get_result_dict('t', part_sent_class_report))
         part_sent_acc = np.mean(part_sent_labels == part_sent_preds)
         logging.info(f'Partial sent task accuracy: {part_sent_acc}')

@@ -69,7 +69,7 @@ class PunctCapitTokenClassifier(TrainableNM):
         dropout=0.0,
         use_transformer_pretrained=True,
         part_sent_num_layers=2,
-        add_part_sent_head=False
+        add_part_sent_head=False,
     ):
         # Pass name up the module class hierarchy.
         super().__init__()
@@ -82,8 +82,8 @@ class PunctCapitTokenClassifier(TrainableNM):
         )
         if add_part_sent_head:
             self.part_sent_mlp = MultiLayerPerceptron(
-            hidden_size, 2, self._device, part_sent_num_layers, activation, log_softmax
-        )
+                hidden_size, 2, self._device, part_sent_num_layers, activation, log_softmax
+            )
         self.add_part_sent_head = add_part_sent_head
         if use_transformer_pretrained:
             self.apply(lambda module: transformer_weights_init(module, xavier=False))
