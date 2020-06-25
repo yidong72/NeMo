@@ -390,7 +390,7 @@ class BertPunctuationCapitalizationDataset(Dataset):
         self.punct_label_ids = features[7]
         self.capit_label_ids = features[8]
         if add_part_sent_head:
-            self.all_part_sent_labels = features[9]
+            self.part_sent_all_labels = features[9]
             self.part_sent_label_ids = features[10]
 
         # save label_ids
@@ -410,6 +410,8 @@ class BertPunctuationCapitalizationDataset(Dataset):
 
         self.punct_label_frequencies = get_stats_and_save(self.punct_all_labels, self.punct_label_ids, 'punct')
         self.capit_label_frequencies = get_stats_and_save(self.capit_all_labels, self.capit_label_ids, 'capit')
+        if add_part_sent_head:
+            self.part_sent_label_frequencies = get_stats_and_save([self.part_sent_all_labels], self.part_sent_label_ids, 'part_sent')
 
     def __len__(self):
         return len(self.all_input_ids)
@@ -425,7 +427,7 @@ class BertPunctuationCapitalizationDataset(Dataset):
             np.array(self.capit_all_labels[idx]),
         ]
         if self.add_part_sent_head:
-            output.append(self.all_part_sent_labels[idx])
+            output.append(self.part_sent_all_labels[idx])
         return output
 
 

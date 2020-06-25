@@ -278,6 +278,8 @@ def create_pipeline(
 
     punct_logits, capit_logits, part_sent_logits = classifier(hidden_states=hidden_states)
     logits = [punct_logits, capit_logits]
+    if args.add_part_sent_head:
+        logits.append(part_sent_logits)
     if mode == 'train':
         punct_loss = punct_loss(logits=punct_logits, labels=data.punct_labels, loss_mask=data.loss_mask)
         capit_loss = capit_loss(logits=capit_logits, labels=data.capit_labels, loss_mask=data.loss_mask)
@@ -292,7 +294,6 @@ def create_pipeline(
         losses = [task_loss, punct_loss, capit_loss]
         if args.add_part_sent_head:
             losses.append(part_sent_loss)
-            logits.append(part_sent_logits)
         return (
             losses,
             logits,
@@ -302,11 +303,11 @@ def create_pipeline(
             part_sent_label_ids,
             classifier,
         )
-    else:
-        tensors_to_evaluate = [l for l in logits] + [data.punct_labels, data.capit_labels, data.subtokens_mask]
-        if args.add_part_sent_head:
-            tensors_to_evaluate.append(data.part_sent_labels)
-        return tensors_to_evaluate
+
+    tensors_to_evaluate = logits + [data.punct_labels, data.capit_labels, data.subtokens_mask]
+    if args.add_part_sent_head:
+        tensors_to_evaluate.append(data.part_sent_labels)
+    return tensors_to_evaluate
 
 
 (

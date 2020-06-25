@@ -40,7 +40,7 @@ def eval_iter_callback(tensors, global_vars):
     global_vars['capit_preds'].extend(tensor2list(torch.argmax(output['capit_logits'], axis=-1)[subtokens_mask]))
     global_vars['punct_labels'].extend(tensor2list(output['punct_labels'][subtokens_mask]))
     global_vars['capit_labels'].extend(tensor2list(output['capit_labels'][subtokens_mask]))
-
+  
     if 'part_sent_logits' in output:
         if 'part_sent_preds' not in global_vars:
             global_vars['part_sent_preds'] = []
@@ -91,7 +91,7 @@ def eval_epochs_done_callback(
 
     capit_class_report = _eval_epochs_done_callback('capit', global_vars, capit_label_ids, graph_fold, normalize_cm)
     results.update(_get_result_dict('c', capit_class_report))
-
+   
     if 'part_sent_preds' in global_vars:
         part_sent_labels = np.asarray(global_vars['part_sent_labels'])
         part_sent_preds = np.asarray(global_vars['part_sent_preds'])
@@ -109,6 +109,11 @@ def eval_epochs_done_callback(
 def _eval_epochs_done_callback(task_name, global_vars, label_ids, graph_fold=None, normalize_cm=True):
     labels = np.array(global_vars[task_name + '_labels'])
     preds = np.array(global_vars[task_name + '_preds'])
+
+    with open('/home/ebakhturina/data/punctuation/fisher/error_analysis/' + task_name + '_labels_preds.txt', 'w') as f:
+        f.write(str(labels))
+        f.write(str(preds))
+    logging.info(f'labels and preds are saved')
 
     # calculate and plot confusion_matrix
     if graph_fold:
