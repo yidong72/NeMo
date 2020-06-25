@@ -365,7 +365,7 @@ eval_callback = nemo.core.EvaluatorCallback(
     eval_tensors=eval_tensors,
     user_iter_callback=lambda x, y: eval_iter_callback(x, y),
     user_epochs_done_callback=lambda x: eval_epochs_done_callback(
-        x, punct_label_ids, capit_label_ids, part_sent_label_ids, graph_dir
+        x, punct_label_ids, capit_label_ids, part_sent_label_ids, nf.work_dir, graph_dir
     ),
     tb_writer=nf.tb_writer,
     eval_step=args.eval_epoch_freq * steps_per_epoch,

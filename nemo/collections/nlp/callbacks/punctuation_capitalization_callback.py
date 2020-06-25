@@ -16,6 +16,7 @@
 
 import numpy as np
 import torch
+import os
 
 from nemo.collections.nlp.utils.callback_utils import get_classification_report, plot_confusion_matrix, tensor2list
 from nemo.utils import logging
@@ -77,7 +78,7 @@ def _get_result_dict(tag, class_report):
 
 
 def eval_epochs_done_callback(
-    global_vars, punct_label_ids, capit_label_ids, part_sent_label_ids=None, graph_fold=None, normalize_cm=True
+    global_vars, punct_label_ids, capit_label_ids, part_sent_label_ids=None, work_dir=None, graph_fold=None, normalize_cm=True
 ):
     '''
     Args:
@@ -86,17 +87,17 @@ def eval_epochs_done_callback(
         normalize confusion matrix
     '''
     results = {}
-    punct_class_report = _eval_epochs_done_callback('punct', global_vars, punct_label_ids, graph_fold, normalize_cm)
+    punct_class_report = _eval_epochs_done_callback('punct', global_vars, punct_label_ids, work_dir, graph_fold, normalize_cm)
     results.update(_get_result_dict('p', punct_class_report))
 
-    capit_class_report = _eval_epochs_done_callback('capit', global_vars, capit_label_ids, graph_fold, normalize_cm)
+    capit_class_report = _eval_epochs_done_callback('capit', global_vars, capit_label_ids, work_dir, graph_fold, normalize_cm)
     results.update(_get_result_dict('c', capit_class_report))
    
     if 'part_sent_preds' in global_vars:
         part_sent_labels = np.asarray(global_vars['part_sent_labels'])
         part_sent_preds = np.asarray(global_vars['part_sent_preds'])
         part_sent_class_report = _eval_epochs_done_callback(
-            'part_sent', global_vars, part_sent_label_ids, graph_fold, normalize_cm
+            'part_sent', global_vars, part_sent_label_ids, work_dir, graph_fold, normalize_cm
         )
         results.update(_get_result_dict('t', part_sent_class_report))
         part_sent_acc = np.mean(part_sent_labels == part_sent_preds)
@@ -106,14 +107,15 @@ def eval_epochs_done_callback(
     return results
 
 
-def _eval_epochs_done_callback(task_name, global_vars, label_ids, graph_fold=None, normalize_cm=True):
+def _eval_epochs_done_callback(task_name, global_vars, label_ids, work_dir=None, graph_fold=None, normalize_cm=True):
     labels = np.array(global_vars[task_name + '_labels'])
     preds = np.array(global_vars[task_name + '_preds'])
-
-    with open('/home/ebakhturina/data/punctuation/fisher/error_analysis/' + task_name + '_labels_preds.txt', 'w') as f:
-        f.write(str(labels))
-        f.write(str(preds))
-    logging.info(f'labels and preds are saved')
+  
+    if work_dir is not None:
+        with open(os.path.join(work_dir, task_name + '_labels_preds.txt'), 'w') as f:
+            f.write(str(labels))
+            f.write(str(preds))
+        logging.info(f'labels and preds are saved at {work_dir}')
 
     # calculate and plot confusion_matrix
     if graph_fold:
