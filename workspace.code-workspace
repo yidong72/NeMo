@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "nemo"
+		}
+	],
+	"settings": {
+        "docker.host": "ssh://yidong@dev"
+    }
+}
