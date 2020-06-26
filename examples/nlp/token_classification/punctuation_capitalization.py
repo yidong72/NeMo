@@ -151,6 +151,7 @@ parser.add_argument(
     "--wandb_exp_name", default=None, type=str, help='Experiment name for tracking with Weights and Biases'
 )
 parser.add_argument("--punct_loss_weight", default=0.5, type=float, help="Punctuation task weight loss")
+parser.add_argument("--part_sent_loss_weight", default=0.5, type=float, help="Partial sentence task weight loss")
 parser.add_argument(
     "--num_workers",
     default=2,
@@ -270,7 +271,7 @@ def create_pipeline(
         if args.add_part_sent_head:
             # TODO add task loss weights
             part_sent_loss = CrossEntropyLossNM(logits_ndim=2)
-            task_loss = LossAggregatorNM(num_inputs=3)
+            task_loss = LossAggregatorNM(num_inputs=3, weights=[args.part_sent_loss_weight, args.punct_loss_weight, 1.0 - args.punct_loss_weight - args.part_sent_loss_weight])
         else:
             task_loss = LossAggregatorNM(num_inputs=2, weights=[args.punct_loss_weight, 1.0 - args.punct_loss_weight])
 
