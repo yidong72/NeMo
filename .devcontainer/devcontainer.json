@@ -1,0 +1,22 @@
+{
+    "image": "nemo:latest",
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localEnv:NEMO_ROOT},target=/workspace,type=bind,consistency=cached",
+    "extensions": [
+        "ms-python.python", "dbaeumer.vscode-eslint"
+    ],
+    "settings": { 
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "python.pythonPath": "/opt/conda/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.formatting.autopep8Path": "/opt/conda/bin/autopep8",
+        "python.linting.flake8Path": "/opt/conda/bin/flake8",
+        "python.linting.pylintPath": "/opt/conda/bin/pylint",
+        "python.testing.pytestPath": "/opt/conda/bin/pytest"
+    },
+    "forwardPorts": [3000, 8888, 8787],
+    "remoteUser": "nemo",
+    "containerUser": "nemo",
+    "runArgs": ["--runtime=nvidia"]
+}
