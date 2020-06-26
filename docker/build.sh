@@ -8,7 +8,7 @@ CONTAINER=nvcr.io/nvidia/nemo:v0.10
 cat > $D_FILE <<EOF
 FROM $CONTAINER
 USER root
-RUN source activate rapids \ 
+RUN source activate base \ 
     && conda install -y -c conda-forge flask pylint flake8 autopep8
 #
 # required set up
@@ -17,6 +17,7 @@ RUN source activate base \
     && mkdir /.local /.jupyter /.config /.cupy  \
     && chmod 777 /.local /.jupyter /.config /.cupy
 
+RUN apt-get update
 RUN apt-get install -y locales-all build-essential vim
 ENV LC_ALL="en_US.utf8"
 EXPOSE 8888
