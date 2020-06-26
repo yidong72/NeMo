@@ -20,6 +20,7 @@ from nemo.collections.nlp.data.tokenizers.bert_tokenizer import NemoBertTokenize
 from nemo.backends.pytorch.common.parts import MultiLayerPerceptron
 from nemo.collections.nlp.utils.functional_utils import gelu
 from nemo.collections.nlp.utils.transformer_utils import transformer_weights_init
+from nemo.collections.nlp.data import BertTokenClassificationDataset
 
 ACT2FN = {"gelu": gelu, "relu": nn.functional.relu}
 
@@ -62,7 +63,8 @@ class NERModel(LightningModule):
         self.tokenizer = NemoBertTokenizer(pretrained_model=pretrained_model_name)
         self.classier = TokenClassifier(hidden_size=hidden_size,num_classes=num_classes, activation=activation, log_softmax=log_softmax, dropout=dropout, use_transformer_pretrained=use_transformer_pretrained)
 
-        # This will be set by setup_training_data
+        self.loss = nn.CrossEntropyLoss()
+        # This will be set by setup_training_datai
         self.__train_dl = None
         # This will be set by setup_validation_data
         self.__val_dl = None
@@ -71,12 +73,12 @@ class NERModel(LightningModule):
         # This will be set by setup_optimization
         self.__optimizer = None
 
-    def forward(self, x):
+    def forward(self, input_ids, token_type_ids, attention_mask):
         """
         No special modification required for Lightning, define it as you normally would
         in the `nn.Module` in vanilla PyTorch.
         """
-        hidden_states = self.bert_model(x)
+        hidden_states = self.bert_model(input_ids, token_type_ids, attention_mask)
         logits = self.classifier(hidden_states)
         return logits
 
@@ -86,9 +88,9 @@ class NERModel(LightningModule):
         passed in as `batch`.
         """
         # forward pass
-        x, y = batch
-        y_hat = self(x)
-        loss = F.cross_entropy(y_hat, y)
+        input_ids, input_type_ids, input_mask, loss_mask, subtokens_mask, labels = batch
+        logits = self(input_ids=input_ids, token_type_ids=input_type_ids, attention_mask=input_mask)
+        loss = self.loss(logits=logits, labels=labels)
         tensorboard_logs = {'train_loss': loss}
         return {'loss': loss, 'log': tensorboard_logs}
 
@@ -97,20 +99,14 @@ class NERModel(LightningModule):
         Lightning calls this inside the validation loop with the data from the validation dataloader
         passed in as `batch`.
         """
-        x, y = batch
-        y_hat = self(x)
-        val_loss = F.cross_entropy(y_hat, y)
-        labels_hat = torch.argmax(y_hat, dim=1)
-        n_correct_pred = torch.sum(y == labels_hat).item()
-        return {'val_loss': val_loss, "n_correct_pred": n_correct_pred, "n_pred": len(x)}
-
-    def test_step(self, batch, batch_idx):
-        x, y = batch
-        y_hat = self(x)
-        test_loss = F.cross_entropy(y_hat, y)
-        labels_hat = torch.argmax(y_hat, dim=1)
-        n_correct_pred = torch.sum(y == labels_hat).item()
-        return {'test_loss': test_loss, "n_correct_pred": n_correct_pred, "n_pred": len(x)}
+        input_ids, input_type_ids, input_mask, loss_mask, subtokens_mask, labels = batch
+        logits = self(input_ids=input_ids, token_type_ids=input_type_ids, attention_mask=input_mask)
+        val_loss = self.loss(logits=logits, labels=labels)
+        tensorboard_logs = {'val_loss': val_loss}
+        # TODO - add eval - callback?
+        # labels_hat = torch.argmax(y_hat, dim=1)
+        # n_correct_pred = torch.sum(y == labels_hat).item()
+        return {'val_loss': val_loss, 'log': tensorboard_logs} #, "n_correct_pred": n_correct_pred, "n_pred": len(x)}
 
     def validation_epoch_end(self, outputs):
         """
@@ -118,48 +114,91 @@ class NERModel(LightningModule):
         :param outputs: list of individual outputs of each validation step.
         """
         avg_loss = torch.stack([x['val_loss'] for x in outputs]).mean()
-        val_acc = sum([x['n_correct_pred'] for x in outputs]) / sum(x['n_pred'] for x in outputs)
-        tensorboard_logs = {'val_loss': avg_loss, 'val_acc': val_acc}
-        return {'val_loss': avg_loss, 'log': tensorboard_logs}
+        # val_acc = sum([x['n_correct_pred'] for x in outputs]) / sum(x['n_pred'] for x in outputs)
+        # tensorboard_logs = {'val_loss': avg_loss, 'val_acc': val_acc}
+        return {'val_loss': avg_loss} #, 'log': tensorboard_logs}
 
-    def test_epoch_end(self, outputs):
-        avg_loss = torch.stack([x['test_loss'] for x in outputs]).mean()
-        test_acc = sum([x['n_correct_pred'] for x in outputs]) / sum(x['n_pred'] for x in outputs)
-        tensorboard_logs = {'test_loss': avg_loss, 'test_acc': test_acc}
-        return {'test_loss': avg_loss, 'log': tensorboard_logs}
+    # def test_epoch_end(self, outputs):
+    #     avg_loss = torch.stack([x['test_loss'] for x in outputs]).mean()
+    #     test_acc = sum([x['n_correct_pred'] for x in outputs]) / sum(x['n_pred'] for x in outputs)
+    #     tensorboard_logs = {'test_loss': avg_loss, 'test_acc': test_acc}
+    #     return {'test_loss': avg_loss, 'log': tensorboard_logs}
 
-    # ---------------------
-    # TRAINING SETUP
-    # ---------------------
+    def setup_training_data(self, train_data_layer_params: Optional[Dict]):
+        if 'shuffle' not in train_data_layer_params:
+            train_data_layer_params['shuffle'] = True
+        self.__train_dl = self.__setup_dataloader_from_config(config=train_data_layer_params)
+
+    def setup_validation_data(self, val_data_layer_params: Optional[Dict]):
+        if 'shuffle' not in val_data_layer_params:
+            val_data_layer_params['shuffle'] = False
+        self.__val_dl = self.__setup_dataloader_from_config(config=val_data_layer_params)
+
+    def setup_test_data(self, test_data_layer_params: Optional[Dict]):
+        if 'shuffle' not in test_data_layer_params:
+            test_data_layer_params['shuffle'] = False
+        self.__test_dl = self.__setup_dataloader_from_config(config=test_data_layer_params)
+
+    def setup_optimization(self, optim_params: Optional[Dict]):
+        self.__optimizer = torch.optim.Adam(self.parameters(), lr=optim_params['lr'])
+
+    def __setup_dataloader_nemo(text_file,
+        label_file,
+        max_seq_length,
+        pad_label='O',
+        label_ids=None,
+        num_samples=-1,
+        shuffle=False,
+        batch_size=64,
+        ignore_extra_tokens=False,
+        ignore_start_end=False,
+        use_cache=False):
+
+        dataset = BertTokenClassificationDataset(
+            text_file= text_file,
+            label_file= label_file,
+            max_seq_length= max_seq_length,
+            tokenizer= self.tokenizer,
+            num_samples= num_samples,
+            pad_label= pad_label,
+            label_ids= label_ids,
+            ignore_extra_tokens= ignore_extra_tokens,
+            ignore_start_end= ignore_start_end,
+            use_cache= use_cache,
+        }
+        featurizer = WaveformFeaturizer(sample_rate=config['sample_rate'], int_values=config.get('int_values', False))
+        dataset = Audio2TextDatasetNM(
+            manifest_filepath=config['manifest_filepath'],
+            labels=config['labels'],
+            featurizer=featurizer,
+            max_duration=config.get('max_duration', None),
+            min_duration=config.get('min_duration', None),
+            max_utts=config.get('max_utts', 0),
+            blank_index=config.get('blank_index', -1),
+            unk_index=config.get('unk_index', -1),
+            normalize=config.get('normalize_transcripts', False),
+            trim=config.get('trim_silence', True),
+            load_audio=config.get('load_audio', True),
+            parser=config.get('parser', 'en'),
+        )
+
+        return torch.utils.data.DataLoader(
+            dataset=dataset,
+            batch_size=config['batch_size'],
+            collate_fn=partial(seq_collate_fn, token_pad_value=config.get('pad_id', 0)),
+            drop_last=config.get('drop_last', False),
+            shuffle=config['shuffle'],
+            num_workers=config.get('num_workers', 0),
+        )
+
     def configure_optimizers(self):
-        """
-        Return whatever optimizers and learning rate schedulers you want here.
-        At least one optimizer is required.
-        """
-        optimizer = optim.Adam(self.parameters(), lr=self.learning_rate)
-        scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=10)
-        return [optimizer], [scheduler]
-
-    def prepare_data(self):
-        MNIST(self.data_root, train=True, download=True, transform=transforms.ToTensor())
-        MNIST(self.data_root, train=False, download=True, transform=transforms.ToTensor())
-
-    def setup(self, stage):
-        transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (1.0,))])
-        self.mnist_train = MNIST(self.data_root, train=True, download=False, transform=transform)
-        self.mnist_test = MNIST(self.data_root, train=False, download=False, transform=transform)
+        return self.__optimizer
 
     def train_dataloader(self):
-        log.info('Training data loader called.')
-        return DataLoader(self.mnist_train, batch_size=self.batch_size, num_workers=4)
+        return self.__train_dl
 
     def val_dataloader(self):
-        log.info('Validation data loader called.')
-        return DataLoader(self.mnist_test, batch_size=self.batch_size, num_workers=4)
-
-    def test_dataloader(self):
-        log.info('Test data loader called.')
-        return DataLoader(self.mnist_test, batch_size=self.batch_size, num_workers=4)
+        return self.__val_dl
 
     @staticmethod
     def add_model_specific_args(parent_parser, root_dir):  # pragma: no-cover
@@ -219,3 +258,4 @@ class TokenClassifier(nn.Module):
         transform = self.norm(hidden_states)
         logits = self.mlp(transform)
         return logits
+
