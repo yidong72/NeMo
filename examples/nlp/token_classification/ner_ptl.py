@@ -148,11 +148,13 @@ class NERModel(LightningModule):
         pad_label='O',
         label_ids=None,
         num_samples=-1,
-        shuffle=False,
-        batch_size=64,
         ignore_extra_tokens=False,
         ignore_start_end=False,
-        use_cache=False):
+        use_cache=False,
+        shuffle = False,
+        batch_size = 64,
+        num_workers = -1,
+    ):
 
         dataset = BertTokenClassificationDataset(
             text_file= text_file,
@@ -164,31 +166,13 @@ class NERModel(LightningModule):
             label_ids= label_ids,
             ignore_extra_tokens= ignore_extra_tokens,
             ignore_start_end= ignore_start_end,
-            use_cache= use_cache,
-        }
-        featurizer = WaveformFeaturizer(sample_rate=config['sample_rate'], int_values=config.get('int_values', False))
-        dataset = Audio2TextDatasetNM(
-            manifest_filepath=config['manifest_filepath'],
-            labels=config['labels'],
-            featurizer=featurizer,
-            max_duration=config.get('max_duration', None),
-            min_duration=config.get('min_duration', None),
-            max_utts=config.get('max_utts', 0),
-            blank_index=config.get('blank_index', -1),
-            unk_index=config.get('unk_index', -1),
-            normalize=config.get('normalize_transcripts', False),
-            trim=config.get('trim_silence', True),
-            load_audio=config.get('load_audio', True),
-            parser=config.get('parser', 'en'),
-        )
+            use_cache= use_cache)
 
         return torch.utils.data.DataLoader(
             dataset=dataset,
-            batch_size=config['batch_size'],
-            collate_fn=partial(seq_collate_fn, token_pad_value=config.get('pad_id', 0)),
-            drop_last=config.get('drop_last', False),
-            shuffle=config['shuffle'],
-            num_workers=config.get('num_workers', 0),
+            batch_size=batch_size,
+            shuffle=shuffle,
+            num_workers=num_workers,
         )
 
     def configure_optimizers(self):
